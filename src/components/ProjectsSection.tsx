@@ -187,6 +187,17 @@ export default function ProjectsSection() {
 
                                     {/* Action Buttons */}
                                     <div className="project-actions">
+                                        {project.demoUrl && (
+                                            <a
+                                                href={project.demoUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="project-link-btn project-link-btn-demo"
+                                            >
+                                                <span style={{ textAlign: 'center', flex: 1 }}>Demo</span>
+                                                <ArrowIcon />
+                                            </a>
+                                        )}
                                         {project.githubUrl && (
                                             <a
                                                 href={project.githubUrl}
@@ -206,17 +217,6 @@ export default function ProjectsSection() {
                                                 className="project-link-btn project-link-btn-youtube"
                                             >
                                                 <span style={{ textAlign: 'center', flex: 1 }}>YouTube</span>
-                                                <ArrowIcon />
-                                            </a>
-                                        )}
-                                        {project.demoUrl && (
-                                            <a
-                                                href={project.demoUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="project-link-btn project-link-btn-demo"
-                                            >
-                                                <span style={{ textAlign: 'center', flex: 1 }}>Demo</span>
                                                 <ArrowIcon />
                                             </a>
                                         )}

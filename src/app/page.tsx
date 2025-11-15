@@ -16,7 +16,6 @@ import ScrollIndicator from '@/components/ScrollIndicator';
 export default function Home() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [showLandingButtons, setShowLandingButtons] = useState(true);
-  const [showFooter, setShowFooter] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,17 +30,9 @@ export default function Home() {
         setShowLandingButtons(!shouldHide);
       }
 
-      // Show footer when near bottom of page
-      const scrollHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const clientHeight = window.innerHeight;
-      const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
-      
-      // Show footer when within 100px of bottom
-      setShowFooter(distanceFromBottom < 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Check on mount
 
     return () => {
@@ -101,13 +92,6 @@ export default function Home() {
       <ResumeSection />
       <ProjectsSection />
       <ContactSection />
-
-      {/* Footer */}
-      <footer className={`portfolio-footer ${showFooter ? 'footer-visible' : ''}`}>
-        <div className="footer-content">
-          <p className="footer-tag">Designed from scratch by <u>Xabiso Memani</u> © 2025</p>
-        </div>
-      </footer>
 
       <InfoPanel
         isOpen={isInfoOpen}

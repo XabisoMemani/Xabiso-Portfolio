@@ -77,6 +77,42 @@ body {
   mix-blend-mode: difference;
 }
 
+/* Hide custom cursor on mobile */
+@media (max-width: 768px) {
+  .cursor,
+  .cursor-dot,
+  .cursor-click {
+    display: none !important;
+  }
+
+  body {
+    cursor: auto !important;
+  }
+
+  .social-link:hover,
+  .info-btn:hover,
+  .close-btn:hover,
+  .theme-btn:hover,
+  a:hover,
+  .certification-link:hover,
+  .project-link-btn:hover,
+  .project-card:hover,
+  .project-image-container:hover,
+  .social-link,
+  .info-btn,
+  .close-btn,
+  .theme-btn,
+  a,
+  .certification-link,
+  .project-link-btn,
+  .project-card,
+  .project-image-container,
+  .download-cv-link,
+  .contact-link {
+    cursor: pointer !important;
+  }
+}
+
 .cursor-default {
   width: 100%;
   height: 100%;
@@ -251,7 +287,7 @@ a:hover,
 
 .subtitle {
   font-family: "VT323", monospace;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--nokia-screen);
   margin-bottom: 2rem;
   text-align: center;
@@ -715,20 +751,20 @@ html.theme-orange .theme-btn::before {
   .info-btn {
     top: 1rem;
     right: 1rem;
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 46px;
+    height: 46px;
+    font-size: 1.3rem;
   }
 
   .theme-btn-wrapper {
-    right: 3.5rem;
+    right: 4rem;
     top: 1rem;
   }
 
   .theme-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 46px;
+    height: 46px;
+    font-size: 1.3rem;
   }
 
   .social-links {
@@ -747,15 +783,31 @@ html.theme-orange .theme-btn::before {
 
   .info-panel {
     padding: 1.5rem;
-    font-size: 1rem;
+    font-size: 1.15rem;
+  }
+
+  .info-line {
+    font-size: 1.15rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .tag {
+    font-size: 1.05rem;
+  }
+
+  .close-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 1.15rem;
   }
 
   .logo {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(3rem, 8vw, 4.5rem);
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .container {
@@ -2121,7 +2173,7 @@ html.theme-wood .download-cv-link:hover {
   border: 1px solid #e5e5e5;
   border-radius: 999px;
   color: #1a1a1a;
-  background: #ffffff;
+  background: transparent;
 }
 
 /* Action Buttons */
@@ -2357,8 +2409,8 @@ html.theme-wood .download-cv-link:hover {
   left: 0;
   width: 100%;
   max-width: 100vw;
-  background: #faf7f794;
-  border-top: 1px solid #d0d0d0;
+  background: #ffffff;
+  border-top: 2px solid rgba(229, 229, 229, 0.6);
   z-index: 1000;
   box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
   overflow-x: hidden;
@@ -2369,7 +2421,8 @@ html.theme-wood .download-cv-link:hover {
   justify-content: center;
   transform: translateY(100%);
   opacity: 0;
-  transition: none;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-visible {
@@ -2508,19 +2561,19 @@ html.theme-wood .download-cv-link:hover {
   }
 
   #about .section-title {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
   }
 
   #resume .section-title {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
   }
 
   #projects .section-title {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
   }
 
   #contact .section-title {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
   }
 
   .about-intro {
@@ -2770,35 +2823,35 @@ html.theme-wood .download-cv-link:hover {
   .info-btn {
     top: 0.75rem;
     right: 0.75rem;
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
+    width: 52px;
+    height: 52px;
+    font-size: 1.5rem;
   }
 
   .theme-btn-wrapper {
-    right: 3rem;
+    right: 4.5rem;
     top: 0.75rem;
   }
 
   .theme-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
+    width: 52px;
+    height: 52px;
+    font-size: 1.5rem;
   }
 
   .logo {
-    font-size: clamp(2.5rem, 7vw, 3.5rem);
+    font-size: clamp(3.5rem, 9vw, 5rem);
     margin-bottom: 0.25rem;
   }
 
   .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin-bottom: 1.5rem;
   }
 
   .profile-container {
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
     margin-bottom: 1.5rem;
   }
 
@@ -2866,19 +2919,19 @@ html.theme-wood .download-cv-link:hover {
   }
 
   #about .section-title {
-    font-size: clamp(2.5rem, 7vw, 3.5rem);
+    font-size: clamp(3rem, 8vw, 4rem);
   }
 
   #resume .section-title {
-    font-size: clamp(2.5rem, 7vw, 3.5rem);
+    font-size: clamp(3rem, 8vw, 4rem);
   }
 
   #projects .section-title {
-    font-size: clamp(2.25rem, 7vw, 3rem);
+    font-size: clamp(3rem, 8vw, 4rem);
   }
 
   #contact .section-title {
-    font-size: clamp(2.25rem, 7vw, 3rem);
+    font-size: clamp(3rem, 8vw, 4rem);
   }
 
   .about-intro {
@@ -3249,5 +3302,29 @@ html.theme-wood .download-cv-link:hover {
   .submit-btn {
     font-size: 0.9rem;
     padding: 0.7rem 1.5rem;
+  }
+
+  .info-panel {
+    padding: 1.5rem;
+    font-size: 1.25rem;
+    max-width: 90%;
+  }
+
+  .info-line {
+    font-size: 1.25rem;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .tag {
+    font-size: 1.1rem;
+  }
+
+  .close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+    top: 1.25rem;
+    right: 1.25rem;
   }
 }
