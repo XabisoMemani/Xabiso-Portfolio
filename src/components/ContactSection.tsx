@@ -59,9 +59,9 @@ export default function ContactSection() {
                             <p className="contact-text" style={{ marginTop: '2rem', fontSize: '1rem' }}>
                                 "Being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus." — Philippians 1:6
                             </p>
-                            <div className="download-cv-link download-cv-link-orange" style={{ marginTop: '1.5rem' }}>
+                            <a href="/documents/XabisoMemaniCV.pdf" download="XabisoMemaniCV.pdf" className="download-cv-link download-cv-link-orange" style={{ marginTop: '1.5rem' }}>
                                 Download CV
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
