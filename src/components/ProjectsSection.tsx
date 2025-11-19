@@ -29,7 +29,7 @@ export default function ProjectsSection() {
                     E-commerce website for Skinn, an African-inspired clothing brand founded by <u>Yethu Mabizela</u>. As Creative Director, I designed and developed the brand identity and web presence. Features a modern e-commerce experience with product showcases, magazine integration, and seamless shopping functionality.
                 </>
             ),
-            tech: ['E-commerce', 'Brand Design', 'UI/UX'],
+            tech: ['E-commerce', 'Brand Design', 'UI/UX', 'Webflow'],
             category: 'personal' as ProjectCategory,
             screenshot: '/images/skinnbeta.png',
             githubUrl: '',
