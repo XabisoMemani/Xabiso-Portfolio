@@ -27,7 +27,7 @@ export default function Cursor() {
         // Check if element or any ancestor is an interactive element
         const isInteractiveElement = (element: HTMLElement | null): boolean => {
             if (!element) return false;
-            
+
             // List of selectors for interactive elements
             const interactiveSelectors = [
                 'a',
@@ -41,10 +41,10 @@ export default function Cursor() {
                 '.project-link-btn',
                 '.contact-link'
             ].join(', ');
-            
+
             // Check if element itself matches or has an ancestor that matches
-            return element.matches(interactiveSelectors) || 
-                   !!element.closest(interactiveSelectors);
+            return element.matches(interactiveSelectors) ||
+                !!element.closest(interactiveSelectors);
         };
 
         const handleMouseOver = (e: MouseEvent) => {
@@ -57,7 +57,7 @@ export default function Cursor() {
         const handleMouseOut = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             const relatedTarget = e.relatedTarget as HTMLElement;
-            
+
             // Only hide if we're leaving an interactive element and not entering another one
             if (isInteractiveElement(target) && !isInteractiveElement(relatedTarget)) {
                 setIsHovering(false);
