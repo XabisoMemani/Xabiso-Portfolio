@@ -45,6 +45,8 @@ export default function Cursor() {
                 '.info-btn',
                 // Include '.close-btn' so the InfoPanel's X shows the aim on hover.
                 '.close-btn',
+                // Allow resume-specific interactive items to trigger the aim
+                '.resume-interactive',
                 '.social-link',
                 '.theme-btn',
                 '.certification-link',

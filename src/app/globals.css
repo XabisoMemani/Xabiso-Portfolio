@@ -239,7 +239,9 @@ a:hover,
   );
   border-radius: 50%;
   opacity: 0.5;
-  animation: rotate 10s linear infinite;
+  /* Disable rotation - make rings static */
+  animation: none !important;
+  transform: rotate(0deg) !important;
   z-index: -1;
 }
 
@@ -258,7 +260,9 @@ a:hover,
   );
   border-radius: 50%;
   opacity: 0.3;
-  animation: rotate 15s linear infinite reverse;
+  /* Disable rotation - make rings static */
+  animation: none !important;
+  transform: rotate(0deg) !important;
   z-index: -1;
 }
 

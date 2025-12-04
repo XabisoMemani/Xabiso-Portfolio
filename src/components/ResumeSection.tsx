@@ -35,7 +35,7 @@ export default function ResumeSection() {
                                         <h4 className="timeline-title">National Senior Certificate/Matric</h4>
                                         <p className="timeline-institution">Bracken High School</p>
                                         <div className="timeline-description">
-                                            <div className="achievement-badge achievement-badge-tooltip" data-tooltip="(83% Final Mark)">Trophy for Top Matric Learner in Computer Applications Technology</div>
+                                            <div className="achievement-badge achievement-badge-tooltip resume-interactive" data-tooltip="(83% Final Mark)">Trophy for Top Matric Learner in Computer Applications Technology</div>
                                             <div className="achievement-badge">RCL Prefect / Leader</div>
                                         </div>
                                     </div>
