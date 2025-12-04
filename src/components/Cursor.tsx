@@ -21,6 +21,16 @@ export default function Cursor() {
             setTimeout(() => {
                 clickEffect.remove();
             }, 600);
+
+            // After a click, recalculate whether the pointer is over an interactive element.
+            // Sometimes clicking removes the element (e.g. closing a panel) and mouseout
+            // won't fire — recalc and clear hover state if not over an interactive item.
+            setTimeout(() => {
+                const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+                if (!isInteractiveElement(el)) {
+                    setIsHovering(false);
+                }
+            }, 0);
         };
 
         // Handle hover states using event delegation
@@ -33,6 +43,7 @@ export default function Cursor() {
                 'a',
                 'button',
                 '.info-btn',
+                // Include '.close-btn' so the InfoPanel's X shows the aim on hover.
                 '.close-btn',
                 '.social-link',
                 '.theme-btn',
@@ -69,11 +80,16 @@ export default function Cursor() {
         document.addEventListener('mouseover', handleMouseOver);
         document.addEventListener('mouseout', handleMouseOut);
 
+        // Clear hover state when info panel explicitly closes
+        const handleInfoClose = () => setIsHovering(false);
+        window.addEventListener('app:info-close', handleInfoClose as EventListener);
+
         return () => {
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('click', handleClick);
             document.removeEventListener('mouseover', handleMouseOver);
             document.removeEventListener('mouseout', handleMouseOut);
+            window.removeEventListener('app:info-close', handleInfoClose as EventListener);
         };
     }, []);
 

@@ -12,6 +12,8 @@ export default function InfoPanel({ isOpen, onClose }: InfoPanelProps) {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 onClose();
+                // notify listeners that the info panel closed
+                window.dispatchEvent(new CustomEvent('app:info-close'));
             }
         };
 
@@ -32,9 +34,29 @@ export default function InfoPanel({ isOpen, onClose }: InfoPanelProps) {
 
     return (
         <>
-            <div className="overlay show" onClick={onClose}></div>
+            <div
+                className="overlay show"
+                onClick={() => {
+                    // Simulate Escape key press so any escape handlers run,
+                    // and dispatch the cursor-reset event.
+                    const esc = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+                    document.dispatchEvent(esc);
+                    window.dispatchEvent(new CustomEvent('app:info-close'));
+                }}
+            ></div>
             <div className="info-panel show">
-                <div className="close-btn" onClick={onClose}>×</div>
+                <div
+                    className="close-btn"
+                    onClick={() => {
+                        // Simulate Escape key press instead of directly invoking onClose
+                        const esc = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+                        document.dispatchEvent(esc);
+                        // Ensure cursor listeners clear hover/aim
+                        window.dispatchEvent(new CustomEvent('app:info-close'));
+                    }}
+                >
+                    ×
+                </div>
                 <div className="info-line">NAME: XABISO MEMANI</div>
                 <div className="info-line">ROLE: SOFTWARE ENGINEER</div>
                 <div className="info-line">LOCATION: JOHANNESBURG, SOUTH AFRICA</div>
