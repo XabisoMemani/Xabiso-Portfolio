@@ -2823,8 +2823,8 @@ html.theme-wood .download-cv-link:hover {
   .info-btn {
     top: 0.75rem;
     right: 0.75rem;
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
     font-size: 1.5rem;
   }
 
@@ -2834,8 +2834,8 @@ html.theme-wood .download-cv-link:hover {
   }
 
   .theme-btn {
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
     font-size: 1.5rem;
   }
 
@@ -3311,7 +3311,7 @@ html.theme-wood .download-cv-link:hover {
   }
 
   .info-line {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     margin-bottom: 0.9rem;
     padding-bottom: 0.45rem;
   }
