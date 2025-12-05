@@ -833,8 +833,8 @@ html.theme-orange .theme-btn::before {
   /* Profile picture only hovers on active/click, not on hover */
   .profile-container:hover {
     transform: scale(1);
-    box-shadow: 0 0 0 3px var(--nokia-screen),
-      0 0 20px rgba(146, 196, 124, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px var(--nokia-screen), 0 0 20px rgba(146, 196, 124, 0.3),
+      inset 0 0 20px rgba(0, 0, 0, 0.3);
   }
 
   .profile-container:active {
