@@ -1248,10 +1248,10 @@ body.navbar-active .landing-section::after {
   margin: 0 auto 3rem;
   padding: 0 1rem;
   letter-spacing: -0.01em;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-  /* Allow natural word wrapping on all screen sizes */
+  /* Prevent mid-word hyphenation or forced breaks; allow natural wrapping */
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .about-intro-word {
@@ -1267,7 +1267,6 @@ body.navbar-active .landing-section::after {
 }
 
 .about-intro-break-mobile {
-  /* Hidden by default; shown on very small screens if needed */
   display: none;
 }
 
@@ -2944,7 +2943,7 @@ html.theme-wood .download-cv-link:hover {
   .theme-btn {
     width: 46px;
     height: 46px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .logo {
@@ -3009,12 +3008,12 @@ html.theme-wood .download-cv-link:hover {
   }
 
   .scroll-indicator {
-    bottom: 1.5rem;
+    bottom: 4rem;
   }
 
   .scroll-indicator svg {
-    width: 24px;
-    height: 24px;
+    width: 34px;
+    height: 34px;
   }
 
   .portfolio-section {
@@ -3425,7 +3424,7 @@ html.theme-wood .download-cv-link:hover {
   }
 
   .tag {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .close-btn {

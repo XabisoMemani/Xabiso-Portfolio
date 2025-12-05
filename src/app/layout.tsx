@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -36,6 +36,27 @@ export default function RootLayout({
         />
         <link rel="icon" href="/images/xabi.png" type="image/png" />
         <link rel="alternate icon" href="/images/xabi.png" />
+
+        {/* Inline script to set theme before React hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const savedTheme = localStorage.getItem('theme');
+                  if (savedTheme === 'dark' || savedTheme === 'wood' || savedTheme === 'orange') {
+                    document.documentElement.classList.add('theme-' + savedTheme);
+                  } else {
+                    document.documentElement.classList.add('theme-orange');
+                  }
+                } catch (e) {
+                  document.documentElement.classList.add('theme-orange');
+                }
+              })();
+            `,
+          }}
+        />
+
       </head>
       <body className={`${vt323.variable} ${inter.variable}`}>
         {children}

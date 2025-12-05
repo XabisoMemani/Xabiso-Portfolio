@@ -103,7 +103,7 @@ export default function AboutSection() {
                             }}
                         >
                             {word}
-                            {index < wordsPart1.length - 1 && '\u00A0'}
+                            {index < wordsPart1.length - 1 && ' '}
                         </span>
                     ))}
                     <br className="about-intro-break" />
@@ -118,7 +118,7 @@ export default function AboutSection() {
                                 }}
                             >
                                 {word}
-                                {index < wordsPart2.length - 1 && '\u00A0'}
+                                {index < wordsPart2.length - 1 && ' '}
                             </span>
                         );
                     })}
@@ -134,7 +134,7 @@ export default function AboutSection() {
                                 }}
                             >
                                 {word}
-                                {index < wordsPart3.length - 1 && '\u00A0'}
+                                {index < wordsPart3.length - 1 && ' '}
                             </span>
                         );
                     })}
