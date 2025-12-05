@@ -77,40 +77,38 @@ body {
   mix-blend-mode: difference;
 }
 
-/* Hide custom cursor on mobile */
-@media (max-width: 768px) {
-  .cursor,
-  .cursor-dot,
-  .cursor-click {
-    display: none !important;
-  }
+.stagger-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  /* Start slightly smaller and animate to normal size (no overshoot).
+     Change `animation-duration` to speed up/slow down the entrance. */
+  transform: scale(0.94);
+  opacity: 0;
+  animation: popGrow 600ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
 
-  body {
-    cursor: auto !important;
+@keyframes popGrow {
+  0% {
+    transform: scale(0.94);
+    opacity: 0;
   }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
-  .social-link:hover,
-  .info-btn:hover,
-  .close-btn:hover,
-  .theme-btn:hover,
-  a:hover,
-  .certification-link:hover,
-  .project-link-btn:hover,
-  .project-card:hover,
-  .project-image-container:hover,
-  .social-link,
-  .info-btn,
-  .close-btn,
-  .theme-btn,
-  a,
-  .certification-link,
-  .project-link-btn,
-  .project-card,
-  .project-image-container,
-  .download-cv-link,
-  .contact-link {
-    cursor: pointer !important;
-  }
+/* Buttons are fixed; animating a transformed parent would change their positioning.
+   Animate the buttons themselves with a separate rule so their fixed positioning
+   remains correct. */
+.staggered-btn {
+  will-change: transform, opacity;
+  transform: scale(0.94);
+  opacity: 0;
+  /* Buttons use the same faster popGrow. */
+  animation: popGrow 900ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
 }
 
 .cursor-default {
@@ -207,6 +205,76 @@ a:hover,
   box-shadow: 0 0 0 3px var(--nokia-screen-dark),
     0 0 20px rgba(146, 196, 124, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+}
+
+/* Ensure the landing section can contain absolutely positioned loader */
+.landing-section {
+  position: relative;
+}
+
+/* Staggered entrance for landing elements.
+   Animates the .stagger-inner wrapper (translate + fade) so
+   child hover transforms (like .profile-container scale) don't conflict. */
+.stagger-parent {
+  display: inline-block;
+}
+
+.stagger-item {
+  display: block;
+}
+
+/* Reveal utility removed for About section; landing animations still use
+  stagger/popGrow rules above. If you want to reintroduce reveals later,
+  re-add the `.reveal` rules here and ensure they don't conflict with
+  hover transforms. */
+
+/* About section specifics: animate the intro paragraph to slide slightly into place
+   when the section becomes visible. We avoid animating opacity here because the
+   intro already has word-level opacity control. */
+.portfolio-section .about-intro {
+  transform: translateY(10px);
+  transition: transform 520ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.portfolio-section.in-view .about-intro {
+  transform: translateY(0);
+}
+
+/* Section title reveal removed for About page to keep original behavior. */
+
+.stagger-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform: scale(0.96);
+  opacity: 0;
+  /* Slower, more visible entrance — grow into place */
+  animation: popGrow 900ms cubic-bezier(0.16, 0.9, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes popGrow {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Buttons are fixed; animating a transformed parent would change their positioning.
+   Animate the buttons themselves with a separate rule so their fixed positioning
+   remains correct. */
+.staggered-btn {
+  will-change: transform, opacity;
+  transform: scale(0.92);
+  opacity: 0;
+  animation: popGrow 900ms cubic-bezier(0.16, 0.9, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
 }
 
 .profile-container:hover {
@@ -752,6 +820,29 @@ html.theme-orange .theme-btn::before {
 
 /* responsive stuff */
 @media (max-width: 768px) {
+  /* Hide custom cursor on mobile */
+  .cursor,
+  .cursor-dot {
+    display: none;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  /* Profile picture only hovers on active/click, not on hover */
+  .profile-container:hover {
+    transform: scale(1);
+    box-shadow: 0 0 0 3px var(--nokia-screen),
+      0 0 20px rgba(146, 196, 124, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .profile-container:active {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px var(--nokia-screen), 0 0 30px var(--nokia-screen),
+      0 0 50px var(--nokia-screen), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
   .info-btn {
     top: 1rem;
     right: 1rem;
@@ -1157,22 +1248,26 @@ body.navbar-active .landing-section::after {
   margin: 0 auto 3rem;
   padding: 0 1rem;
   letter-spacing: -0.01em;
-  word-break: normal;
-  overflow-wrap: normal;
-  hyphens: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  /* Allow natural word wrapping on all screen sizes */
 }
 
 .about-intro-word {
   display: inline;
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
+  /* Don't force nowrap; let words wrap naturally on mobile */
+  white-space: normal;
 }
 
 .about-intro-break {
+  /* Visible on desktop (>= 768px), hidden on mobile */
   display: block;
 }
 
 .about-intro-break-mobile {
+  /* Hidden by default; shown on very small screens if needed */
   display: none;
 }
 
@@ -2559,6 +2654,10 @@ html.theme-wood .download-cv-link:hover {
     padding: 4rem 1.5rem;
   }
 
+  #about {
+    padding-top: 5rem;
+  }
+
   .section-title {
     font-size: clamp(1.75rem, 5vw, 2.25rem);
     margin-bottom: 2.5rem;
@@ -2592,6 +2691,11 @@ html.theme-wood .download-cv-link:hover {
 
   .about-intro-word {
     white-space: normal;
+  }
+
+  /* Hide the desktop hard line break on mobile; let text wrap naturally */
+  .about-intro-break {
+    display: none;
   }
 
   .about-content {
@@ -2958,7 +3062,7 @@ html.theme-wood .download-cv-link:hover {
 
   .about-intro-word {
     white-space: normal !important;
-    font-size: 0.95rem !important;
+    font-size: 1rem !important;
     display: inline !important;
     word-break: break-word;
     overflow-wrap: break-word;

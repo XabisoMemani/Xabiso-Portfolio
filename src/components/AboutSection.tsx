@@ -7,12 +7,14 @@ export default function AboutSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const [wordOpacities, setWordOpacities] = useState<number[]>([]);
 
+    // Note: scroll-based word opacity animation remains below.
+
     // Split text into parts for line breaks
-    // Desktop: 2 lines, Mobile: 3 lines
-    // Add soft hyphens to long words for better breaking on mobile
+    // Desktop: forced 2 lines with <br> after part 1
+    // Mobile: natural wrapping—let text flow as many lines as needed
     const textPart1 = "Software Engineer based in Johannesburg, ";
-    const textPart2 = "So\u00ADuth Africa, passionate about ";
-    const textPart3 = "creating in\u00ADnovative\u00AD digital ex\u00ADpe\u00ADri\u00ADences.";
+    const textPart2 = "South Africa, passionate about ";
+    const textPart3 = "creating innovative digital experiences.";
     const wordsPart1 = textPart1.split(' ');
     const wordsPart2 = textPart2.split(' ');
     const wordsPart3 = textPart3.split(' ');

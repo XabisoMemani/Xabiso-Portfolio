@@ -46,9 +46,20 @@ export default function Home() {
       <ScanLines />
       <Navbar />
 
-      {/* Info Button - only on landing */}
+      {/* Theme Switcher - only on landing (staggered on the element itself).
+          We set a lower delay so the theme button appears before the info button.
+          Tip: change the inline `--delay` value (milliseconds) on this element
+          to move it earlier/later in the sequence. */}
+      <div className={`theme-btn-wrapper staggered-btn ${!showLandingButtons ? 'hidden' : ''}`}
+        style={{ ['--delay' as any]: '450ms' }}>
+        <ThemeSwitcher />
+      </div>
+
+      {/* Info Button - only on landing (staggered).
+          Tip: change `--delay` (ms) below to alter when this button appears. */}
       <div
-        className={`info-btn ${!showLandingButtons ? 'hidden' : ''}`}
+        className={`info-btn staggered-btn ${!showLandingButtons ? 'hidden' : ''}`}
+        style={{ ['--delay' as any]: '650ms' }}
         onClick={() => setIsInfoOpen(true)}
         role="button"
         tabIndex={0}
@@ -61,27 +72,40 @@ export default function Home() {
         i
       </div>
 
-      {/* Theme Switcher - only on landing */}
-      <div className={`theme-btn-wrapper ${!showLandingButtons ? 'hidden' : ''}`}>
-        <ThemeSwitcher />
-      </div>
-
       {/* Landing Section */}
       <section className="landing-section">
         <div className="container">
-          <div className="profile-container">
-            <Image
-              src="/images/profile-picture.png"
-              alt="Xabiso Memani"
-              width={200}
-              height={200}
-              className="profile-pic"
-              priority
-            />
+          <div className="stagger-parent">
+            <div className="stagger-item" style={{ ['--delay' as any]: '0ms' }}>
+              <div className="stagger-inner">
+                <div className="profile-container">
+                  <Image
+                    src="/images/profile-picture.png"
+                    alt="Xabiso Memani"
+                    width={200}
+                    height={200}
+                    className="profile-pic"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="stagger-item" style={{ ['--delay' as any]: '200ms' }}>
+              <div className="stagger-inner">
+                <h1 className="logo">XABISO MEMANI</h1>
+              </div>
+            </div>
+            <div className="stagger-item" style={{ ['--delay' as any]: '400ms' }}>
+              <div className="stagger-inner">
+                <p className="subtitle">SOFTWARE ENGINEER</p>
+              </div>
+            </div>
+            {/*
+              Stagger delays are controlled via the inline CSS variable `--delay`.
+              You can edit the millisecond values below to change the sequence/timing.
+              Order here controls visual stacking: profile -> title -> subtitle.
+            */}
           </div>
-
-          <h1 className="logo">XABISO MEMANI</h1>
-          <p className="subtitle">SOFTWARE ENGINEER</p>
 
         </div>
         <ScrollIndicator />
