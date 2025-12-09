@@ -171,11 +171,11 @@ export default function AboutSection() {
                         </div>
                         <div className="about-section-body">
                             <p className="about-section-text">
-                                I'm passionate about building software that makes a real impact—clean, intuitive, and enjoyable to use. I love crafting elegant code and thoughtful design that solves real problems.
+                                I'm passionate about building software that makes a real impact, is clean, intuitive and enjoyable to use. I love crafting code and thoughtful design that solves real problems.
                             </p><p className="about-section-text">
-                                With a strong foundation in both theory and hands-on development, I'm always learning and improving. I'm looking to join a team that values innovation, user experience, and collaboration.
+                                With a strong foundation in theory and hands-on development, I'm always learning and improving. I'm looking to join a team that values innovation, collaboration and user experience.
                             </p><p className="about-section-text">
-                                If you're seeking someone driven, adaptable, and genuinely excited about software and design—I'm ready to contribute and grow.
+                                If you're looking for someone thats driven, adaptable and  generally excited about software and design-I'm ready to contribute and grow.
                             </p>
                         </div>
                     </div>
