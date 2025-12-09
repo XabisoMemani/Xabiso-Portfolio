@@ -6,6 +6,7 @@ export default function AboutSection() {
     const introRef = useRef<HTMLParagraphElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
     const [wordOpacities, setWordOpacities] = useState<number[]>([]);
+    const [hoveredService, setHoveredService] = useState<number | null>(null);
 
     // Note: scroll-based word opacity animation remains below.
 
@@ -188,8 +189,19 @@ export default function AboutSection() {
                         </div>
                         <div className="about-section-body">
                             <div className="services-grid">
-                                <div className="service-item">
-                                    <div className="service-icon-wrapper">
+                                {/* Full Stack Development - Monitor that scales up */}
+                                <div
+                                    className="service-item"
+                                    onMouseEnter={() => setHoveredService(0)}
+                                    onMouseLeave={() => setHoveredService(null)}
+                                >
+                                    <div
+                                        className="service-icon-wrapper"
+                                        style={{
+                                            transform: hoveredService === 0 ? 'scale(1.2) rotate(5deg)' : 'scale(1) rotate(0deg)',
+                                            transition: 'transform 0.3s ease-out'
+                                        }}
+                                    >
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                                             <line x1="8" y1="21" x2="16" y2="21"></line>
@@ -201,8 +213,20 @@ export default function AboutSection() {
                                         <p className="service-description">Yes I do it all, front-end and back-end development</p>
                                     </div>
                                 </div>
-                                <div className="service-item">
-                                    <div className="service-icon-wrapper">
+
+                                {/* UI/UX Design - Layout that expands */}
+                                <div
+                                    className="service-item"
+                                    onMouseEnter={() => setHoveredService(1)}
+                                    onMouseLeave={() => setHoveredService(null)}
+                                >
+                                    <div
+                                        className="service-icon-wrapper"
+                                        style={{
+                                            transform: hoveredService === 1 ? 'scale(1.3)' : 'scale(1)',
+                                            transition: 'transform 0.3s ease-out'
+                                        }}
+                                    >
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                             <line x1="9" y1="9" x2="15" y2="9"></line>
@@ -214,8 +238,20 @@ export default function AboutSection() {
                                         <p className="service-description">I design immersive, accessible interfaces with animation and branding</p>
                                     </div>
                                 </div>
-                                <div className="service-item">
-                                    <div className="service-icon-wrapper">
+
+                                {/* API Development - Box that opens up */}
+                                <div
+                                    className="service-item"
+                                    onMouseEnter={() => setHoveredService(2)}
+                                    onMouseLeave={() => setHoveredService(null)}
+                                >
+                                    <div
+                                        className="service-icon-wrapper"
+                                        style={{
+                                            transform: hoveredService === 2 ? 'scale(1.2) rotateY(15deg)' : 'scale(1) rotateY(0deg)',
+                                            transition: 'transform 0.3s ease-out'
+                                        }}
+                                    >
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                                             <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
@@ -227,8 +263,20 @@ export default function AboutSection() {
                                         <p className="service-description">RESTful APIs and seamless integrations for modern applications</p>
                                     </div>
                                 </div>
-                                <div className="service-item">
-                                    <div className="service-icon-wrapper">
+
+                                {/* IT Management - Calendar that expands */}
+                                <div
+                                    className="service-item"
+                                    onMouseEnter={() => setHoveredService(3)}
+                                    onMouseLeave={() => setHoveredService(null)}
+                                >
+                                    <div
+                                        className="service-icon-wrapper"
+                                        style={{
+                                            transform: hoveredService === 3 ? 'scale(1.25) translateY(-3px)' : 'scale(1) translateY(0px)',
+                                            transition: 'transform 0.3s ease-out'
+                                        }}
+                                    >
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                             <line x1="16" y1="2" x2="16" y2="6"></line>
