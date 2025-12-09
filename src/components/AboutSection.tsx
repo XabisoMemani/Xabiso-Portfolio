@@ -23,7 +23,7 @@ export default function AboutSection() {
 
     useEffect(() => {
         // Initialize all words with low opacity
-        setWordOpacities(new Array(words.length).fill(0.15));
+        setWordOpacities(new Array(words.length).fill(0.05));
 
         const handleScroll = () => {
             if (!introRef.current || !sectionRef.current) return;
@@ -68,14 +68,14 @@ export default function AboutSection() {
                         wordProgress = 0; // Word not started yet
                     }
 
-                    // Interpolate from 0.15 (low opacity) to 1 (full opacity)
-                    return 0.15 + (wordProgress * 0.85);
+                    // Interpolate from 0.1 (low opacity) to 1 (full opacity)
+                    return 0.1 + (wordProgress * 0.9);
                 });
 
                 setWordOpacities(newOpacities);
             } else if (sectionTop > animationStart) {
                 // Before animation starts (section top > 80% down viewport), all words at low opacity
-                setWordOpacities(new Array(words.length).fill(0.15));
+                setWordOpacities(new Array(words.length).fill(0.05));
             } else if (sectionTop < animationEnd) {
                 // After animation ends (section top < 60% down viewport), all words at full opacity
                 setWordOpacities(new Array(words.length).fill(1));

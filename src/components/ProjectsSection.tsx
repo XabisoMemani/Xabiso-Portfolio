@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 type ProjectCategory = 'all' | 'school' | 'personal' | 'design';
 
@@ -19,6 +19,9 @@ type Project = {
 
 export default function ProjectsSection() {
     const [activeFilter, setActiveFilter] = useState<ProjectCategory>('all');
+    const projectCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+    const [cardAnimations, setCardAnimations] = useState<Map<number, { opacity: number; translateY: number; blur: number }>>(new Map());
+    const [isMobile, setIsMobile] = useState(false);
 
     const projects: Project[] = [
         {
@@ -33,7 +36,7 @@ export default function ProjectsSection() {
             category: 'personal' as ProjectCategory,
             screenshot: '/images/skinnbeta.png',
             githubUrl: '',
-            demoUrl: 'https://skinnbeta.webflow.io/',
+            demoUrl: 'https://skinnnation.webflow.io/',
             youtubeUrl: '',
             instagramUrl: 'https://www.instagram.com/skinnnation/',
         },
@@ -45,7 +48,7 @@ export default function ProjectsSection() {
             category: 'personal' as ProjectCategory,
             screenshot: '/images/findmyuni.png', // Add screenshot when available
             githubUrl: 'https://github.com/XabisoMemani/FindMyUni',
-            demoUrl: 'https://findmyuni-xabiso4.vercel.app',
+            demoUrl: 'https://findmyuni-xabiso.vercel.app',
             youtubeUrl: '',
         },
         {
@@ -93,18 +96,187 @@ export default function ProjectsSection() {
             demoUrl: '',
             youtubeUrl: 'https://youtu.be/L-LNjbStd80?t=568',
         },
+        {
+            id: 7,
+            title: 'Fleur De Maison',
+            description: (
+                <>
+                    Logo design for Fleur De Maison, a boutique floral brand. Inspired by the romance of Parisian gardens, the brand creates bespoke bouquets that transform every moment into something extraordinary. Check them out on instagram!
+                </>
+            ),
+            tech: ['Logo Design', 'Graphic Design', 'Adobe Illustrator'],
+            category: 'design' as ProjectCategory,
+            screenshot: '/images/fleurdemaison.png',
+            githubUrl: '',
+            demoUrl: '',
+            youtubeUrl: '',
+            instagramUrl: 'https://www.instagram.com/fleur.de.maison/',
+        },
     ];
 
     const filters: { label: string; value: ProjectCategory }[] = [
         { label: 'All Projects', value: 'all' },
         { label: 'School Projects', value: 'school' },
         { label: 'Personal Projects', value: 'personal' },
-        { label: 'Graphic Design', value: 'design' },
+        { label: 'Logos', value: 'design' },
     ];
 
-    const filteredProjects = activeFilter === 'all'
-        ? projects
-        : projects.filter(project => project.category === activeFilter);
+    const filteredProjects = useMemo(() => {
+        if (activeFilter === 'all') {
+            // Exclude Fleur De Maison (id: 7) from "All Projects" - it only shows in "Logos"
+            return projects.filter(project => project.id !== 7);
+        }
+        return projects.filter(project => project.category === activeFilter);
+    }, [activeFilter]);
+
+    // Detect mobile vs desktop
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768); // Adjust breakpoint as needed
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Scroll animation effect for project cards
+    useEffect(() => {
+        // Access filteredProjects from closure - it's memoized so stable
+        const handleScroll = () => {
+            const windowHeight = window.innerHeight;
+
+            // ANIMATION PARAMETERS - Same values as ResumeSection
+            const animationStart = windowHeight * 0.95; // When animation STARTS
+            const animationEnd = windowHeight * 0.8; // When animation ENDS
+            const animationRange = animationStart - animationEnd;
+            const translateDistance = 15; // Movement distance (in pixels)
+            const blurAmount = 10; // Maximum blur (in pixels)
+            const blurEnd = windowHeight * 0.9; // When blur ENDS
+
+            const newAnimations = new Map<number, { opacity: number; translateY: number; blur: number }>();
+
+            // Get visible cards per row on desktop
+            const getVisibleCardsPerRow = () => {
+                if (isMobile) return 1; // Mobile: one card per row
+
+                // Desktop: detect how many cards fit per row
+                const firstCard = projectCardRefs.current.get(filteredProjects[0]?.id);
+                if (!firstCard || filteredProjects.length === 0) return 3;
+
+                const gridContainer = firstCard.parentElement;
+                if (!gridContainer) return 3;
+
+                const containerWidth = gridContainer.clientWidth;
+                const cardWidth = firstCard.offsetWidth;
+                const gap = 32; // 2rem gap
+                const cardsPerRow = Math.floor((containerWidth + gap) / (cardWidth + gap));
+                return Math.max(1, Math.min(cardsPerRow, filteredProjects.length));
+            };
+
+            const cardsPerRow = getVisibleCardsPerRow();
+            const rowGroups: number[][] = [];
+
+            // Group cards by rows
+            for (let i = 0; i < filteredProjects.length; i += cardsPerRow) {
+                rowGroups.push(filteredProjects.slice(i, i + cardsPerRow).map(p => p.id));
+            }
+
+            filteredProjects.forEach((project, index) => {
+                const cardElement = projectCardRefs.current.get(project.id);
+                if (!cardElement) return;
+
+                const rect = cardElement.getBoundingClientRect();
+                const elementTop = rect.top;
+
+                // On mobile: each card animates individually (staggered)
+                // On desktop: cards in the same row animate together
+                let progress = 0;
+                if (elementTop <= animationStart && elementTop >= animationEnd) {
+                    progress = Math.max(0, Math.min(1, (animationStart - elementTop) / animationRange));
+                } else if (elementTop < animationEnd) {
+                    progress = 1;
+                }
+
+                // On mobile: add stagger delay based on index
+                // On desktop: use row-based timing (cards in same row have same progress)
+                let adjustedProgress = progress;
+                if (isMobile) {
+                    // Stagger: each card starts slightly after the previous one
+                    const staggerDelay = 0.15; // 15% delay between cards
+                    const cardStartProgress = index * staggerDelay;
+                    if (progress > cardStartProgress) {
+                        adjustedProgress = Math.min(1, (progress - cardStartProgress) / (1 - cardStartProgress));
+                    } else {
+                        adjustedProgress = 0;
+                    }
+                } else {
+                    // Desktop: find which row this card belongs to
+                    const rowIndex = rowGroups.findIndex(row => row.includes(project.id));
+                    if (rowIndex >= 0) {  // Changed from > 0 to >= 0
+                        // Use the first card in the row to determine progress
+                        const firstCardInRow = projectCardRefs.current.get(rowGroups[rowIndex][0]);
+                        if (firstCardInRow) {
+                            const rowRect = firstCardInRow.getBoundingClientRect();
+                            const rowTop = rowRect.top;
+                            if (rowTop <= animationStart && rowTop >= animationEnd) {
+                                adjustedProgress = Math.max(0, Math.min(1, (animationStart - rowTop) / animationRange));
+                            } else if (rowTop < animationEnd) {
+                                adjustedProgress = 1;
+                            }
+                        }
+                    }
+                }
+
+                // Ease out function
+                const easedProgress = 1 - Math.pow(1 - adjustedProgress, 3);
+
+                // Calculate blur progress separately
+                const blurRange = animationStart - blurEnd;
+                let blurProgress = 0;
+                if (elementTop <= animationStart && elementTop >= blurEnd) {
+                    blurProgress = Math.max(0, Math.min(1, (animationStart - elementTop) / blurRange));
+                } else if (elementTop < blurEnd) {
+                    blurProgress = 1;
+                }
+
+                const easedBlurProgress = 1 - Math.pow(1 - blurProgress, 3);
+                const currentBlur = blurAmount * (1 - easedBlurProgress);
+
+                newAnimations.set(project.id, {
+                    opacity: easedProgress,
+                    translateY: translateDistance * (1 - easedProgress),
+                    blur: currentBlur
+                });
+            });
+
+            // Only update if animations actually changed
+            setCardAnimations(prev => {
+                let hasChanged = false;
+                if (prev.size !== newAnimations.size) {
+                    hasChanged = true;
+                } else {
+                    for (const [id, anim] of newAnimations) {
+                        const prevAnim = prev.get(id);
+                        if (!prevAnim ||
+                            Math.abs(prevAnim.opacity - anim.opacity) > 0.01 ||
+                            Math.abs(prevAnim.translateY - anim.translateY) > 0.01 ||
+                            Math.abs(prevAnim.blur - anim.blur) > 0.01) {
+                            hasChanged = true;
+                            break;
+                        }
+                    }
+                }
+                return hasChanged ? newAnimations : prev;
+            });
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Check on mount
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [filteredProjects, isMobile]);
 
     return (
         <section id="projects" className="portfolio-section">
@@ -126,10 +298,11 @@ export default function ProjectsSection() {
                     ))}
                 </div>
 
-                <div className="projects-grid">
+                <div className={`projects-grid ${filteredProjects.length === 1 ? 'projects-grid-single' : ''}`}>
                     {filteredProjects.map((project) => {
                         const isDesignCategory = project.category === 'design';
-                        const aspectRatioClass = isDesignCategory ? 'project-image-square' : 'project-image-video';
+                        // Use normal aspect ratio for Fleur De Maison (styled like normal projects)
+                        const aspectRatioClass = (isDesignCategory && project.id !== 7) ? 'project-image-square' : 'project-image-video';
 
                         // Arrow icon SVG
                         const ArrowIcon = () => (
@@ -149,10 +322,25 @@ export default function ProjectsSection() {
                             </svg>
                         );
 
+                        const animation = cardAnimations.get(project.id) || { opacity: 0, translateY: 15, blur: 10 };
+
                         return (
                             <div
                                 key={project.id}
+                                ref={(el) => {
+                                    if (el) {
+                                        projectCardRefs.current.set(project.id, el);
+                                    } else {
+                                        projectCardRefs.current.delete(project.id);
+                                    }
+                                }}
                                 className={`project-card ${project.screenshot ? 'project-card-with-image' : ''}`}
+                                style={{
+                                    opacity: animation.opacity,
+                                    transform: `translateY(${animation.translateY}px)`,
+                                    filter: `blur(${animation.blur}px)`,
+                                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out, filter 0.3s ease-out'
+                                }}
                             >
                                 {/* Image Container */}
                                 {project.screenshot && (

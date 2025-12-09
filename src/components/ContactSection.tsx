@@ -1,6 +1,91 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+
 export default function ContactSection() {
+    const contactTextRef = useRef<HTMLParagraphElement>(null);
+    const contactLinksRef = useRef<HTMLDivElement>(null);
+    const [contactTextAnimation, setContactTextAnimation] = useState<{ opacity: number; translateY: number; blur: number }>({ opacity: 0, translateY: 15, blur: 10 });
+    const [contactLinksAnimation, setContactLinksAnimation] = useState<{ opacity: number; translateY: number; blur: number }>({ opacity: 0, translateY: 15, blur: 10 });
+
+    // Rotating "hello" in different languages
+    const helloLanguages = ['Hello', 'Sawubona', 'Molo', 'Dumela', 'Thobela', 'Xeweni', 'Ndaa', 'Lotjani', 'Hallo', 'Awe', 'Hola', 'Bonjour', 'Ciao', 'Jambo', 'Sannu', '你好', 'こんにちは', 'नमस्ते', 'Здравствуйте', 'السلام عليكم', '👋'];
+    const [currentHelloIndex, setCurrentHelloIndex] = useState(0);
+
+    // Scroll animation effect for contact text
+    useEffect(() => {
+        const handleScroll = () => {
+            const windowHeight = window.innerHeight;
+
+            // ANIMATION PARAMETERS - Same values as ResumeSection
+            const animationStart = windowHeight * 0.98; // When animation STARTS
+            const animationEnd = windowHeight * 0.8; // When animation ENDS
+            const animationRange = animationStart - animationEnd;
+            const translateDistance = 15; // Movement distance (in pixels)
+            const blurAmount = 10; // Maximum blur (in pixels)
+            const blurEnd = windowHeight * 0.9; // When blur ENDS
+
+            if (!contactTextRef.current) return;
+
+            // Use text element position to calculate progress for both text and links (so they animate together)
+            const rect = contactTextRef.current.getBoundingClientRect();
+            const elementTop = rect.top;
+
+            // Calculate opacity/translateY progress (shared for both text and links)
+            let progress = 0;
+            if (elementTop <= animationStart && elementTop >= animationEnd) {
+                progress = Math.max(0, Math.min(1, (animationStart - elementTop) / animationRange));
+            } else if (elementTop < animationEnd) {
+                progress = 1; // Animation complete
+            }
+
+            // Ease out function for smoother animation
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+            // Calculate blur progress separately (shared for both text and links)
+            const blurRange = animationStart - blurEnd;
+            let blurProgress = 0;
+            if (elementTop <= animationStart && elementTop >= blurEnd) {
+                blurProgress = Math.max(0, Math.min(1, (animationStart - elementTop) / blurRange));
+            } else if (elementTop < blurEnd) {
+                blurProgress = 1; // Blur animation complete
+            }
+
+            // Ease out function for blur
+            const easedBlurProgress = 1 - Math.pow(1 - blurProgress, 3);
+
+            // Blur decreases as blur progress increases (inverse relationship)
+            const currentBlur = blurAmount * (1 - easedBlurProgress);
+
+            // Apply same animation values to both text and links (they animate together)
+            const sharedAnimation = {
+                opacity: easedProgress,
+                translateY: translateDistance * (1 - easedProgress),
+                blur: currentBlur
+            };
+
+            setContactTextAnimation(sharedAnimation);
+            setContactLinksAnimation(sharedAnimation);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Check on mount
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    // Rotate "hello" languages every 2 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentHelloIndex((prevIndex) => (prevIndex + 1) % helloLanguages.length);
+        }, 3000); // Change every 2 seconds
+
+        return () => clearInterval(interval);
+    }, [helloLanguages.length]);
+
     return (
         <>
             <section id="contact" className="portfolio-section">
@@ -8,10 +93,28 @@ export default function ContactSection() {
                     <h2 className="section-title">CONTACT</h2>
                     <div className="contact-content">
                         <div className="contact-info">
-                            <p className="contact-text">
-                                Feel free to reach out if you'd like to work together or just want to say hello!
+                            <p
+                                ref={contactTextRef}
+                                className="contact-text"
+                                style={{
+                                    opacity: contactTextAnimation.opacity,
+                                    transform: `translateY(${contactTextAnimation.translateY}px)`,
+                                    filter: `blur(${contactTextAnimation.blur}px)`,
+                                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out, filter 0.3s ease-out'
+                                }}
+                            >
+                                Feel free to reach out if you'd like to work together or just want to say {helloLanguages[currentHelloIndex].toLowerCase()} !
                             </p>
-                            <div className="contact-links">
+                            <div
+                                ref={contactLinksRef}
+                                className="contact-links"
+                                style={{
+                                    opacity: contactLinksAnimation.opacity,
+                                    transform: `translateY(${contactLinksAnimation.translateY}px)`,
+                                    filter: `blur(${contactLinksAnimation.blur}px)`,
+                                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out, filter 0.3s ease-out'
+                                }}
+                            >
                                 <a href="https://github.com/XabisoMemani" target="_blank" rel="noopener noreferrer" className="contact-link">
                                     <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
@@ -62,6 +165,20 @@ export default function ContactSection() {
                             <a href="/documents/XabisoMemaniCV.pdf" download="XabisoMemaniCV.pdf" className="download-cv-link download-cv-link-orange" style={{ marginTop: '1.5rem' }}>
                                 Download CV
                             </a>
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <Image
+                                    src="/images/xabi2.png"
+                                    alt="Active Drummer"
+                                    width={300}
+                                    height={300}
+                                    style={{
+                                        width: '51.5px',
+                                        height: 'auto',
+                                        objectFit: 'contain',
+                                        color: 'red',
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
