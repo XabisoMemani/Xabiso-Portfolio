@@ -43,10 +43,10 @@ export default function ProjectsSection() {
         {
             id: 2,
             title: 'Find My Uni',
-            description: 'Full-stack web application that helps South African students discover university programs based on their subject marks and APS scores. Features course matching, automatic APS calculation, user authentication, and responsive design with custom animations.',
+            description: 'Full-stack web application that helps South African students discover university programs based on their subject marks and APS scores. Features course matching, automatic APS calculation, user authentication, and responsive design with custom animations. Do check out the GitHub repo to see the code and how to run FindMyUni locally!',
             tech: ['HTML5', 'CSS3', 'JavaScript', 'WCF', '.NET Framework', 'C#', 'SQL Server'],
             category: 'personal' as ProjectCategory,
-            screenshot: '/images/findmyuni.png', // Add screenshot when available
+            screenshot: '/images/findmyuni.png',
             githubUrl: 'https://github.com/XabisoMemani/FindMyUni',
             demoUrl: 'https://findmyuni-xabiso.vercel.app',
             youtubeUrl: '',

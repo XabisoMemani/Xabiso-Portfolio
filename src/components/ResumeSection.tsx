@@ -189,10 +189,10 @@ export default function ResumeSection() {
                                     </div>
                                     <div className="experience-job-title">Call Centre Agent</div>
                                     <p className="experience-description">
-                                        Gained valuable sales experience conducting cold calls and promoting insurance products, demonstrating strong communication skills and customer relationship management.
+                                        Gained valuable sales experience conducting cold calls and promoting MiWay Life insurance products, demonstrating strong communication skills and customer relationship management.
                                     </p>
                                     <div className="experience-achievement">
-                                        <strong>Achievement:</strong> Recognized as the junior agent with the most transfers in the first 30-day cycle, earning an achievement badge for outstanding performance
+                                        <strong>Achievement:</strong> Recognized as the junior agent with the most transfers in the first 30-day cycle
                                     </div>
                                 </div>
 
@@ -207,7 +207,7 @@ export default function ResumeSection() {
                                     </div>
                                     <div className="experience-job-title">Internet Café Assistant / IT Customer Assistant</div>
                                     <p className="experience-description">
-                                        Provided technical support and operated professional printing equipment, showcasing proficiency with hardware systems and customer-facing troubleshooting. Managed cash transactions and inventory, applying business acumen in a fast-paced environment. Designed marketing materials including posters, flyers, and business cards, developing visual communication skills that now inform my approach to UI/UX design. Delivered <u>24-hour support</u> to select clients, strengthening my problem-solving abilities and responsiveness in technical roles.
+                                        Provided technical support and operated professional printing equipment, showcasing proficiency with hardware systems and customer service skills. Managed cash transactions and inventory, applying business acumen everyday. Designed marketing materials such as posters, flyers, and business cards, developing visual communication skills that I now use in my UI/UX design projects. Delivered <u>24-hour support</u> to select clients, strengthening my problem-solving abilities and responsiveness in technical roles.
                                     </p>
                                 </div>
                             </div>
