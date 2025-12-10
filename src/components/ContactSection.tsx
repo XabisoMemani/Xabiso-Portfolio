@@ -171,6 +171,7 @@ export default function ContactSection() {
                                     alt="Active Drummer"
                                     width={300}
                                     height={300}
+                                    loading="lazy"
                                     style={{
                                         width: '51.5px',
                                         height: 'auto',

@@ -22,8 +22,8 @@ export default function Snowflakes() {
             return;
         }
 
-        // Create 50 snowflakes
-        const flakes: Snowflake[] = Array.from({ length: 50 }, (_, i) => ({
+        // Create 40 snowflakes (reduced from 50 for better performance)
+        const flakes: Snowflake[] = Array.from({ length: 40 }, (_, i) => ({
             id: i,
             left: Math.random() * 100,
             animationDuration: 6 + Math.random() * 4, // 6-10 seconds

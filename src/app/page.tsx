@@ -1,20 +1,68 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Cursor from '@/components/Cursor';
 import ScanLines from '@/components/ScanLines';
 import Snowflakes from '@/components/Snowflakes';
-import InfoPanel from '@/components/InfoPanel';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import Navbar from '@/components/Navbar';
-import AboutSection from '@/components/AboutSection';
-import ResumeSection from '@/components/ResumeSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import ContactSection from '@/components/ContactSection';
 import ScrollIndicator from '@/components/ScrollIndicator';
 import Notification from '@/components/Notification';
 import { useTheme } from '@/hooks/useTheme';
+
+// Lazy load sections below the fold to reduce initial bundle size
+// Using ssr: false for client components to avoid Turbopack issues
+const AboutSection = dynamic(() => import('@/components/AboutSection'), {
+  ssr: false,
+});
+
+const ResumeSection = dynamic(() => import('@/components/ResumeSection'), {
+  ssr: false,
+});
+
+const ProjectsSection = dynamic(() => import('@/components/ProjectsSection'), {
+  ssr: false,
+});
+
+const ContactSection = dynamic(() => import('@/components/ContactSection'), {
+  ssr: false,
+});
+
+// Lazy load InfoPanel - only loads when needed
+const InfoPanel = dynamic(() => import('@/components/InfoPanel'), {
+  ssr: false,
+});
+
+// Intersection Observer wrapper for true lazy loading
+function LazySection({ children, className }: { children: React.ReactNode; className?: string }) {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // Start loading 200px before it's visible
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={className}>
+      {shouldLoad && children}
+    </div>
+  );
+}
 
 export default function Home() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -119,16 +167,26 @@ export default function Home() {
         <ScrollIndicator />
       </section>
 
-      {/* Portfolio Sections */}
-      <AboutSection />
-      <ResumeSection />
-      <ProjectsSection />
-      <ContactSection />
+      {/* Portfolio Sections - Load only when scrolled into view */}
+      <LazySection>
+        <AboutSection />
+      </LazySection>
+      <LazySection>
+        <ResumeSection />
+      </LazySection>
+      <LazySection>
+        <ProjectsSection />
+      </LazySection>
+      <LazySection>
+        <ContactSection />
+      </LazySection>
 
-      <InfoPanel
-        isOpen={isInfoOpen}
-        onClose={() => setIsInfoOpen(false)}
-      />
+      {isInfoOpen && (
+        <InfoPanel
+          isOpen={isInfoOpen}
+          onClose={() => setIsInfoOpen(false)}
+        />
+      )}
     </>
   );
 }

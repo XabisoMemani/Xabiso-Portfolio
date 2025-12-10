@@ -5,17 +5,19 @@ import { useTheme } from '@/hooks/useTheme';
 
 export default function Notification() {
     const { theme, mounted, setTheme } = useTheme();
-    const [isVisible, setIsVisible] = useState(false);
+    const [firstNotificationVisible, setFirstNotificationVisible] = useState(false);
+    const [secondNotificationVisible, setSecondNotificationVisible] = useState(false);
 
     useEffect(() => {
         if (!mounted || theme !== 'christmas') {
-            setIsVisible(false);
+            setFirstNotificationVisible(false);
+            setSecondNotificationVisible(false);
             return;
         }
 
-        // Show notification after 1 second delay
+        // Show first notification after 1 second delay
         const showTimer = setTimeout(() => {
-            setIsVisible(true);
+            setFirstNotificationVisible(true);
         }, 1000);
 
         return () => {
@@ -23,20 +25,42 @@ export default function Notification() {
         };
     }, [theme, mounted]);
 
-    const handleClose = () => {
-        setIsVisible(false);
+    // Handle second notification auto-dismiss
+    useEffect(() => {
+        if (!secondNotificationVisible) return;
+
+        const autoHideTimer = setTimeout(() => {
+            setSecondNotificationVisible(false);
+        }, 8000); // Auto-dismiss after 8 seconds
+
+        return () => {
+            clearTimeout(autoHideTimer);
+        };
+    }, [secondNotificationVisible]);
+
+    const handleFirstClose = () => {
+        setFirstNotificationVisible(false);
+        // Show second notification after slide-out animation completes
+        setTimeout(() => {
+            setSecondNotificationVisible(true);
+        }, 800); // Wait for slide-out animation (0.5s) plus buffer
     };
 
     const handleSwitchTheme = () => {
         setTheme('orange');
-        setIsVisible(false);
+        setFirstNotificationVisible(false);
+        setSecondNotificationVisible(false);
+    };
+
+    const handleSecondClose = () => {
+        setSecondNotificationVisible(false);
     };
 
     if (theme !== 'christmas') {
         return null;
     }
 
-    // Christmas tree emoji for icon
+    // Christmas tree emoji for notifications
     const treeEmoji = '🎄';
 
     const checkSvg = (
@@ -52,33 +76,57 @@ export default function Notification() {
     );
 
     return (
-        <div className={`custom-alert ${isVisible ? 'show' : ''}`}>
-            <div className="alert-icon">
-                {treeEmoji}
+        <>
+            {/* First Notification - always render when Christmas theme, control visibility with class */}
+            <div className={`custom-alert ${firstNotificationVisible ? 'show' : ''}`}>
+                <div className="alert-icon">
+                    {treeEmoji}
+                </div>
+                <div className="alert-content">
+                    <div className="alert-title">Happy Holidays!</div>
+                    <div className="alert-message">Enjoying this christmas theme I added?</div>
+                </div>
+                <div className="alert-actions">
+                    <button
+                        className="alert-check"
+                        onClick={handleFirstClose}
+                        aria-label="Keep theme and close notification"
+                        title="Keep theme"
+                    >
+                        {checkSvg}
+                    </button>
+                    <button
+                        className="alert-close"
+                        onClick={handleSwitchTheme}
+                        aria-label="Switch to orange theme"
+                        title="Switch theme"
+                    >
+                        {closeSvg}
+                    </button>
+                </div>
             </div>
-            <div className="alert-content">
-                <div className="alert-title">Happy Holidays!</div>
-                <div className="alert-message">Enjoying this christmas theme I added?</div>
+
+            {/* Second Notification - always render when Christmas theme, control visibility with class */}
+            <div className={`custom-alert ${secondNotificationVisible ? 'show' : ''}`}>
+                <div className="alert-icon">
+                    {treeEmoji}
+                </div>
+                <div className="alert-content">
+                    <div className="alert-title">There's more themes to explore</div>
+                    <div className="alert-message">Click the glowy top-right button to change themes!</div>
+                </div>
+                <div className="alert-actions">
+                    <button
+                        className="alert-check"
+                        onClick={handleSecondClose}
+                        aria-label="Close notification"
+                        title="Close"
+                    >
+                        {checkSvg}
+                    </button>
+                </div>
             </div>
-            <div className="alert-actions">
-                <button
-                    className="alert-check"
-                    onClick={handleClose}
-                    aria-label="Keep theme and close notification"
-                    title="Keep theme"
-                >
-                    {checkSvg}
-                </button>
-                <button
-                    className="alert-close"
-                    onClick={handleSwitchTheme}
-                    aria-label="Switch to orange theme"
-                    title="Switch theme"
-                >
-                    {closeSvg}
-                </button>
-            </div>
-        </div>
+        </>
     );
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+import Image from 'next/image';
 
 type ProjectCategory = 'all' | 'school' | 'personal' | 'design';
 
@@ -118,7 +119,7 @@ export default function ProjectsSection() {
         { label: 'All Projects', value: 'all' },
         { label: 'School Projects', value: 'school' },
         { label: 'Personal Projects', value: 'personal' },
-        { label: 'Logos', value: 'design' },
+        { label: 'Graphic Design', value: 'design' },
     ];
 
     const filteredProjects = useMemo(() => {
@@ -345,11 +346,18 @@ export default function ProjectsSection() {
                                 {/* Image Container */}
                                 {project.screenshot && (
                                     <div className={`project-image-container ${aspectRatioClass}`}>
-                                        <img
-                                            src={project.screenshot}
-                                            alt={`${project.title} screenshot`}
-                                            className="project-screenshot"
-                                        />
+                                        {/* Only load Fleur De Maison (id: 7) image when design/logos filter is active */}
+                                        {project.id === 7 && activeFilter !== 'design' ? null : (
+                                            <Image
+                                                src={project.screenshot}
+                                                alt={`${project.title} screenshot`}
+                                                className="project-screenshot"
+                                                width={800}
+                                                height={600}
+                                                loading="lazy"
+                                                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                                            />
+                                        )}
                                     </div>
                                 )}
 
