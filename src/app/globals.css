@@ -30,6 +30,15 @@ html.theme-orange {
   --scan-line-color: rgba(255, 152, 0, 0.05);
 }
 
+html.theme-christmas {
+  --nokia-screen: #c41e3a;
+  --nokia-screen-dark: #8b1538;
+  --nokia-text: #000000;
+  --bg-dark: #f5eceb;
+  --grid-color: rgba(34, 139, 34, 0.12);
+  --scan-line-color: rgba(196, 30, 58, 0.08);
+}
+
 /* Default to orange theme */
 :root {
   --nokia-screen: #ff9800;
@@ -524,6 +533,14 @@ html.theme-orange .theme-btn::before {
   animation: themeGlowOrange 4s ease-in-out infinite;
 }
 
+html.theme-christmas .theme-btn {
+  animation: themePulseChristmas 4s ease-in-out infinite;
+}
+
+html.theme-christmas .theme-btn::before {
+  animation: themeGlowChristmas 4s ease-in-out infinite;
+}
+
 @keyframes themePulse {
   0%,
   100% {
@@ -613,6 +630,31 @@ html.theme-orange .theme-btn::before {
 }
 
 @keyframes themeGlowOrange {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes themePulseChristmas {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(196, 30, 58, 0);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px 4px rgba(196, 30, 58, 0.5),
+      0 0 25px 6px rgba(196, 30, 58, 0.3);
+  }
+}
+
+@keyframes themeGlowChristmas {
   0%,
   100% {
     opacity: 0;
@@ -816,6 +858,164 @@ html.theme-orange .theme-btn::before {
   background-size: 50px 50px;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Snowflakes - only on landing when Christmas theme is active */
+.landing-section .snowflakes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+/* Custom Alert Styles - Notification in landing section */
+.landing-section .custom-alert {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  background: #faf7f794;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  max-width: 400px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateX(calc(100% + 60px));
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.landing-section .custom-alert.show {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.landing-section .custom-alert:not(.show) {
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+.alert-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.alert-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+.alert-message {
+  color: #666;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  font-size: 0.875rem;
+}
+
+.alert-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.alert-check,
+.alert-close {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #666;
+  cursor: none;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.alert-check:hover,
+.alert-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .landing-section .custom-alert {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    left: 1.5rem;
+    max-width: calc(100% - 3rem);
+    padding: 0.875rem 1rem;
+  }
+
+  .alert-icon {
+    font-size: 1.25rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  .alert-title,
+  .alert-message {
+    font-size: 0.8rem;
+  }
+}
+
+.snowflake {
+  position: absolute;
+  top: -20px;
+  color: #ffffff;
+  font-size: inherit;
+  user-select: none;
+  animation: snowFall linear infinite;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes snowFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 /* responsive stuff */
@@ -1471,6 +1671,18 @@ html.theme-wood .download-cv-link:hover {
     0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* Theme-specific styles - Christmas */
+html.theme-christmas .download-cv-link {
+  background: rgba(196, 30, 58, 0.15);
+  box-shadow: 0 0 15px rgba(196, 30, 58, 0.2), 0 0 30px rgba(196, 30, 58, 0.1);
+}
+
+html.theme-christmas .download-cv-link:hover {
+  background: rgba(196, 30, 58, 0.25);
+  box-shadow: 0 0 20px rgba(196, 30, 58, 0.4), 0 0 40px rgba(196, 30, 58, 0.2),
+    0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
 /* Small variant (for resume section) */
 .download-cv-link-small {
   padding: 0.5rem 1rem;
@@ -1597,6 +1809,8 @@ html.theme-wood .download-cv-link:hover {
   margin-bottom: 3rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  z-index: 10;
 }
 
 .experience-badge {
@@ -1611,6 +1825,8 @@ html.theme-wood .download-cv-link:hover {
   grid-template-columns: 2fr 1fr;
   gap: 0rem;
   margin-top: 2rem;
+  position: relative;
+  z-index: 10;
 }
 
 .resume-left {
@@ -1618,17 +1834,22 @@ html.theme-wood .download-cv-link:hover {
   flex-direction: column;
   gap: 0.5rem;
   padding-right: 4rem;
+  position: relative;
+  z-index: 10;
 }
 
 .resume-right {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
+  z-index: 10;
 }
 
 .resume-section-group {
   position: relative;
   margin-bottom: 3.5rem;
+  z-index: 10;
 }
 
 .resume-section-group:last-child {
@@ -1648,11 +1869,14 @@ html.theme-wood .download-cv-link:hover {
   text-decoration-thickness: 2px;
   text-underline-offset: 0.5rem;
   letter-spacing: -0.02em;
+  position: relative;
+  z-index: 10;
 }
 
 /* Timeline Styles */
 .timeline {
   position: relative;
+  z-index: 10;
 }
 
 .timeline-item {
@@ -1662,6 +1886,7 @@ html.theme-wood .download-cv-link:hover {
   width: 100%;
   padding-bottom: 2rem;
   margin-bottom: 0;
+  z-index: 10;
 }
 
 .timeline-item:last-child {
@@ -1675,7 +1900,7 @@ html.theme-wood .download-cv-link:hover {
   bottom: 0;
   width: 2px;
   background-color: #666;
-  z-index: 0;
+  z-index: 5;
 }
 
 .timeline-divider::after {
@@ -1700,6 +1925,8 @@ html.theme-wood .download-cv-link:hover {
   text-align: right;
   vertical-align: top;
   min-width: 100px;
+  position: relative;
+  z-index: 10;
 }
 
 /* Timeline Right Part - Change 'width' so left + right = 100%, and 'padding-left' to move content */
@@ -1709,6 +1936,8 @@ html.theme-wood .download-cv-link:hover {
   padding-left: 1.75rem; /* CHANGE THIS: Increase to move right-side content further right */
   padding-right: 1rem;
   vertical-align: top;
+  position: relative;
+  z-index: 10;
 }
 
 .timeline-year {
@@ -1719,6 +1948,8 @@ html.theme-wood .download-cv-link:hover {
   margin: 0;
   line-height: 1.5;
   white-space: nowrap;
+  position: relative;
+  z-index: 10;
 }
 
 .timeline-title {
@@ -1729,6 +1960,8 @@ html.theme-wood .download-cv-link:hover {
   margin-bottom: 0.25rem;
   letter-spacing: -0.01em;
   line-height: 1.4;
+  position: relative;
+  z-index: 10;
 }
 
 .timeline-institution {
@@ -1738,6 +1971,8 @@ html.theme-wood .download-cv-link:hover {
   color: #666;
   margin-bottom: 0.35rem;
   line-height: 1.5;
+  position: relative;
+  z-index: 10;
 }
 
 .timeline-description {
@@ -1747,6 +1982,8 @@ html.theme-wood .download-cv-link:hover {
   color: #666;
   letter-spacing: -0.005em;
   margin-bottom: 0;
+  position: relative;
+  z-index: 10;
 }
 
 /* Experience Section - New Format */
@@ -1754,11 +1991,14 @@ html.theme-wood .download-cv-link:hover {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
+  z-index: 10;
 }
 
 .experience-entry {
   position: relative;
   padding-bottom: 2rem;
+  z-index: 10;
 }
 
 .experience-entry:not(:last-child)::after {
@@ -1778,6 +2018,8 @@ html.theme-wood .download-cv-link:hover {
   gap: 1rem;
   margin-bottom: 0.25rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
 }
 
 .experience-employer {
@@ -1786,6 +2028,8 @@ html.theme-wood .download-cv-link:hover {
   font-weight: 600;
   color: #1a1a1a;
   line-height: 1.4;
+  position: relative;
+  z-index: 10;
 }
 
 .experience-address {
@@ -1801,6 +2045,8 @@ html.theme-wood .download-cv-link:hover {
   color: #666;
   letter-spacing: -0.01em;
   margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 10;
 }
 
 .experience-description {
@@ -1810,6 +2056,8 @@ html.theme-wood .download-cv-link:hover {
   color: #555;
   margin-bottom: 0.75rem;
   letter-spacing: -0.005em;
+  position: relative;
+  z-index: 10;
 }
 
 .experience-achievement {
@@ -1921,10 +2169,14 @@ html.theme-wood .download-cv-link:hover {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  position: relative;
+  z-index: 10;
 }
 
 .certification-item {
   margin-bottom: 0;
+  position: relative;
+  z-index: 10;
 }
 
 .certification-header {
@@ -1932,6 +2184,8 @@ html.theme-wood .download-cv-link:hover {
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.25rem;
+  position: relative;
+  z-index: 10;
 }
 
 .certification-title {
@@ -1945,6 +2199,8 @@ html.theme-wood .download-cv-link:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
+  z-index: 10;
 }
 
 .certification-link {
@@ -2025,6 +2281,8 @@ html.theme-wood .download-cv-link:hover {
   margin: 0 0 0.25rem 0;
   line-height: 1.5;
   padding-left: 0.9em; /* Indent to align with text after bullet point */
+  position: relative;
+  z-index: 10;
 }
 
 .certification-date {
@@ -2035,6 +2293,8 @@ html.theme-wood .download-cv-link:hover {
   margin: 0;
   line-height: 1.4;
   padding-left: 0.9em;
+  position: relative;
+  z-index: 10;
 }
 
 .certification-skills {
@@ -2045,6 +2305,8 @@ html.theme-wood .download-cv-link:hover {
   margin: 0.25rem 0 0 0;
   line-height: 1.4;
   padding-left: 0.9em;
+  position: relative;
+  z-index: 10;
 }
 
 /* Skills Progress Bars */

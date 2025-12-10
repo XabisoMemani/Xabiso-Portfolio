@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { VT323, Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import ThemeProviderWrapper from '@/components/ThemeProviderWrapper';
 import './globals.css';
 
 const vt323 = VT323({
@@ -44,13 +45,13 @@ export default function RootLayout({
               (function() {
                 try {
                   const savedTheme = localStorage.getItem('theme');
-                  if (savedTheme === 'dark' || savedTheme === 'wood' || savedTheme === 'orange') {
+                  if (savedTheme === 'dark' || savedTheme === 'wood' || savedTheme === 'orange' || savedTheme === 'christmas') {
                     document.documentElement.classList.add('theme-' + savedTheme);
                   } else {
-                    document.documentElement.classList.add('theme-orange');
+                    document.documentElement.classList.add('theme-christmas');
                   }
                 } catch (e) {
-                  document.documentElement.classList.add('theme-orange');
+                  document.documentElement.classList.add('theme-christmas');
                 }
               })();
             `,
@@ -59,9 +60,11 @@ export default function RootLayout({
 
       </head>
       <body className={`${vt323.variable} ${inter.variable}`}>
-        {children}
-        <Analytics />
-        <SpeedInsights />
+        <ThemeProviderWrapper>
+          {children}
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProviderWrapper>
       </body>
     </html>
   );

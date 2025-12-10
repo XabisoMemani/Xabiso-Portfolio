@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Cursor from '@/components/Cursor';
 import ScanLines from '@/components/ScanLines';
+import Snowflakes from '@/components/Snowflakes';
 import InfoPanel from '@/components/InfoPanel';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import Navbar from '@/components/Navbar';
@@ -12,10 +13,13 @@ import ResumeSection from '@/components/ResumeSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import ScrollIndicator from '@/components/ScrollIndicator';
+import Notification from '@/components/Notification';
+import { useTheme } from '@/hooks/useTheme';
 
 export default function Home() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [showLandingButtons, setShowLandingButtons] = useState(true);
+  const { theme, mounted } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,18 +78,22 @@ export default function Home() {
 
       {/* Landing Section */}
       <section className="landing-section">
+        <Snowflakes />
+        <Notification />
         <div className="container">
           <div className="stagger-parent">
             <div className="stagger-item" style={{ ['--delay' as any]: '0ms' }}>
               <div className="stagger-inner">
                 <div className="profile-container">
                   <Image
-                    src="/images/profile-picture.png"
+                    key={`profile-${theme}`}
+                    src={theme === 'christmas' ? '/images/profile-picture-chrismas.jpg' : '/images/profile-picture.png'}
                     alt="Xabiso Memani"
                     width={200}
                     height={200}
                     className="profile-pic"
                     priority
+                    unoptimized
                   />
                 </div>
               </div>
