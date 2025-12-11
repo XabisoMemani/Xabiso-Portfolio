@@ -18,8 +18,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    // Check for saved theme, default to christmas
-    const savedTheme = localStorage.getItem("theme") as Theme;
+    // Check for saved theme in sessionStorage, default to christmas
+    const savedTheme = sessionStorage.getItem("theme") as Theme;
 
     // Validate saved theme is one of our allowed themes
     if (
@@ -48,8 +48,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Apply theme class to html element
     root.classList.add(`theme-${theme}`);
 
-    // Save to localStorage
-    localStorage.setItem("theme", theme);
+    // Save to sessionStorage (clears when tab/window closes)
+    sessionStorage.setItem("theme", theme);
   }, [theme, mounted]);
 
   return (

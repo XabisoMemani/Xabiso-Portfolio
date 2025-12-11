@@ -44,7 +44,7 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  const savedTheme = localStorage.getItem('theme');
+                  const savedTheme = sessionStorage.getItem('theme');
                   if (savedTheme === 'dark' || savedTheme === 'wood' || savedTheme === 'orange' || savedTheme === 'christmas') {
                     document.documentElement.classList.add('theme-' + savedTheme);
                   } else {
