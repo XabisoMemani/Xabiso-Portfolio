@@ -48,10 +48,10 @@ export default function RootLayout({
                   if (savedTheme === 'dark' || savedTheme === 'wood' || savedTheme === 'orange' || savedTheme === 'christmas') {
                     document.documentElement.classList.add('theme-' + savedTheme);
                   } else {
-                    document.documentElement.classList.add('theme-christmas');
+                    document.documentElement.classList.add('theme-orange');
                   }
                 } catch (e) {
-                  document.documentElement.classList.add('theme-christmas');
+                  document.documentElement.classList.add('theme-orange');
                 }
               })();
             `,

@@ -11,6 +11,7 @@ export default function ContactSection() {
 
     // Rotating "hello" in different languages
     const helloLanguages = ['Hello', 'Sawubona', 'Molo', 'Dumela', 'Thobela', 'Xeweni', 'Ndaa', 'Lotjani', 'Hallo', 'Awe', 'Hola', 'Bonjour', 'Ciao', 'Jambo', 'Sannu', '你好', 'こんにちは', 'नमस्ते', 'Здравствуйте', 'السلام عليكم', '👋'];
+    const helloLanguageNames = ['English', 'Zulu', 'Xhosa', 'Sesotho', 'Sepedi', 'Xitsonga', 'Tshivenda', 'Siswati', 'German', 'Yoruba', 'Spanish', 'French', 'Italian', 'Swahili', 'Hausa', 'Chinese', 'Japanese', 'Hindi', 'Russian', 'Arabic', 'Emoji'];
     const [currentHelloIndex, setCurrentHelloIndex] = useState(0);
 
     // Scroll animation effect for contact text
@@ -103,7 +104,19 @@ export default function ContactSection() {
                                     transition: 'opacity 0.3s ease-out, transform 0.3s ease-out, filter 0.3s ease-out'
                                 }}
                             >
-                                Feel free to reach out if you'd like to work together or just want to say {helloLanguages[currentHelloIndex].toLowerCase()} !
+                                Feel free to reach out if you'd like to work together or just want to say{' '}
+                                <span
+                                    title={`Hello in ${helloLanguageNames[currentHelloIndex]}`}
+                                    style={{
+                                        cursor: 'help',
+                                        textDecoration: 'underline',
+                                        textDecorationStyle: 'dotted',
+                                        textUnderlineOffset: '3px'
+                                    }}
+                                >
+                                    {helloLanguages[currentHelloIndex].toLowerCase()}
+                                </span>
+                                !
                             </p>
                             <div
                                 ref={contactLinksRef}

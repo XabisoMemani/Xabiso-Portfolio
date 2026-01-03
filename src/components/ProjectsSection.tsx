@@ -26,6 +26,17 @@ export default function ProjectsSection() {
 
     const projects: Project[] = [
         {
+            id: 8,
+            title: 'JobTrackr',
+            description: 'Smart job application dashboard with Gmail auto-sync and secure login. JobTrackr is a full-stack web application designed to help job seekers organize and track their job applications with clarity and confidence. Built with Next.js, MongoDB, and secure authentication flows (Google OAuth and OTP), it features automatic Gmail syncing, manual entry fallback, and a clean, responsive dashboard. I designed and developed the entire system—from backend architecture and token cleanup to UI/UX and branding—with a focus on transparency, user trust, and professional polish.',
+            tech: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'OAuth', 'Nodemailer', 'UI/UX', 'JWT', 'TailwindCSS'],
+            category: 'personal' as ProjectCategory,
+            screenshot: '/images/jobtrackr.png',
+            githubUrl: '',
+            demoUrl: 'https://jobtrackr-xabiso.vercel.app/',
+            youtubeUrl: '#',
+        },
+        {
             id: 5,
             title: 'Skinn Galleria',
             description: (
@@ -124,8 +135,10 @@ export default function ProjectsSection() {
 
     const filteredProjects = useMemo(() => {
         if (activeFilter === 'all') {
-            // Exclude Fleur De Maison (id: 7) from "All Projects" - it only shows in "Logos"
-            return projects.filter(project => project.id !== 7);
+            // Include all projects, with Fleur De Maison (id: 7) at the end
+            const allProjects = projects.filter(project => project.id !== 7);
+            const fleurProject = projects.find(project => project.id === 7);
+            return fleurProject ? [...allProjects, fleurProject] : allProjects;
         }
         return projects.filter(project => project.category === activeFilter);
     }, [activeFilter]);
@@ -346,18 +359,15 @@ export default function ProjectsSection() {
                                 {/* Image Container */}
                                 {project.screenshot && (
                                     <div className={`project-image-container ${aspectRatioClass}`}>
-                                        {/* Only load Fleur De Maison (id: 7) image when design/logos filter is active */}
-                                        {project.id === 7 && activeFilter !== 'design' ? null : (
-                                            <Image
-                                                src={project.screenshot}
-                                                alt={`${project.title} screenshot`}
-                                                className="project-screenshot"
-                                                width={800}
-                                                height={600}
-                                                loading="lazy"
-                                                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                                            />
-                                        )}
+                                        <Image
+                                            src={project.screenshot}
+                                            alt={`${project.title} screenshot`}
+                                            className="project-screenshot"
+                                            width={800}
+                                            height={600}
+                                            loading="lazy"
+                                            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                                        />
                                     </div>
                                 )}
 
@@ -385,10 +395,12 @@ export default function ProjectsSection() {
                                     <div className="project-actions">
                                         {project.demoUrl && (
                                             <a
-                                                href={project.demoUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                                href={project.demoUrl === '#' ? undefined : project.demoUrl}
+                                                target={project.demoUrl === '#' ? undefined : '_blank'}
+                                                rel={project.demoUrl === '#' ? undefined : 'noopener noreferrer'}
                                                 className="project-link-btn project-link-btn-demo"
+                                                onClick={project.demoUrl === '#' ? (e) => e.preventDefault() : undefined}
+                                                style={project.demoUrl === '#' ? { cursor: 'not-allowed', opacity: 0.6, pointerEvents: 'none' } : {}}
                                             >
                                                 <span style={{ textAlign: 'center', flex: 1 }}>Demo</span>
                                                 <ArrowIcon />
@@ -407,10 +419,12 @@ export default function ProjectsSection() {
                                         )}
                                         {project.youtubeUrl && (
                                             <a
-                                                href={project.youtubeUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                                href={project.youtubeUrl === '#' ? undefined : project.youtubeUrl}
+                                                target={project.youtubeUrl === '#' ? undefined : '_blank'}
+                                                rel={project.youtubeUrl === '#' ? undefined : 'noopener noreferrer'}
                                                 className="project-link-btn project-link-btn-youtube"
+                                                onClick={project.youtubeUrl === '#' ? (e) => e.preventDefault() : undefined}
+                                                style={project.youtubeUrl === '#' ? { cursor: 'not-allowed', opacity: 0.6, pointerEvents: 'none' } : {}}
                                             >
                                                 <span style={{ textAlign: 'center', flex: 1 }}>YouTube</span>
                                                 <ArrowIcon />

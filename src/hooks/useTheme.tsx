@@ -13,12 +13,12 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("christmas"); // default to christmas(change back to orange after 25 December)
+  const [theme, setTheme] = useState<Theme>("orange");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Check for saved theme in sessionStorage, default to christmas
+    // Check for saved theme in sessionStorage, default to orange
     const savedTheme = sessionStorage.getItem("theme") as Theme;
 
     // Validate saved theme is one of our allowed themes
@@ -31,7 +31,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     ) {
       setTheme(savedTheme);
     } else {
-      setTheme("christmas");
+      setTheme("orange");
     }
   }, []);
 
