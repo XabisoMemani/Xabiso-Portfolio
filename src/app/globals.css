@@ -2564,6 +2564,11 @@ html.theme-christmas .download-cv-link:hover {
   border-radius: 999px;
   color: #1a1a1a;
   background: transparent;
+  transition: box-shadow 0.2s ease;
+}
+
+.tech-tag:hover {
+  box-shadow: 0 0 12px rgba(185, 185, 185, 0.3);
 }
 
 /* Action Buttons */

@@ -16,6 +16,7 @@ type Project = {
     demoUrl?: string;
     youtubeUrl?: string;
     instagramUrl?: string;
+    year?: string;
 };
 
 export default function ProjectsSection() {
@@ -28,13 +29,13 @@ export default function ProjectsSection() {
         {
             id: 8,
             title: 'JobTrackr',
-            description: 'Smart job application dashboard with Gmail auto-sync and secure login. JobTrackr is a full-stack web application designed to help job seekers organize and track their job applications with clarity and confidence. Built with Next.js, MongoDB, and secure authentication flows (Google OAuth and OTP), it features automatic Gmail syncing, manual entry fallback, and a clean, responsive dashboard. I designed and developed the entire system—from backend architecture and token cleanup to UI/UX and branding—with a focus on transparency, user trust, and professional polish.',
+            description: 'Smart job application dashboard with Gmail auto-sync and secure login. JobTrackr is a full-stack web application designed to help job seekers organize and track their job applications with clarity and confidence. Built with Next.js, MongoDB, and secure authentication flows (Google OAuth and OTP), it features automatic Gmail syncing, manual entry fallback, and a clean, responsive dashboard.',
             tech: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'OAuth', 'Nodemailer', 'UI/UX', 'JWT', 'TailwindCSS'],
             category: 'personal' as ProjectCategory,
             screenshot: '/images/jobtrackr.png',
-            githubUrl: '',
+            githubUrl: 'https://github.com/XabisoMemani/JobTrackr-Showcase',
             demoUrl: 'https://jobtrackr-xabiso.vercel.app/',
-            youtubeUrl: '#',
+            year: 'NEW! (2026)',
         },
         {
             id: 5,
@@ -51,6 +52,7 @@ export default function ProjectsSection() {
             demoUrl: 'https://skinnnation.webflow.io/',
             youtubeUrl: '',
             instagramUrl: 'https://www.instagram.com/skinnnation/',
+            year: '2020',
         },
         {
             id: 2,
@@ -62,6 +64,7 @@ export default function ProjectsSection() {
             githubUrl: 'https://github.com/XabisoMemani/FindMyUni',
             demoUrl: 'https://findmyuni-xabiso.vercel.app',
             youtubeUrl: '',
+            year: '2024',
         },
         {
             id: 6,
@@ -74,6 +77,7 @@ export default function ProjectsSection() {
             demoUrl: '',
             youtubeUrl: '',
             instagramUrl: '',
+            year: '2025',
         },
         {
             id: 1,
@@ -85,6 +89,7 @@ export default function ProjectsSection() {
             githubUrl: 'https://github.com/IFMTYP2025/team15',
             demoUrl: '',
             youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
+            year: '2025',
         },
         {
             id: 3,
@@ -96,6 +101,7 @@ export default function ProjectsSection() {
             githubUrl: 'https://github.com/IFMTYP2025/team15-api',
             demoUrl: '',
             youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
+            year: '2025',
         },
         {
             id: 4,
@@ -107,6 +113,7 @@ export default function ProjectsSection() {
             githubUrl: 'https://github.com/IFMTYP2025/team15-mobile',
             demoUrl: '',
             youtubeUrl: 'https://youtu.be/L-LNjbStd80?t=568',
+            year: '2025',
         },
         {
             id: 7,
@@ -123,6 +130,7 @@ export default function ProjectsSection() {
             demoUrl: '',
             youtubeUrl: '',
             instagramUrl: 'https://www.instagram.com/fleur.de.maison/',
+            year: '2025',
         },
     ];
 
@@ -374,16 +382,17 @@ export default function ProjectsSection() {
                                 {/* Content */}
                                 <div className="project-card-content">
                                     <div className="project-card-text">
-                                        <h3 className="project-title">
-                                            {project.title}
+                                        <h3 className="project-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <span>{project.title}</span>
+                                            <span style={{ fontFamily: 'var(--font-inter), sans-serif', fontSize: '0.7rem', fontWeight: '500', padding: '0.25rem 0.5rem', border: '1px solid #e5e5e5', borderRadius: '999px', color: '#1a1a1a', background: 'transparent' }}>{project.year || 'NEW!'}</span>
                                         </h3>
-                                        <p className="project-description">
+                                        <p className="project-description" style={{ textAlign: 'justify', marginTop: '1em' }}>
                                             {project.description}
                                         </p>
                                     </div>
 
                                     {/* Technologies */}
-                                    <div className="project-tech">
+                                    <div className="project-tech" style={{ marginTop: '1rem' }}>
                                         {project.tech.map((tech, index) => (
                                             <span key={index} className="tech-tag">
                                                 {tech}
