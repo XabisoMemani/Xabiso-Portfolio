@@ -11,7 +11,7 @@ export default function ContactSection() {
 
     // Rotating "hello" in different languages
     const helloLanguages = ['Hello', 'Sawubona', 'Molo', 'Dumela', 'Thobela', 'Xeweni', 'Ndaa', 'Lotjani', 'Hallo', 'Awe', 'Hola', 'Bonjour', 'Ciao', 'Jambo', 'Sannu', '你好', 'こんにちは', 'नमस्ते', 'Здравствуйте', 'السلام عليكم', '👋'];
-    const helloLanguageNames = ['English', 'Zulu', 'Xhosa', 'Sesotho', 'Sepedi', 'Xitsonga', 'Tshivenda', 'Siswati', 'German', 'Yoruba', 'Spanish', 'French', 'Italian', 'Swahili', 'Hausa', 'Chinese', 'Japanese', 'Hindi', 'Russian', 'Arabic', 'Emoji'];
+    const helloLanguageNames = ['in English', 'in Zulu', 'in Xhosa', 'in Sesotho', 'in Sepedi', 'in Xitsonga', 'in Tshivenda', 'in Siswati', 'in German', 'in Tsotsi Slang', 'in Spanish', 'in French', 'in Italian', 'in Swahili', 'in Hausa', 'in Chinese', 'in Japanese', 'in Hindi', 'in Russian', 'in Arabic', 'Emoji'];
     const [currentHelloIndex, setCurrentHelloIndex] = useState(0);
 
     // Scroll animation effect for contact text
@@ -106,7 +106,7 @@ export default function ContactSection() {
                             >
                                 Feel free to reach out if you'd like to work together or just want to say{' '}
                                 <span
-                                    title={`Hello in ${helloLanguageNames[currentHelloIndex]}`}
+                                    title={`Hello ${helloLanguageNames[currentHelloIndex]}`}
                                     style={{
                                         cursor: 'help',
                                         textDecoration: 'underline',
