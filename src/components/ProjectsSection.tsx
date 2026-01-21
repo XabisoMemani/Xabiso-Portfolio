@@ -27,6 +27,18 @@ export default function ProjectsSection() {
 
     const projects: Project[] = [
         {
+            id: 9,
+            title: 'IntelliSave Chrome Extension',
+            description:
+                'Intelligent Chrome extension that automatically organises downloaded files into the correct folders based on file type and source, helping to declutter your Downloads folder. IntelliSave runs quietly in the background so you always know exactly where your files are.',
+            tech: ['Chrome Extension', 'Manifest V3', 'JavaScript', 'Automation'],
+            category: 'personal' as ProjectCategory,
+            screenshot: '/images/intellisave.png',
+            githubUrl: '#',
+            demoUrl: '#',
+            year: 'TBA',
+        },
+        {
             id: 8,
             title: 'JobTrackr',
             description: 'Smart job application dashboard with Gmail auto-sync and secure login. JobTrackr is a full-stack web application designed to help job seekers organize and track their job applications with clarity and confidence. Built with Next.js, MongoDB, and secure authentication flows (Google OAuth and OTP), it features automatic Gmail syncing, manual entry fallback, and a clean, responsive dashboard.',
@@ -417,10 +429,12 @@ export default function ProjectsSection() {
                                         )}
                                         {project.githubUrl && (
                                             <a
-                                                href={project.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                                href={project.githubUrl === '#' ? undefined : project.githubUrl}
+                                                target={project.githubUrl === '#' ? undefined : '_blank'}
+                                                rel={project.githubUrl === '#' ? undefined : 'noopener noreferrer'}
                                                 className="project-link-btn project-link-btn-github"
+                                                onClick={project.githubUrl === '#' ? (e) => e.preventDefault() : undefined}
+                                                style={project.githubUrl === '#' ? { cursor: 'not-allowed', opacity: 0.6, pointerEvents: 'none' } : {}}
                                             >
                                                 <span style={{ textAlign: 'center', flex: 1 }}>GitHub</span>
                                                 <ArrowIcon />
