@@ -86,6 +86,55 @@ body {
   mix-blend-mode: difference;
 }
 
+/*
+   Hide custom cursor on devices that use touch (coarse pointer),
+   regardless of screen size. This ensures small laptops (pointer: fine)
+   still see the cursor, while iPads/Tablets (pointer: coarse) do not.
+*/
+@media (pointer: coarse) {
+  .cursor,
+  .cursor-dot {
+    display: none !important;
+  }
+
+  /* Reset cursor to system default */
+  body,
+  a,
+  button,
+  .social-link,
+  .project-card,
+  .project-image-container,
+  .info-btn,
+  .close-btn,
+  .theme-btn,
+  .certification-link,
+  .project-link-btn,
+  .contact-link,
+  .social-link:hover,
+  .info-btn:hover,
+  .close-btn:hover,
+  .theme-btn:hover,
+  a:hover,
+  .certification-link:hover,
+  .project-link-btn:hover,
+  .project-card:hover,
+  .project-image-container:hover {
+    cursor: auto !important;
+  }
+
+  /* Restore the nice 'hand' pointer for clickable items */
+  a,
+  button,
+  .social-link,
+  .info-btn,
+  .close-btn,
+  .theme-btn,
+  .project-link-btn,
+  .contact-link {
+    cursor: pointer !important;
+  }
+}
+
 .stagger-inner {
   display: inline-block;
   will-change: transform, opacity;
@@ -211,8 +260,10 @@ a:hover,
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid var(--nokia-screen);
-  box-shadow: 0 0 0 3px var(--nokia-screen-dark),
-    0 0 20px rgba(146, 196, 124, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 0 3px var(--nokia-screen-dark),
+    0 0 20px rgba(146, 196, 124, 0.3),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
@@ -288,8 +339,11 @@ a:hover,
 
 .profile-container:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 0 4px var(--nokia-screen), 0 0 30px var(--nokia-screen),
-    0 0 50px var(--nokia-screen), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 0 4px var(--nokia-screen),
+    0 0 30px var(--nokia-screen),
+    0 0 50px var(--nokia-screen),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .profile-pic {
@@ -461,14 +515,20 @@ a:hover,
 
 @media (max-width: 900px) {
   .theme-btn-wrapper {
-    right: 4.5rem;
+    right: 5.5rem; /* Increased spacing to prevent overlap */
   }
 }
 
 @media (max-width: 770px) {
-  .theme-btn-wrapper {
-    right: 4rem;
+  /* On tablet: align both buttons slightly higher but keep them level */
+  .info-btn {
     top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .theme-btn-wrapper {
+    top: 1.5rem;
+    right: 5rem; /* 1.5rem (info) + 2.5rem (btn width) + 1rem (gap) */
   }
 }
 
@@ -549,7 +609,8 @@ html.theme-christmas .theme-btn::before {
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 0 15px 4px var(--nokia-screen),
+    box-shadow:
+      0 0 15px 4px var(--nokia-screen),
       0 0 25px 6px var(--nokia-screen);
   }
 }
@@ -574,7 +635,8 @@ html.theme-christmas .theme-btn::before {
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 0 15px 4px rgba(146, 196, 124, 0.5),
+    box-shadow:
+      0 0 15px 4px rgba(146, 196, 124, 0.5),
       0 0 25px 6px rgba(146, 196, 124, 0.3);
   }
 }
@@ -599,7 +661,8 @@ html.theme-christmas .theme-btn::before {
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 0 15px 4px rgba(93, 64, 55, 0.5),
+    box-shadow:
+      0 0 15px 4px rgba(93, 64, 55, 0.5),
       0 0 25px 6px rgba(93, 64, 55, 0.3);
   }
 }
@@ -624,7 +687,8 @@ html.theme-christmas .theme-btn::before {
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 0 15px 4px rgba(255, 152, 0, 0.5),
+    box-shadow:
+      0 0 15px 4px rgba(255, 152, 0, 0.5),
       0 0 25px 6px rgba(255, 152, 0, 0.3);
   }
 }
@@ -649,7 +713,8 @@ html.theme-christmas .theme-btn::before {
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 0 15px 4px rgba(196, 30, 58, 0.5),
+    box-shadow:
+      0 0 15px 4px rgba(196, 30, 58, 0.5),
       0 0 25px 6px rgba(196, 30, 58, 0.3);
   }
 }
@@ -853,7 +918,8 @@ html.theme-christmas .theme-btn::before {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
@@ -891,7 +957,9 @@ html.theme-christmas .theme-btn::before {
   gap: 0.75rem;
   opacity: 0;
   transform: translateX(calc(100% + 60px));
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
   pointer-events: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
@@ -900,11 +968,15 @@ html.theme-christmas .theme-btn::before {
   opacity: 1;
   transform: translateX(0);
   pointer-events: auto;
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
 }
 
 .landing-section .custom-alert:not(.show) {
-  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+  transition:
+    opacity 0.5s ease-in,
+    transform 0.5s ease-in;
 }
 
 .alert-icon {
@@ -955,7 +1027,9 @@ html.theme-christmas .theme-btn::before {
   cursor: none;
   padding: 4px;
   border-radius: 6px;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1033,14 +1107,19 @@ html.theme-christmas .theme-btn::before {
   /* Profile picture only hovers on active/click, not on hover */
   .profile-container:hover {
     transform: scale(1);
-    box-shadow: 0 0 0 3px var(--nokia-screen), 0 0 20px rgba(146, 196, 124, 0.3),
+    box-shadow:
+      0 0 0 3px var(--nokia-screen),
+      0 0 20px rgba(146, 196, 124, 0.3),
       inset 0 0 20px rgba(0, 0, 0, 0.3);
   }
 
   .profile-container:active {
     transform: scale(1.05);
-    box-shadow: 0 0 0 4px var(--nokia-screen), 0 0 30px var(--nokia-screen),
-      0 0 50px var(--nokia-screen), inset 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 0 0 4px var(--nokia-screen),
+      0 0 30px var(--nokia-screen),
+      0 0 50px var(--nokia-screen),
+      inset 0 0 20px rgba(0, 0, 0, 0.3);
   }
 
   .info-btn {
@@ -1124,7 +1203,8 @@ html.theme-christmas .theme-btn::before {
   z-index: 999;
   transform: translateY(-100%);
   opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   box-sizing: border-box;
@@ -1148,7 +1228,8 @@ html.theme-christmas .theme-btn::before {
   z-index: 1000;
   transform: translateY(-100%);
   opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   overflow-x: hidden;
@@ -1169,7 +1250,8 @@ html.theme-christmas .theme-btn::before {
     transparent
   );
   opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -1209,7 +1291,8 @@ html.theme-christmas .theme-btn::before {
 .navbar-content > * {
   opacity: 0;
   transform: translateY(-20px);
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -1246,7 +1329,9 @@ html.theme-christmas .theme-btn::before {
 
 .nav-link:hover {
   color: #1a1a1a;
-  text-shadow: 0 0 20px var(--nokia-screen), 0 0 30px var(--nokia-screen);
+  text-shadow:
+    0 0 20px var(--nokia-screen),
+    0 0 30px var(--nokia-screen);
   transform: translateY(-2px);
 }
 
@@ -1274,7 +1359,8 @@ html.theme-christmas .theme-btn::before {
   padding: 0.5rem;
   pointer-events: none;
   z-index: 10;
-  animation: scrollPulse 4s ease-in-out infinite,
+  animation:
+    scrollPulse 4s ease-in-out infinite,
     scrollGlow 4s ease-in-out infinite;
   opacity: 0;
   animation-delay: 10s;
@@ -1416,6 +1502,24 @@ body.navbar-active .landing-section::after {
   left: 2px;
   color: rgba(0, 0, 0, 0.1);
   z-index: -1;
+}
+
+/* Projects layout: avoid forced 100vh height so there isn't a huge gap after the last card */
+#projects.portfolio-section {
+  min-height: auto;
+}
+
+@media (max-width: 768px) {
+  /* Tighten vertical space for Projects on mobile */
+  #projects.portfolio-section {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .projects-grid {
+    margin-top: 1.25rem;
+    gap: 1.5rem;
+  }
 }
 
 /* Contact Section - Same doubled effect for title */
@@ -1637,49 +1741,64 @@ body.navbar-active .landing-section::after {
 /* Theme-specific styles - Orange */
 html.theme-orange .download-cv-link {
   background: rgba(255, 242, 225, 0.65);
-  box-shadow: 0 0 15px rgba(255, 152, 0, 0.2), 0 0 30px rgba(255, 152, 0, 0.1);
+  box-shadow:
+    0 0 15px rgba(255, 152, 0, 0.2),
+    0 0 30px rgba(255, 152, 0, 0.1);
 }
 
 html.theme-orange .download-cv-link:hover {
   background: rgba(255, 242, 225, 0.8);
-  box-shadow: 0 0 20px rgba(255, 152, 0, 0.4), 0 0 40px rgba(255, 152, 0, 0.2),
+  box-shadow:
+    0 0 20px rgba(255, 152, 0, 0.4),
+    0 0 40px rgba(255, 152, 0, 0.2),
     0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Theme-specific styles - Dark */
 html.theme-dark .download-cv-link {
   background: rgba(146, 196, 124, 0.15);
-  box-shadow: 0 0 15px rgba(146, 196, 124, 0.2),
+  box-shadow:
+    0 0 15px rgba(146, 196, 124, 0.2),
     0 0 30px rgba(146, 196, 124, 0.1);
 }
 
 html.theme-dark .download-cv-link:hover {
   background: rgba(146, 196, 124, 0.25);
-  box-shadow: 0 0 20px rgba(146, 196, 124, 0.4),
-    0 0 40px rgba(146, 196, 124, 0.2), 0 10px 40px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 0 20px rgba(146, 196, 124, 0.4),
+    0 0 40px rgba(146, 196, 124, 0.2),
+    0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Theme-specific styles - Wood */
 html.theme-wood .download-cv-link {
   background: rgba(93, 64, 55, 0.15);
-  box-shadow: 0 0 15px rgba(93, 64, 55, 0.2), 0 0 30px rgba(93, 64, 55, 0.1);
+  box-shadow:
+    0 0 15px rgba(93, 64, 55, 0.2),
+    0 0 30px rgba(93, 64, 55, 0.1);
 }
 
 html.theme-wood .download-cv-link:hover {
   background: rgba(93, 64, 55, 0.25);
-  box-shadow: 0 0 20px rgba(93, 64, 55, 0.4), 0 0 40px rgba(93, 64, 55, 0.2),
+  box-shadow:
+    0 0 20px rgba(93, 64, 55, 0.4),
+    0 0 40px rgba(93, 64, 55, 0.2),
     0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Theme-specific styles - Christmas */
 html.theme-christmas .download-cv-link {
   background: rgba(196, 30, 58, 0.15);
-  box-shadow: 0 0 15px rgba(196, 30, 58, 0.2), 0 0 30px rgba(196, 30, 58, 0.1);
+  box-shadow:
+    0 0 15px rgba(196, 30, 58, 0.2),
+    0 0 30px rgba(196, 30, 58, 0.1);
 }
 
 html.theme-christmas .download-cv-link:hover {
   background: rgba(196, 30, 58, 0.25);
-  box-shadow: 0 0 20px rgba(196, 30, 58, 0.4), 0 0 40px rgba(196, 30, 58, 0.2),
+  box-shadow:
+    0 0 20px rgba(196, 30, 58, 0.4),
+    0 0 40px rgba(196, 30, 58, 0.2),
     0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
@@ -1698,13 +1817,17 @@ html.theme-christmas .download-cv-link:hover {
   border-color: #ff9800 !important;
   color: #ff9800 !important;
   background: rgba(255, 242, 225, 0.65) !important;
-  box-shadow: 0 0 15px rgba(255, 152, 0, 0.2), 0 0 30px rgba(255, 152, 0, 0.1) !important;
+  box-shadow:
+    0 0 15px rgba(255, 152, 0, 0.2),
+    0 0 30px rgba(255, 152, 0, 0.1) !important;
 }
 
 .download-cv-link-orange:hover {
   background: rgba(255, 242, 225, 0.8) !important;
   color: #ff9800 !important;
-  box-shadow: 0 0 20px rgba(255, 152, 0, 0.4), 0 0 40px rgba(255, 152, 0, 0.2),
+  box-shadow:
+    0 0 20px rgba(255, 152, 0, 0.4),
+    0 0 40px rgba(255, 152, 0, 0.2),
     0 10px 40px rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -2107,7 +2230,9 @@ html.theme-christmas .download-cv-link:hover {
 }
 
 .achievement-badge:hover {
-  box-shadow: 0 0 5px rgba(255, 152, 0, 0.4), 0 0 15px rgba(255, 152, 0, 0.2);
+  box-shadow:
+    0 0 5px rgba(255, 152, 0, 0.4),
+    0 0 15px rgba(255, 152, 0, 0.2);
 }
 
 .achievement-badge:first-child {
@@ -2136,7 +2261,9 @@ html.theme-christmas .download-cv-link:hover {
   border-radius: 6px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
   transform: translateX(-50%) translateY(-5px);
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -2153,7 +2280,9 @@ html.theme-christmas .download-cv-link:hover {
   border-top-color: #1a1a1a;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
   z-index: 1001;
 }
 
@@ -2161,7 +2290,9 @@ html.theme-christmas .download-cv-link:hover {
 .achievement-badge-tooltip:hover::before {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-  transition: opacity 0.3s ease 1.5s, transform 0.3s ease 1.5s;
+  transition:
+    opacity 0.3s ease 1.5s,
+    transform 0.3s ease 1.5s;
 }
 
 /* Certifications List - No Timeline */
@@ -2208,7 +2339,9 @@ html.theme-christmas .download-cv-link:hover {
   align-items: center;
   color: #ff9800;
   text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
   cursor: none;
 }
 
@@ -2245,7 +2378,9 @@ html.theme-christmas .download-cv-link:hover {
   border-radius: 6px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
   transform: translateX(-50%) translateY(-5px);
   z-index: 10000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -2262,7 +2397,9 @@ html.theme-christmas .download-cv-link:hover {
   border-top-color: #1a1a1a;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transition:
+    opacity 0.3s ease 0s,
+    transform 0.3s ease 0s;
   z-index: 10001;
 }
 
@@ -2270,7 +2407,9 @@ html.theme-christmas .download-cv-link:hover {
 .certification-link-tooltip:hover::before {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-  transition: opacity 0.3s ease 2s, transform 0.3s ease 2s;
+  transition:
+    opacity 0.3s ease 2s,
+    transform 0.3s ease 2s;
 }
 
 .certification-institution {
@@ -2403,12 +2542,16 @@ html.theme-christmas .download-cv-link:hover {
 .project-filter-btn.active {
   color: #ff9800;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(255, 152, 0, 0.5), 0 0 20px rgba(255, 152, 0, 0.3);
+  text-shadow:
+    0 0 10px rgba(255, 152, 0, 0.5),
+    0 0 20px rgba(255, 152, 0, 0.3);
 }
 
 .project-filter-btn.active:hover {
   color: #ff9800;
-  text-shadow: 0 0 15px rgba(255, 152, 0, 0.7), 0 0 30px rgba(255, 152, 0, 0.4);
+  text-shadow:
+    0 0 15px rgba(255, 152, 0, 0.7),
+    0 0 30px rgba(255, 152, 0, 0.4);
 }
 
 .project-filter-separator {
@@ -2592,7 +2735,10 @@ html.theme-christmas .download-cv-link:hover {
   background: transparent;
   text-decoration: none;
   cursor: none;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid;
   position: relative;
 }
@@ -2816,7 +2962,8 @@ html.theme-christmas .download-cv-link:hover {
   justify-content: center;
   transform: translateY(100%);
   opacity: 0;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

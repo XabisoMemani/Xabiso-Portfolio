@@ -24,6 +24,7 @@ export default function ProjectsSection() {
     const projectCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
     const [cardAnimations, setCardAnimations] = useState<Map<number, { opacity: number; translateY: number; blur: number }>>(new Map());
     const [isMobile, setIsMobile] = useState(false);
+    const [visibleCount, setVisibleCount] = useState(6);
 
     const projects: Project[] = [
         {
@@ -163,6 +164,9 @@ export default function ProjectsSection() {
         return projects.filter(project => project.category === activeFilter);
     }, [activeFilter]);
 
+    const baseVisibleCount = isMobile ? 4 : 6;
+    const visibleProjects = useMemo(() => filteredProjects.slice(0, visibleCount), [filteredProjects, visibleCount]);
+
     // Detect mobile vs desktop
     useEffect(() => {
         const checkMobile = () => {
@@ -172,6 +176,11 @@ export default function ProjectsSection() {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    // Reset visible cards when filter changes or breakpoint changes
+    useEffect(() => {
+        setVisibleCount(Math.min(baseVisibleCount, filteredProjects.length));
+    }, [activeFilter, isMobile, filteredProjects.length, baseVisibleCount]);
 
     // Scroll animation effect for project cards
     useEffect(() => {
@@ -194,8 +203,8 @@ export default function ProjectsSection() {
                 if (isMobile) return 1; // Mobile: one card per row
 
                 // Desktop: detect how many cards fit per row
-                const firstCard = projectCardRefs.current.get(filteredProjects[0]?.id);
-                if (!firstCard || filteredProjects.length === 0) return 3;
+                const firstCard = projectCardRefs.current.get(visibleProjects[0]?.id);
+                if (!firstCard || visibleProjects.length === 0) return 3;
 
                 const gridContainer = firstCard.parentElement;
                 if (!gridContainer) return 3;
@@ -204,18 +213,18 @@ export default function ProjectsSection() {
                 const cardWidth = firstCard.offsetWidth;
                 const gap = 32; // 2rem gap
                 const cardsPerRow = Math.floor((containerWidth + gap) / (cardWidth + gap));
-                return Math.max(1, Math.min(cardsPerRow, filteredProjects.length));
+                return Math.max(1, Math.min(cardsPerRow, visibleProjects.length));
             };
 
             const cardsPerRow = getVisibleCardsPerRow();
             const rowGroups: number[][] = [];
 
             // Group cards by rows
-            for (let i = 0; i < filteredProjects.length; i += cardsPerRow) {
-                rowGroups.push(filteredProjects.slice(i, i + cardsPerRow).map(p => p.id));
+            for (let i = 0; i < visibleProjects.length; i += cardsPerRow) {
+                rowGroups.push(visibleProjects.slice(i, i + cardsPerRow).map(p => p.id));
             }
 
-            filteredProjects.forEach((project, index) => {
+            visibleProjects.forEach((project, index) => {
                 const cardElement = projectCardRefs.current.get(project.id);
                 if (!cardElement) return;
 
@@ -234,29 +243,22 @@ export default function ProjectsSection() {
                 // On mobile: add stagger delay based on index
                 // On desktop: use row-based timing (cards in same row have same progress)
                 let adjustedProgress = progress;
-                if (isMobile) {
-                    // Stagger: each card starts slightly after the previous one
-                    const staggerDelay = 0.15; // 15% delay between cards
-                    const cardStartProgress = index * staggerDelay;
-                    if (progress > cardStartProgress) {
-                        adjustedProgress = Math.min(1, (progress - cardStartProgress) / (1 - cardStartProgress));
-                    } else {
-                        adjustedProgress = 0;
-                    }
-                } else {
-                    // Desktop: find which row this card belongs to
-                    const rowIndex = rowGroups.findIndex(row => row.includes(project.id));
-                    if (rowIndex >= 0) {  // Changed from > 0 to >= 0
-                        // Use the first card in the row to determine progress
-                        const firstCardInRow = projectCardRefs.current.get(rowGroups[rowIndex][0]);
-                        if (firstCardInRow) {
-                            const rowRect = firstCardInRow.getBoundingClientRect();
-                            const rowTop = rowRect.top;
-                            if (rowTop <= animationStart && rowTop >= animationEnd) {
-                                adjustedProgress = Math.max(0, Math.min(1, (animationStart - rowTop) / animationRange));
-                            } else if (rowTop < animationEnd) {
-                                adjustedProgress = 1;
-                            }
+                // Unified logic for both mobile and desktop
+                // On mobile: cardsPerRow is 1, so each card is its own row
+                // On desktop: cards calculate progress based on their row's position
+
+                // Find which row this card belongs to
+                const rowIndex = rowGroups.findIndex(row => row.includes(project.id));
+                if (rowIndex >= 0) {
+                    // Use the first card in the row to determine progress
+                    const firstCardInRow = projectCardRefs.current.get(rowGroups[rowIndex][0]);
+                    if (firstCardInRow) {
+                        const rowRect = firstCardInRow.getBoundingClientRect();
+                        const rowTop = rowRect.top;
+                        if (rowTop <= animationStart && rowTop >= animationEnd) {
+                            adjustedProgress = Math.max(0, Math.min(1, (animationStart - rowTop) / animationRange));
+                        } else if (rowTop < animationEnd) {
+                            adjustedProgress = 1;
                         }
                     }
                 }
@@ -310,7 +312,7 @@ export default function ProjectsSection() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [filteredProjects, isMobile]);
+    }, [visibleProjects, isMobile]);
 
     return (
         <section id="projects" className="portfolio-section">
@@ -332,8 +334,8 @@ export default function ProjectsSection() {
                     ))}
                 </div>
 
-                <div className={`projects-grid ${filteredProjects.length === 1 ? 'projects-grid-single' : ''}`}>
-                    {filteredProjects.map((project) => {
+                <div className={`projects-grid ${visibleProjects.length === 1 ? 'projects-grid-single' : ''}`}>
+                    {visibleProjects.map((project) => {
                         const isDesignCategory = project.category === 'design';
                         // Use normal aspect ratio for Fleur De Maison (styled like normal projects)
                         const aspectRatioClass = (isDesignCategory && project.id !== 7) ? 'project-image-square' : 'project-image-video';
@@ -470,6 +472,39 @@ export default function ProjectsSection() {
                         );
                     })}
                 </div>
+
+                {(filteredProjects.length > baseVisibleCount) && (
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            gap: '0.75rem',
+                            marginTop: isMobile ? '1rem' : '2rem',
+                            marginBottom: isMobile ? '1rem' : undefined,
+                        }}
+                    >
+                        {visibleCount < filteredProjects.length && (
+                            <button
+                                type="button"
+                                onClick={() => setVisibleCount(filteredProjects.length)}
+                                className="project-filter-btn active"
+                                style={{ padding: '0.75rem 1.25rem', borderRadius: '999px' }}
+                            >
+                                See more
+                            </button>
+                        )}
+                        {visibleCount > baseVisibleCount && (
+                            <button
+                                type="button"
+                                onClick={() => setVisibleCount(Math.min(baseVisibleCount, filteredProjects.length))}
+                                className="project-filter-btn"
+                                style={{ padding: '0.75rem 1.25rem', borderRadius: '999px' }}
+                            >
+                                See less
+                            </button>
+                        )}
+                    </div>
+                )}
             </div>
         </section>
     );
