@@ -27,18 +27,7 @@ export default function ProjectsSection() {
     const [visibleCount, setVisibleCount] = useState(6);
 
     const projects: Project[] = [
-        {
-            id: 9,
-            title: 'IntelliSave Chrome Extension',
-            description:
-                'Intelligent Chrome extension that automatically organises downloaded files into the correct folders based on file type and source, helping to declutter your Downloads folder. IntelliSave runs quietly in the background so you always know exactly where your files are.',
-            tech: ['Chrome Extension', 'Manifest V3', 'JavaScript', 'Automation'],
-            category: 'personal' as ProjectCategory,
-            screenshot: '/images/intellisave.png',
-            githubUrl: '#',
-            demoUrl: '#',
-            year: 'TBA',
-        },
+
         {
             id: 8,
             title: 'JobTrackr',
@@ -66,6 +55,17 @@ export default function ProjectsSection() {
             youtubeUrl: '',
             instagramUrl: 'https://www.instagram.com/skinnnation/',
             year: '2020',
+        },
+        {
+            id: 9,
+            title: 'IntelliSave Chrome Extension',
+            description:
+                'Intelligent Chrome extension that automatically organises downloaded files into the correct folders based on file type and source, helping to declutter your Downloads folder. IntelliSave runs quietly in the background so you always know exactly where your files are. I started this project in 2024 to solve my own problem of a messy Downloads folder, and decided to share it with others who might benefit from it too!',
+            tech: ['Chrome Extension', 'Manifest V3', 'JavaScript', 'Automation'],
+            category: 'personal' as ProjectCategory,
+            screenshot: '/images/intellisave.png',
+            githubUrl: 'https://github.com/XabisoMemani/IntelliSave',
+            year: '2024',
         },
         {
             id: 2,
