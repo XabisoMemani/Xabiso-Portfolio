@@ -10,6 +10,7 @@ export default function Notification() {
 
     useEffect(() => {
         if (!mounted || theme !== 'christmas') {
+            // eslint-disable-next-line
             setFirstNotificationVisible(false);
             setSecondNotificationVisible(false);
             return;
@@ -112,7 +113,7 @@ export default function Notification() {
                     {treeEmoji}
                 </div>
                 <div className="alert-content">
-                    <div className="alert-title">There's more themes to explore</div>
+                    <div className="alert-title">There&apos;s more themes to explore</div>
                     <div className="alert-message">Click the glowy top-right button to change themes!</div>
                 </div>
                 <div className="alert-actions">

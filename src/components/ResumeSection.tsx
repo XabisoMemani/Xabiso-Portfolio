@@ -292,7 +292,7 @@ export default function ResumeSection() {
                             <h3 className="resume-group-title">SKILLS</h3>
                             <div className="skill-item">
                                 <div className="skill-header">
-                                    <span className="skill-name"><strong>Programming Languages:</strong> C#, C++, Java, Python, SQL</span>
+                                    <span className="skill-name"><strong>Programming Languages:</strong> C#, C++, Java, SQL</span>
                                     <span className="skill-percentage">90%</span>
                                 </div>
                                 <div className="skill-bar">

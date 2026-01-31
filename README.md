@@ -6,134 +6,40 @@ A custom portfolio website designed and built from scratch to showcase my work, 
 
 This portfolio is a full-stack Next.js application that combines modern web technologies with custom design systems. It features a unique custom cursor system, dynamic theme switching, and a fully responsive layout that works seamlessly across all devices.
 
-The project demonstrates my skills in React development, TypeScript, CSS architecture, and UX design—all brought together to create a cohesive, interactive experience that represents who I am as a developer and designer.
-
 ## Key Features
 
-- **Custom Cursor System**: Interactive cursor with hover effects and click animations
-
-- **Dynamic Theme Switching**: Three themes (Orange, Dark, Wood) with smooth transitions
-
-- **Responsive Design**: Fully responsive layout optimized for mobile, tablet, and desktop
-
-- **Project Showcase**: Filterable project gallery with detailed descriptions and links
-
-- **Interactive Resume Section**: Timeline-style experience and education display
-
-- **Smooth Animations**: Scroll-triggered animations and transitions throughout
-
-- **Contact Integration**: Direct links to GitHub, LinkedIn, Email, WhatsApp, and social media
+- **Custom Cursor**: Adds interactive effects as you move and click
+- **Theme System**: Choose between Orange, Dark, Wood and Christmas themes
+- **Mobile First Design**: The site is built to look great on every screen size
+- **Project Gallery**: Filter through my work to see what I have built
+- **Smooth Animations**: Interactive transitions that trigger as you scroll
+- **Contact Links**: Easy access to my GitHub, LinkedIn and WhatsApp
 
 ## Technology Stack
 
 ### Frontend
 
-- **Next.js 16** with React 19 and TypeScript
+- **Next.js 16**: Using React 19 and TypeScript
+- **Handwritten CSS**: Built to be fast and easy to maintain
+- **Custom Layouts**: Designed for better performance
+- **Animated Transitions**: Gives the site a polished feel
 
-- **100% Custom CSS** — no UI libraries, all styles built from scratch
+### Design and UX
 
-- Responsive design with mobile-first approach
-
-- Custom animations and transitions
-
-### Design & UX
-
-- Custom cursor system with interactive states
-
-- Theme system with CSS variables for dynamic color switching
-
-- Glassmorphism effects and backdrop filters
-
-- Typography using VT323 monospace and Inter sans-serif
+- **Interactive Cursor**: Unique hover states for different elements
+- **Theme Variables**: Used for instant color switching
+- **Visual Effects**: Includes glassmorphism and backdrop filters
+- **Typography**: Uses VT323 and Inter fonts
 
 ### State Management
 
-- React hooks for theme management and UI state
-
-- LocalStorage for theme persistence
-
-- Scroll-based animations and interactions
-
-## Project Structure
-
-```
-xabiso-portfolio/
-├── src/
-│   ├── app/              # Next.js app directory
-│   │   ├── globals.css   # All custom styles
-│   │   ├── layout.tsx    # Root layout
-│   │   └── page.tsx      # Main page component
-│   ├── components/       # React components
-│   │   ├── AboutSection.tsx
-│   │   ├── ResumeSection.tsx
-│   │   ├── ProjectsSection.tsx
-│   │   ├── ContactSection.tsx
-│   │   ├── Cursor.tsx
-│   │   ├── ThemeSwitcher.tsx
-│   │   └── ...
-│   └── hooks/
-│       └── useTheme.ts  # Theme management hook
-├── public/
-│   ├── documents/        # PDF files (CV, certificates)
-│   └── images/          # Project screenshots and assets
-└── README.md
-```
-
-## Quick Start
-
-### Prerequisites
-
-- Node.js 18+ and npm
-
-### Running the Application
-
-1. **Install Dependencies**
-
-   ```bash
-   npm install
-   ```
-
-2. **Run Development Server**
-
-   ```bash
-   npm run dev
-   ```
-
-   Open [http://localhost:3000](http://localhost:3000) in your browser
-
-3. **Build for Production**
-
-   ```bash
-   npm run build
-   npm start
-   ```
+- **React Hooks**: Handles the themes and UI states
+- **Storage Persistence**: Remembers your preferred theme
+- **Scroll Logic**: Drives the interactive word animations
 
 ## Sections
 
-- **About Me**: Introduction with animated text reveal and service offerings
-
-- **Resume**: Education timeline, work experience, certifications, and skills
-
-- **Projects**: Filterable gallery showcasing school projects, personal projects, and design work
-
-- **Contact**: Social links and contact information with download CV option
-
-## Design Philosophy
-
-This portfolio was built to reflect my personality and design sensibilities. Every interaction, animation, and visual element was intentionally crafted to create a cohesive experience. The custom cursor, theme system, and scroll animations all work together to make the site feel alive and interactive—not just a static collection of information.
-
-## Deployment
-
-The portfolio is designed to be deployed on any platform that supports Next.js:
-
-- **Vercel** (recommended for Next.js)
-- **Netlify**
-- **Any Node.js hosting service**
-
-Simply run `npm run build` and deploy the `.next` output directory.
-
-## Collaboration?
-
-This portfolio is part of my professional work, built to showcase my skills in frontend development, UX design, and creative problem-solving.
-
-I'm always open to feedback, especially from fellow developers, designers, or anyone interested in modern web development and UX design.
+- **About Me**: A short intro and a list of my services
+- **Resume**: My education and career timeline
+- **Projects**: A gallery of everything I have built
+- **Contact**: How to reach out and download my CV

@@ -19,140 +19,139 @@ type Project = {
     year?: string;
 };
 
+const projects: Project[] = [
+    {
+        id: 8,
+        title: 'JobTrackr',
+        description: 'Smart job application dashboard with Gmail auto-sync and secure login. JobTrackr is a full-stack web application designed to help job seekers organize and track their job applications with clarity and confidence. Built with Next.js, MongoDB, and secure authentication flows (Google OAuth and OTP), it features automatic Gmail syncing, manual entry fallback, and a clean, responsive dashboard.',
+        tech: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'OAuth', 'Nodemailer', 'UI/UX', 'JWT', 'TailwindCSS'],
+        category: 'personal' as ProjectCategory,
+        screenshot: '/images/jobtrackr.png',
+        githubUrl: 'https://github.com/XabisoMemani/JobTrackr-Showcase',
+        demoUrl: 'https://jobtrackr-xabiso.vercel.app/',
+        year: 'NEW! (2026)',
+    },
+    {
+        id: 5,
+        title: 'Skinn Galleria',
+        description: (
+            <>
+                E-commerce website for Skinn, an African-inspired clothing brand founded by <u>Yethu Mabizela</u>. As Creative Director, I designed and developed the brand identity and web presence. Features a modern e-commerce experience with product showcases, magazine integration, and seamless shopping functionality.
+            </>
+        ),
+        tech: ['E-commerce', 'Brand Design', 'UI/UX', 'Webflow'],
+        category: 'personal' as ProjectCategory,
+        screenshot: '/images/skinnbeta.png',
+        githubUrl: '',
+        demoUrl: 'https://skinnnation.webflow.io/',
+        youtubeUrl: '',
+        instagramUrl: 'https://www.instagram.com/skinnnation/',
+        year: '2020',
+    },
+    {
+        id: 9,
+        title: 'IntelliSave Chrome Extension',
+        description:
+            'Intelligent Chrome extension that automatically organises downloaded files into the correct folders based on file type and source, helping to declutter your Downloads folder. IntelliSave runs quietly in the background so you always know exactly where your files are. I started this project in 2024 to solve my own problem of a messy Downloads folder, and decided to share it with others who might benefit from it too!',
+        tech: ['Chrome Extension', 'JavaScript', 'Manifest V3', 'Automation'],
+        category: 'personal' as ProjectCategory,
+        screenshot: '/images/intellisave.png',
+        githubUrl: 'https://github.com/XabisoMemani/IntelliSave',
+        year: '2024',
+    },
+    {
+        id: 2,
+        title: 'Find My Uni',
+        description: 'Full-stack web application that helps South African students discover university programs based on their subject marks and APS scores. Features course matching, automatic APS calculation, user authentication, and responsive design with custom animations. Do check out the GitHub repo to see the code and how to run FindMyUni locally!',
+        tech: ['HTML5', 'CSS3', 'JavaScript', 'WCF', '.NET Framework', 'C#', 'SQL Server'],
+        category: 'personal' as ProjectCategory,
+        screenshot: '/images/findmyuni.png',
+        githubUrl: 'https://github.com/XabisoMemani/FindMyUni',
+        demoUrl: 'https://findmyuni-xabiso.vercel.app',
+        youtubeUrl: '',
+        year: '2024',
+    },
+    {
+        id: 6,
+        title: 'Xabiso Memani Portfolio',
+        description: 'Custom portfolio website designed and built from scratch to showcase my personality and work. Features a unique custom cursor system, theme switching, and a fully responsive design. Everything was designed by me with no templates—every element crafted to reflect my creative vision and technical skills.',
+        tech: ['Next.js', 'React', 'TypeScript', 'CSS3', 'Custom Design'],
+        category: 'personal' as ProjectCategory,
+        screenshot: '/images/xabisoportfolio.png',
+        githubUrl: 'https://github.com/XabisoMemani/XabisoMemani-Portfolio',
+        demoUrl: '',
+        youtubeUrl: '',
+        instagramUrl: '',
+        year: '2025',
+    },
+    {
+        id: 1,
+        title: 'ZenBox Web Frontend',
+        description: 'Full-stack project management/client onboarding web application built with ASP.NET Web Forms. Features role-based access control, quotation generation, automated emails, and PDF reporting for SAS Environmental.',
+        tech: ['ASP.NET', 'Web Forms', 'HTML', 'C#'],
+        category: 'school' as ProjectCategory,
+        screenshot: '/images/zenbox-web.png',
+        githubUrl: 'https://github.com/IFMTYP2025/team15',
+        demoUrl: '',
+        youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
+        year: '2025',
+    },
+    {
+        id: 3,
+        title: 'ZenBox API',
+        description: 'RESTful backend API built with ASP.NET Core (.NET 8) featuring Entity Framework Core, Azure SQL database, and JWT authentication. Handles business logic, data access, and secure authentication for the ZenBox ecosystem.',
+        tech: ['ASP.NET Core', 'C#', '.NET 8', 'Entity Framework', 'Azure SQL'],
+        category: 'school' as ProjectCategory,
+        screenshot: '/images/zenbox-api.png',
+        githubUrl: 'https://github.com/IFMTYP2025/team15-api',
+        demoUrl: '',
+        youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
+        year: '2025',
+    },
+    {
+        id: 4,
+        title: 'ZenBox Mobile App',
+        description: 'React Native mobile application built with Expo for employee task management. Features role-based access, real-time task tracking, and seamless integration with the ZenBox API. Supports both iOS and Android platforms.',
+        tech: ['React Native', 'Expo', 'TypeScript', 'Tailwind CSS'],
+        category: 'school' as ProjectCategory,
+        screenshot: '/images/zenbox-mobile.png',
+        githubUrl: 'https://github.com/IFMTYP2025/team15-mobile',
+        demoUrl: '',
+        youtubeUrl: 'https://youtu.be/L-LNjbStd80?t=568',
+        year: '2025',
+    },
+    {
+        id: 7,
+        title: 'Fleur De Maison',
+        description: (
+            <>
+                Logo design for Fleur De Maison, a boutique floral brand. Inspired by the romance of Parisian gardens, the brand creates bespoke bouquets that transform every moment into something extraordinary. Check them out on instagram!
+            </>
+        ),
+        tech: ['Logo Design', 'Graphic Design', 'Adobe Illustrator'],
+        category: 'design' as ProjectCategory,
+        screenshot: '/images/fleurdemaison.png',
+        githubUrl: '',
+        demoUrl: '',
+        youtubeUrl: '',
+        instagramUrl: 'https://www.instagram.com/fleur.de.maison/',
+        year: '2025',
+    },
+];
+
+const filters: { label: string; value: ProjectCategory }[] = [
+    { label: 'All Projects', value: 'all' },
+    { label: 'School Projects', value: 'school' },
+    { label: 'Personal Projects', value: 'personal' },
+    { label: 'Graphic Design', value: 'design' },
+];
+
 export default function ProjectsSection() {
     const [activeFilter, setActiveFilter] = useState<ProjectCategory>('all');
     const projectCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
     const [cardAnimations, setCardAnimations] = useState<Map<number, { opacity: number; translateY: number; blur: number }>>(new Map());
     const [isMobile, setIsMobile] = useState(false);
     const [visibleCount, setVisibleCount] = useState(6);
-
-    const projects: Project[] = [
-
-        {
-            id: 8,
-            title: 'JobTrackr',
-            description: 'Smart job application dashboard with Gmail auto-sync and secure login. JobTrackr is a full-stack web application designed to help job seekers organize and track their job applications with clarity and confidence. Built with Next.js, MongoDB, and secure authentication flows (Google OAuth and OTP), it features automatic Gmail syncing, manual entry fallback, and a clean, responsive dashboard.',
-            tech: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'OAuth', 'Nodemailer', 'UI/UX', 'JWT', 'TailwindCSS'],
-            category: 'personal' as ProjectCategory,
-            screenshot: '/images/jobtrackr.png',
-            githubUrl: 'https://github.com/XabisoMemani/JobTrackr-Showcase',
-            demoUrl: 'https://jobtrackr-xabiso.vercel.app/',
-            year: 'NEW! (2026)',
-        },
-        {
-            id: 5,
-            title: 'Skinn Galleria',
-            description: (
-                <>
-                    E-commerce website for Skinn, an African-inspired clothing brand founded by <u>Yethu Mabizela</u>. As Creative Director, I designed and developed the brand identity and web presence. Features a modern e-commerce experience with product showcases, magazine integration, and seamless shopping functionality.
-                </>
-            ),
-            tech: ['E-commerce', 'Brand Design', 'UI/UX', 'Webflow'],
-            category: 'personal' as ProjectCategory,
-            screenshot: '/images/skinnbeta.png',
-            githubUrl: '',
-            demoUrl: 'https://skinnnation.webflow.io/',
-            youtubeUrl: '',
-            instagramUrl: 'https://www.instagram.com/skinnnation/',
-            year: '2020',
-        },
-        {
-            id: 9,
-            title: 'IntelliSave Chrome Extension',
-            description:
-                'Intelligent Chrome extension that automatically organises downloaded files into the correct folders based on file type and source, helping to declutter your Downloads folder. IntelliSave runs quietly in the background so you always know exactly where your files are. I started this project in 2024 to solve my own problem of a messy Downloads folder, and decided to share it with others who might benefit from it too!',
-            tech: ['Chrome Extension', 'Manifest V3', 'JavaScript', 'Automation'],
-            category: 'personal' as ProjectCategory,
-            screenshot: '/images/intellisave.png',
-            githubUrl: 'https://github.com/XabisoMemani/IntelliSave',
-            year: '2024',
-        },
-        {
-            id: 2,
-            title: 'Find My Uni',
-            description: 'Full-stack web application that helps South African students discover university programs based on their subject marks and APS scores. Features course matching, automatic APS calculation, user authentication, and responsive design with custom animations. Do check out the GitHub repo to see the code and how to run FindMyUni locally!',
-            tech: ['HTML5', 'CSS3', 'JavaScript', 'WCF', '.NET Framework', 'C#', 'SQL Server'],
-            category: 'personal' as ProjectCategory,
-            screenshot: '/images/findmyuni.png',
-            githubUrl: 'https://github.com/XabisoMemani/FindMyUni',
-            demoUrl: 'https://findmyuni-xabiso.vercel.app',
-            youtubeUrl: '',
-            year: '2024',
-        },
-        {
-            id: 6,
-            title: 'Xabiso Memani Portfolio',
-            description: 'Custom portfolio website designed and built from scratch to showcase my personality and work. Features a unique custom cursor system, theme switching, and a fully responsive design. Everything was designed by me with no templates—every element crafted to reflect my creative vision and technical skills.',
-            tech: ['Next.js', 'React', 'TypeScript', 'CSS3', 'Custom Design'],
-            category: 'personal' as ProjectCategory,
-            screenshot: '/images/xabisoportfolio.png',
-            githubUrl: 'https://github.com/XabisoMemani/XabisoMemani-Portfolio',
-            demoUrl: '',
-            youtubeUrl: '',
-            instagramUrl: '',
-            year: '2025',
-        },
-        {
-            id: 1,
-            title: 'ZenBox Web Frontend',
-            description: 'Full-stack project management/client onboarding web application built with ASP.NET Web Forms. Features role-based access control, quotation generation, automated emails, and PDF reporting for SAS Environmental.',
-            tech: ['ASP.NET', 'Web Forms', 'HTML', 'C#'],
-            category: 'school' as ProjectCategory,
-            screenshot: '/images/zenbox-web.png',
-            githubUrl: 'https://github.com/IFMTYP2025/team15',
-            demoUrl: '',
-            youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
-            year: '2025',
-        },
-        {
-            id: 3,
-            title: 'ZenBox API',
-            description: 'RESTful backend API built with ASP.NET Core (.NET 8) featuring Entity Framework Core, Azure SQL database, and JWT authentication. Handles business logic, data access, and secure authentication for the ZenBox ecosystem.',
-            tech: ['ASP.NET Core', 'C#', '.NET 8', 'Entity Framework', 'Azure SQL'],
-            category: 'school' as ProjectCategory,
-            screenshot: '/images/zenbox-api.png',
-            githubUrl: 'https://github.com/IFMTYP2025/team15-api',
-            demoUrl: '',
-            youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
-            year: '2025',
-        },
-        {
-            id: 4,
-            title: 'ZenBox Mobile App',
-            description: 'React Native mobile application built with Expo for employee task management. Features role-based access, real-time task tracking, and seamless integration with the ZenBox API. Supports both iOS and Android platforms.',
-            tech: ['React Native', 'Expo', 'TypeScript', 'Tailwind CSS'],
-            category: 'school' as ProjectCategory,
-            screenshot: '/images/zenbox-mobile.png',
-            githubUrl: 'https://github.com/IFMTYP2025/team15-mobile',
-            demoUrl: '',
-            youtubeUrl: 'https://youtu.be/L-LNjbStd80?t=568',
-            year: '2025',
-        },
-        {
-            id: 7,
-            title: 'Fleur De Maison',
-            description: (
-                <>
-                    Logo design for Fleur De Maison, a boutique floral brand. Inspired by the romance of Parisian gardens, the brand creates bespoke bouquets that transform every moment into something extraordinary. Check them out on instagram!
-                </>
-            ),
-            tech: ['Logo Design', 'Graphic Design', 'Adobe Illustrator'],
-            category: 'design' as ProjectCategory,
-            screenshot: '/images/fleurdemaison.png',
-            githubUrl: '',
-            demoUrl: '',
-            youtubeUrl: '',
-            instagramUrl: 'https://www.instagram.com/fleur.de.maison/',
-            year: '2025',
-        },
-    ];
-
-    const filters: { label: string; value: ProjectCategory }[] = [
-        { label: 'All Projects', value: 'all' },
-        { label: 'School Projects', value: 'school' },
-        { label: 'Personal Projects', value: 'personal' },
-        { label: 'Graphic Design', value: 'design' },
-    ];
 
     const filteredProjects = useMemo(() => {
         if (activeFilter === 'all') {
@@ -179,6 +178,7 @@ export default function ProjectsSection() {
 
     // Reset visible cards when filter changes or breakpoint changes
     useEffect(() => {
+        // eslint-disable-next-line
         setVisibleCount(Math.min(baseVisibleCount, filteredProjects.length));
     }, [activeFilter, isMobile, filteredProjects.length, baseVisibleCount]);
 
@@ -191,8 +191,8 @@ export default function ProjectsSection() {
             // ANIMATION PARAMETERS - Same values as ResumeSection
             const animationStart = windowHeight * 0.95; // When animation STARTS
             const animationEnd = windowHeight * 0.8; // When animation ENDS
-            const animationRange = animationStart - animationEnd;
             const translateDistance = 15; // Movement distance (in pixels)
+            const animationRange = animationStart - animationEnd; // Range height
             const blurAmount = 10; // Maximum blur (in pixels)
             const blurEnd = windowHeight * 0.9; // When blur ENDS
 
@@ -224,7 +224,8 @@ export default function ProjectsSection() {
                 rowGroups.push(visibleProjects.slice(i, i + cardsPerRow).map(p => p.id));
             }
 
-            visibleProjects.forEach((project, index) => {
+            // Remove unused 'index' parameter
+            visibleProjects.forEach((project) => {
                 const cardElement = projectCardRefs.current.get(project.id);
                 if (!cardElement) return;
 

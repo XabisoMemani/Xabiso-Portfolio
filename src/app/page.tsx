@@ -67,7 +67,7 @@ function LazySection({ children, className }: { children: React.ReactNode; class
 export default function Home() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [showLandingButtons, setShowLandingButtons] = useState(true);
-  const { theme, mounted } = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,7 +103,7 @@ export default function Home() {
           Tip: change the inline `--delay` value (milliseconds) on this element
           to move it earlier/later in the sequence. */}
       <div className={`theme-btn-wrapper staggered-btn ${!showLandingButtons ? 'hidden' : ''}`}
-        style={{ ['--delay' as any]: '450ms' }}>
+        style={{ '--delay': '450ms' } as React.CSSProperties}>
         <ThemeSwitcher />
       </div>
 
@@ -111,7 +111,7 @@ export default function Home() {
           Tip: change `--delay` (ms) below to alter when this button appears. */}
       <div
         className={`info-btn staggered-btn ${!showLandingButtons ? 'hidden' : ''}`}
-        style={{ ['--delay' as any]: '650ms' }}
+        style={{ '--delay': '650ms' } as React.CSSProperties}
         onClick={() => setIsInfoOpen(true)}
         role="button"
         tabIndex={0}
@@ -130,7 +130,7 @@ export default function Home() {
         <Notification />
         <div className="container">
           <div className="stagger-parent">
-            <div className="stagger-item" style={{ ['--delay' as any]: '0ms' }}>
+            <div className="stagger-item" style={{ '--delay': '0ms' } as React.CSSProperties}>
               <div className="stagger-inner">
                 <div className="profile-container">
                   <Image
@@ -146,12 +146,12 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="stagger-item" style={{ ['--delay' as any]: '200ms' }}>
+            <div className="stagger-item" style={{ '--delay': '200ms' } as React.CSSProperties}>
               <div className="stagger-inner">
                 <h1 className="logo">XABISO MEMANI</h1>
               </div>
             </div>
-            <div className="stagger-item" style={{ ['--delay' as any]: '400ms' }}>
+            <div className="stagger-item" style={{ '--delay': '400ms' } as React.CSSProperties}>
               <div className="stagger-inner">
                 <p className="subtitle">SOFTWARE ENGINEER</p>
               </div>

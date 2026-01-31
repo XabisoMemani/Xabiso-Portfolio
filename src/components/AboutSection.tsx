@@ -2,29 +2,21 @@
 
 import { useState, useEffect, useRef } from 'react';
 
+const textPart1 = "Software Engineer based in Johannesburg, ";
+const textPart2 = "South Africa, passionate about ";
+const textPart3 = "creating innovative digital experiences.";
+const wordsPart1 = textPart1.split(' ');
+const wordsPart2 = textPart2.split(' ');
+const wordsPart3 = textPart3.split(' ');
+const words = [...wordsPart1, ...wordsPart2, ...wordsPart3];
+
 export default function AboutSection() {
     const introRef = useRef<HTMLParagraphElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
-    const [wordOpacities, setWordOpacities] = useState<number[]>([]);
+    const [wordOpacities, setWordOpacities] = useState<number[]>(() => new Array(words.length).fill(0.05));
     const [hoveredService, setHoveredService] = useState<number | null>(null);
 
-    // Note: scroll-based word opacity animation remains below.
-
-    // Split text into parts for line breaks
-    // Desktop: forced 2 lines with <br> after part 1
-    // Mobile: natural wrapping—let text flow as many lines as needed
-    const textPart1 = "Software Engineer based in Johannesburg, ";
-    const textPart2 = "South Africa, passionate about ";
-    const textPart3 = "creating innovative digital experiences.";
-    const wordsPart1 = textPart1.split(' ');
-    const wordsPart2 = textPart2.split(' ');
-    const wordsPart3 = textPart3.split(' ');
-    const words = [...wordsPart1, ...wordsPart2, ...wordsPart3];
-
     useEffect(() => {
-        // Initialize all words with low opacity
-        setWordOpacities(new Array(words.length).fill(0.05));
-
         const handleScroll = () => {
             if (!introRef.current || !sectionRef.current) return;
 
@@ -88,7 +80,7 @@ export default function AboutSection() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [words.length]);
+    }, []);
 
     return (
         <section id="about" ref={sectionRef} className="portfolio-section">
@@ -151,9 +143,7 @@ export default function AboutSection() {
                             <div className="about-section-lines">
                                 <p className="about-section-line">
                                     Hello, my name is <strong>Xabiso Memani</strong>.
-
                                     I am a <strong>22-year-old</strong> recent graduate with a
-
                                     <strong> Bachelor of Science in Information Technology (BSc IT)</strong> from the <span className="university-orange">University of Johannesburg</span> majoring in Computer Science and Informatics.
                                 </p>
                                 <p className="about-section-line">Hire the boy</p>
@@ -172,11 +162,11 @@ export default function AboutSection() {
                         </div>
                         <div className="about-section-body">
                             <p className="about-section-text">
-                                I'm passionate about building software that makes a real impact, is clean, intuitive and enjoyable to use. I love crafting code and thoughtful design that solves real problems.
+                                I&apos;m passionate about building software that makes a real impact, is clean, intuitive and enjoyable to use. I love crafting code and thoughtful design that solves real problems.
                             </p><p className="about-section-text">
-                                With a strong foundation in theory and hands-on development, I'm always learning and improving. I'm looking to join a team that values innovation, collaboration and user experience.
+                                With a strong foundation in theory and hands-on development, I&apos;m always learning and improving. I&apos;m looking to join a team that values innovation, collaboration and user experience.
                             </p><p className="about-section-text">
-                                If you're looking for someone thats driven, adaptable and  generally excited about software and design-I'm ready to contribute and grow.
+                                If you&apos;re looking for someone that&apos;s driven, adaptable and generally excited about software and design-I&apos;m ready to contribute and grow.
                             </p>
                         </div>
                     </div>
@@ -210,11 +200,11 @@ export default function AboutSection() {
                                     </div>
                                     <div className="service-content">
                                         <h4 className="service-title">Full Stack Development</h4>
-                                        <p className="service-description">Yes I do it all, front-end and back-end development</p>
+                                        <p className="service-description">Developing end-to-end web applications, from the database to frontend</p>
                                     </div>
                                 </div>
 
-                                {/* UI/UX Design - Layout that expands */}
+                                {/* Mobile App Development - Phone that vibrates/scales */}
                                 <div
                                     className="service-item"
                                     onMouseEnter={() => setHoveredService(1)}
@@ -223,7 +213,31 @@ export default function AboutSection() {
                                     <div
                                         className="service-icon-wrapper"
                                         style={{
-                                            transform: hoveredService === 1 ? 'scale(1.3)' : 'scale(1)',
+                                            transform: hoveredService === 1 ? 'scale(1.2)' : 'scale(1)',
+                                            transition: 'transform 0.3s ease-out'
+                                        }}
+                                    >
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                        </svg>
+                                    </div>
+                                    <div className="service-content">
+                                        <h4 className="service-title">Mobile App Development</h4>
+                                        <p className="service-description">Building high-performance mobile applications for both iOS and Android</p>
+                                    </div>
+                                </div>
+
+                                {/* UI/UX Design - Layout that expands */}
+                                <div
+                                    className="service-item"
+                                    onMouseEnter={() => setHoveredService(2)}
+                                    onMouseLeave={() => setHoveredService(null)}
+                                >
+                                    <div
+                                        className="service-icon-wrapper"
+                                        style={{
+                                            transform: hoveredService === 2 ? 'scale(1.3)' : 'scale(1)',
                                             transition: 'transform 0.3s ease-out'
                                         }}
                                     >
@@ -235,20 +249,20 @@ export default function AboutSection() {
                                     </div>
                                     <div className="service-content">
                                         <h4 className="service-title">UI/UX Design</h4>
-                                        <p className="service-description">I design immersive, accessible interfaces with animation and branding</p>
+                                        <p className="service-description">Designing intuitive user interfaces with a focus on responsive layouts</p>
                                     </div>
                                 </div>
 
                                 {/* API Development - Box that opens up */}
                                 <div
                                     className="service-item"
-                                    onMouseEnter={() => setHoveredService(2)}
+                                    onMouseEnter={() => setHoveredService(3)}
                                     onMouseLeave={() => setHoveredService(null)}
                                 >
                                     <div
                                         className="service-icon-wrapper"
                                         style={{
-                                            transform: hoveredService === 2 ? 'scale(1.2) rotateY(15deg)' : 'scale(1) rotateY(0deg)',
+                                            transform: hoveredService === 3 ? 'scale(1.2) rotateY(15deg)' : 'scale(1) rotateY(0deg)',
                                             transition: 'transform 0.3s ease-out'
                                         }}
                                     >
@@ -260,34 +274,7 @@ export default function AboutSection() {
                                     </div>
                                     <div className="service-content">
                                         <h4 className="service-title">API Development</h4>
-                                        <p className="service-description">RESTful APIs and seamless integrations for modern applications</p>
-                                    </div>
-                                </div>
-
-                                {/* IT Management - Calendar that expands */}
-                                <div
-                                    className="service-item"
-                                    onMouseEnter={() => setHoveredService(3)}
-                                    onMouseLeave={() => setHoveredService(null)}
-                                >
-                                    <div
-                                        className="service-icon-wrapper"
-                                        style={{
-                                            transform: hoveredService === 3 ? 'scale(1.25) translateY(-3px)' : 'scale(1) translateY(0px)',
-                                            transition: 'transform 0.3s ease-out'
-                                        }}
-                                    >
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                                            <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"></path>
-                                        </svg>
-                                    </div>
-                                    <div className="service-content">
-                                        <h4 className="service-title">IT Management with ITIL</h4>
-                                        <p className="service-description">IT management aligned with ITIL best practices for efficient delivery</p>
+                                        <p className="service-description">Building robust APIs to connect systems and ensure seamless data exchange</p>
                                     </div>
                                 </div>
                             </div>

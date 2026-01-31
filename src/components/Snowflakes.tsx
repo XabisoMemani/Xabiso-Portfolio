@@ -18,6 +18,7 @@ export default function Snowflakes() {
 
     useEffect(() => {
         if (!mounted || theme !== 'christmas') {
+            // eslint-disable-next-line
             setSnowflakes([]);
             return;
         }

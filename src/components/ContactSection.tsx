@@ -11,7 +11,7 @@ export default function ContactSection() {
 
     // Rotating "hello" in different languages
     const helloLanguages = ['Hello', 'Sawubona', 'Molo', 'Dumela', 'Thobela', 'Xeweni', 'Ndaa', 'Lotjani', 'Hallo', 'Awe', 'Hola', 'Bonjour', 'Ciao', 'Jambo', 'Sannu', '你好', 'こんにちは', 'नमस्ते', 'Здравствуйте', 'السلام عليكم', '👋'];
-    const helloLanguageNames = ['in English', 'in Zulu', 'in Xhosa', 'in Sesotho', 'in Sepedi', 'in Xitsonga', 'in Tshivenda', 'in Siswati', 'in German', 'in Tsotsi Slang', 'in Spanish', 'in French', 'in Italian', 'in Swahili', 'in Hausa', 'in Chinese', 'in Japanese', 'in Hindi', 'in Russian', 'in Arabic', 'Emoji'];
+    const helloLanguageNames = ['in English', 'in Zulu', 'in Xhosa', 'in Sesotho', 'in Sepedi', 'in Xitsonga', 'in Tshivenda', 'in Siswati', 'in German', 'in Slang', 'in Spanish', 'in French', 'in Italian', 'in Swahili', 'in Hausa', 'in Chinese', 'in Japanese', 'in Hindi', 'in Russian', 'in Arabic', 'Emoji'];
     const [currentHelloIndex, setCurrentHelloIndex] = useState(0);
 
     // Scroll animation effect for contact text
@@ -78,11 +78,11 @@ export default function ContactSection() {
         };
     }, []);
 
-    // Rotate "hello" languages every 2 seconds
+    // Rotate "hello" languages every 3 seconds
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentHelloIndex((prevIndex) => (prevIndex + 1) % helloLanguages.length);
-        }, 3000); // Change every 2 seconds
+        }, 3000); // Change every 3 seconds
 
         return () => clearInterval(interval);
     }, [helloLanguages.length]);
@@ -104,7 +104,7 @@ export default function ContactSection() {
                                     transition: 'opacity 0.3s ease-out, transform 0.3s ease-out, filter 0.3s ease-out'
                                 }}
                             >
-                                Feel free to reach out if you'd like to work together or just want to say{' '}
+                                Feel free to reach out if you&apos;d like to work together or just want to say{' '}
                                 <span
                                     title={`Hello ${helloLanguageNames[currentHelloIndex]}`}
                                     style={{
@@ -173,7 +173,7 @@ export default function ContactSection() {
                                 </a>
                             </div>
                             <p className="contact-text" style={{ marginTop: '2rem', fontSize: '1rem' }}>
-                                "Being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus." — Philippians 1:6
+                                &quot;Being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus.&quot; — Philippians 1:6
                             </p>
                             <a href="/documents/XabisoMemaniCV.pdf" download="XabisoMemaniCV.pdf" className="download-cv-link download-cv-link-orange" style={{ marginTop: '1.5rem' }}>
                                 Download CV
