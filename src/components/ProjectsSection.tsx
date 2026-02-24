@@ -121,6 +121,17 @@ const projects: Project[] = [
         year: '2025',
     },
     {
+        id: 10,
+        title: 'Bear Group',
+        description:
+            'Designed and built a website for Bear Group, a South African company that provides strategic oversight and shared resources across its subsidiaries in construction, earthworks & logistics, security protection, consulting, etc. Built as a clean, responsive site with clear service pages, a gallery, and direct contact details.',
+        tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Radix UI', 'GSAP', 'Lenis'],
+        category: 'personal' as ProjectCategory,
+        screenshot: '/images/beargroup.png',
+        demoUrl: 'https://beargroup.vercel.app/',
+        year: '2026',
+    },
+    {
         id: 7,
         title: 'Fleur De Maison',
         description: (
@@ -426,7 +437,7 @@ export default function ProjectsSection() {
                                                 onClick={project.demoUrl === '#' ? (e) => e.preventDefault() : undefined}
                                                 style={project.demoUrl === '#' ? { cursor: 'not-allowed', opacity: 0.6, pointerEvents: 'none' } : {}}
                                             >
-                                                <span style={{ textAlign: 'center', flex: 1 }}>Demo</span>
+                                                <span style={{ textAlign: 'center', flex: 1 }}>Live</span>
                                                 <ArrowIcon />
                                             </a>
                                         )}
