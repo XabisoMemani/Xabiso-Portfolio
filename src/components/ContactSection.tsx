@@ -180,8 +180,8 @@ export default function ContactSection() {
                             </a>
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Image
-                                    src="/images/xabi2.png"
-                                    alt="Active Drummer"
+                                    src="/images/xabi2.webp"
+                                    alt="Xabi Logo"
                                     width={300}
                                     height={300}
                                     loading="lazy"

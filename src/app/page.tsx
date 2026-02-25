@@ -135,7 +135,7 @@ export default function Home() {
                 <div className="profile-container">
                   <Image
                     key={`profile-${theme}`}
-                    src={theme === 'christmas' ? '/images/profile-picture-chrismas.jpg' : '/images/profile-picture.png'}
+                    src={theme === 'christmas' ? '/images/profile-picture-chrismas.jpg' : '/images/profile-picture.webp'}
                     alt="Xabiso Memani"
                     width={200}
                     height={200}

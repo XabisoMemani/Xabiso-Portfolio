@@ -30,8 +30,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
 
-        <link rel="icon" href="/images/xabi.png" type="image/png" />
-        <link rel="alternate icon" href="/images/xabi.png" />
+        <link rel="icon" href="/images/xabi.webp" type="image/webp" />
+        <link rel="alternate icon" href="/images/xabi.webp" />
 
         {/* Inline script to set theme before React hydration */}
         <script
