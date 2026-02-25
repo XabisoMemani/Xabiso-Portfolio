@@ -11,6 +11,7 @@ type Project = {
     description: string | React.ReactNode;
     tech: string[];
     category: ProjectCategory;
+    showInAll?: boolean;
     screenshot?: string;
     githubUrl?: string;
     demoUrl?: string;
@@ -18,7 +19,6 @@ type Project = {
     instagramUrl?: string;
     year?: string;
 };
-
 const projects: Project[] = [
     {
         id: 8,
@@ -166,10 +166,9 @@ export default function ProjectsSection() {
 
     const filteredProjects = useMemo(() => {
         if (activeFilter === 'all') {
-            // Include all projects, with Fleur De Maison (id: 7) at the end
-            const allProjects = projects.filter(project => project.id !== 7);
-            const fleurProject = projects.find(project => project.id === 7);
-            return fleurProject ? [...allProjects, fleurProject] : allProjects;
+            // Return projects in the same order as declared in the `projects` array.
+            // Use `showInAll` flag to hide specific items (like duplicates) from the All view.
+            return projects.filter(project => project.showInAll !== false);
         }
         return projects.filter(project => project.category === activeFilter);
     }, [activeFilter]);
@@ -180,7 +179,7 @@ export default function ProjectsSection() {
     // Detect mobile vs desktop
     useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768); // Adjust breakpoint as needed
+            setIsMobile(window.innerWidth < 768); // Breakpoint for mobile. hardcoded but works well for this use case. Adjust if needed.
         };
         checkMobile();
         window.addEventListener('resize', checkMobile);
@@ -195,7 +194,7 @@ export default function ProjectsSection() {
 
     // Scroll animation effect for project cards
     useEffect(() => {
-        // Access filteredProjects from closure - it's memoized so stable
+        // Access filteredProjects from closure
         const handleScroll = () => {
             const windowHeight = window.innerHeight;
 
@@ -348,9 +347,9 @@ export default function ProjectsSection() {
 
                 <div className={`projects-grid ${visibleProjects.length === 1 ? 'projects-grid-single' : ''}`}>
                     {visibleProjects.map((project) => {
+                        //can i remove this line?
                         const isDesignCategory = project.category === 'design';
-                        // Use normal aspect ratio for Fleur De Maison (styled like normal projects)
-                        const aspectRatioClass = (isDesignCategory && project.id !== 7) ? 'project-image-square' : 'project-image-video';
+                        const aspectRatioClass = 'project-image-video';
 
                         // Arrow icon SVG
                         const ArrowIcon = () => (
