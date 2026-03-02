@@ -1346,7 +1346,6 @@ html.theme-christmas .theme-btn::before {
   text-shadow:
     0 0 20px var(--nokia-screen),
     0 0 30px var(--nokia-screen);
-  transform: translateY(-2px);
 }
 
 /* Landing Section */
