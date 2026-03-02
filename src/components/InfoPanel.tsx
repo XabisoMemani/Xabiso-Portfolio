@@ -68,6 +68,7 @@ export default function InfoPanel({ isOpen, onClose }: InfoPanelProps) {
                     PHONE: <a href="tel:+27736744337">+27 73 674 4337</a>
                 </div>
                 <div className="info-line">STATUS: BUILDING SOMETHING COOL</div>
+                <div className="info-line">FOCUS: CLOUD INFRASTRUCTURE</div>
                 <div className="info-line">AVAILABLE: AVAILABLE FOR HIRE</div>
                 <p className="tag">Designed from scratch by <u>Xabiso Memani</u> :)</p>
             </div>
