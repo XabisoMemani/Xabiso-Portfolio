@@ -54,12 +54,13 @@ export default function RootLayout({
         />
 
       </head>
-      <body className={`${vt323.variable} ${inter.variable}`}>
+      <body className={`${vt323.variable} ${inter.variable}`} suppressHydrationWarning>
         <ThemeProviderWrapper>
           {children}
           <Analytics />
           <SpeedInsights />
         </ThemeProviderWrapper>
+
       </body>
     </html>
   );

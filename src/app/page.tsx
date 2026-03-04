@@ -36,11 +36,22 @@ const InfoPanel = dynamic(() => import('@/components/InfoPanel'), {
 });
 
 // Intersection Observer wrapper for true lazy loading
-function LazySection({ children, className }: { children: React.ReactNode; className?: string }) {
+function LazySection({ children, className, id }: { children: React.ReactNode; className?: string, id?: string }) {
   const [shouldLoad, setShouldLoad] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Force load if ANY hash is present in the URL to ensure correct page layout/height
+    const checkHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        setShouldLoad(true);
+      }
+    };
+
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+
     if (!ref.current) return;
 
     const observer = new IntersectionObserver(
@@ -54,11 +65,14 @@ function LazySection({ children, className }: { children: React.ReactNode; class
     );
 
     observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('hashchange', checkHash);
+    };
+  }, []); // Only run once on mount
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} id={id} className={className} style={{ minHeight: shouldLoad ? 'auto' : '100px' }}>
       {shouldLoad && children}
     </div>
   );
@@ -70,6 +84,32 @@ export default function Home() {
   const { theme } = useTheme();
 
   useEffect(() => {
+    // 1. Handle encoded hashes (like /%23projects) from the URL
+    const pathname = window.location.pathname;
+    if (pathname.includes('%23')) {
+      const hashFromPath = pathname.split('%23')[1];
+      if (hashFromPath) {
+        // Replace encoded hash with a proper hash and update URL without reload
+        window.history.replaceState(null, '', `/#${hashFromPath}`);
+
+        // Dispatch hash change event manually to trigger LazySection check
+        window.dispatchEvent(new HashChangeEvent('hashchange'));
+      }
+    }
+
+    // 2. Initial scroll to hash if present
+    const hash = window.location.hash;
+    if (hash) {
+      // Delay slightly to allow forced section loading to complete
+      setTimeout(() => {
+        const sectionId = hash.replace('#', '');
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500);
+    }
+
     const handleScroll = () => {
       const landingSection = document.querySelector('.landing-section');
       const aboutSection = document.getElementById('about');
@@ -168,16 +208,16 @@ export default function Home() {
       </section>
 
       {/* Portfolio Sections - Load only when scrolled into view */}
-      <LazySection>
+      <LazySection id="about">
         <AboutSection />
       </LazySection>
-      <LazySection>
+      <LazySection id="resume">
         <ResumeSection />
       </LazySection>
-      <LazySection>
+      <LazySection id="projects">
         <ProjectsSection />
       </LazySection>
-      <LazySection>
+      <LazySection id="contact">
         <ContactSection />
       </LazySection>
 

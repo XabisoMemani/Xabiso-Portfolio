@@ -74,19 +74,13 @@ body {
   width: 100%;
 }
 
-/* Ensure html also has cursor: none to cover edges and prevent extension overrides */
-html {
-  cursor: none !important;
-}
-
-/* Explicitly hide it for all common elements to fight extensions */
-a,
-button,
-[role="button"],
-input,
-textarea,
-select {
-  cursor: none !important;
+/* Ensure html and ALL elements have cursor: none to cover edges and prevent extension/inline overrides */
+@media (hover: hover) and (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
 }
 
 .cursor {
