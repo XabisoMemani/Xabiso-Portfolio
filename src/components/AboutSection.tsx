@@ -148,7 +148,7 @@ export default function AboutSection() {
                                 </p>
                                 <p className="about-section-line">Hire the boy</p>
                             </div>
-                            <a href="/documents/XabisoMemaniCV.pdf" download="XabisoMemaniCV.pdf" className="download-cv-link">
+                            <a href="/cv-download" download="XabisoMemaniCV.pdf" className="download-cv-link">
                                 Download CV
                             </a>
                         </div>

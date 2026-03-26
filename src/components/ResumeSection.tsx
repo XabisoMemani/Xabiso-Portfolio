@@ -345,7 +345,7 @@ export default function ResumeSection() {
                                 </div>
                             </div>
                             <div style={{ marginTop: '2rem', textAlign: 'right' }}>
-                                <a href="/documents/XabisoMemaniCV.pdf" download="XabisoMemaniCV.pdf" className="download-cv-link download-cv-link-orange">
+                                <a href="/cv-download" download="XabisoMemaniCV.pdf" className="download-cv-link download-cv-link-orange">
                                     Download CV
                                 </a>
                             </div>
