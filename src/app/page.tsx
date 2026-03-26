@@ -85,7 +85,7 @@ export default function Home() {
       <Navbar />
 
       {/* Theme Switcher - only on landing (staggered on the element itself).
-          We set a lower delay so the theme button appears before the info button.
+          I set a lower delay so the theme button appears before the info button.
           Tip: change the inline `--delay` value (milliseconds) on this element
           to move it earlier/later in the sequence. */}
       <div className={`theme-btn-wrapper staggered-btn ${!showLandingButtons ? 'hidden' : ''}`}

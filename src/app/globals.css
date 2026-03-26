@@ -215,7 +215,7 @@ body {
   }
 }
 
-/* Hide standard cursor when hovering these elements so our custom one shows */
+/* Hide standard cursor when hovering these elements so my custom one shows */
 .social-link:hover,
 .info-btn:hover,
 .close-btn:hover,
@@ -297,7 +297,7 @@ a:hover,
   hover transforms. */
 
 /* About section specifics: animate the intro paragraph to slide slightly into place
-   when the section becomes visible. We avoid animating opacity here because the
+   when the section becomes visible. I avoid animating opacity here because the
    intro already has word-level opacity control. */
 .portfolio-section .about-intro {
   transform: translateY(10px);

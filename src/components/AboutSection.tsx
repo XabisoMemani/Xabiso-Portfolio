@@ -34,7 +34,7 @@ export default function AboutSection() {
             const animationRange = animationStart - animationEnd;
 
             // Calculate progress: 0 when section top is at animationStart, 1 when at animationEnd
-            // Invert because as we scroll, sectionTop decreases
+            // Invert because as the user scrolls, sectionTop decreases
             const scrollProgress = Math.max(0, Math.min(1,
                 (animationStart - sectionTop) / animationRange
             ));

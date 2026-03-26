@@ -22,7 +22,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Check for saved theme in sessionStorage, default to orange
     const savedTheme = sessionStorage.getItem("theme") as Theme;
 
-    // Validate saved theme is one of our allowed themes
+    // Validate saved theme is one of the allowed themes
     if (
       savedTheme &&
       (savedTheme === "dark" ||

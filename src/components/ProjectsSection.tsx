@@ -427,6 +427,7 @@ export default function ProjectsSection() {
                                             width={800}
                                             height={600}
                                             loading="lazy"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                                         />
                                     </div>

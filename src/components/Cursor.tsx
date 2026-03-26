@@ -76,7 +76,7 @@ export default function Cursor() {
             }, 0);
         };
 
-        // check if we are hovering over something clickable
+        // check if I am hovering over something clickable
         const isInteractiveElement = (element: HTMLElement | null): boolean => {
             if (!element) return false;
 
@@ -155,7 +155,7 @@ export default function Cursor() {
                     left: 0,
                     top: 0,
                     opacity: isVisible ? 1 : 0,
-                    // We remove the transition in CSS, and handle position entirely via transform here
+                    // I remove the transition in CSS, and handle position entirely via transform here
                 }}
             >
                 <div className="cursor-default"></div>

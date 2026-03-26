@@ -4,81 +4,23 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { triggerCVDownload } from '@/utils/cv-tracker';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function ContactSection() {
     const contactTextRef = useRef<HTMLParagraphElement>(null);
     const contactLinksRef = useRef<HTMLDivElement>(null);
-    const [contactTextAnimation, setContactTextAnimation] = useState<{ opacity: number; translateY: number; blur: number }>({ opacity: 0, translateY: 15, blur: 10 });
-    const [contactLinksAnimation, setContactLinksAnimation] = useState<{ opacity: number; translateY: number; blur: number }>({ opacity: 0, translateY: 15, blur: 10 });
-
-    // Rotating "hello" in different languages
     const helloLanguages = ['Hello', 'Sawubona', 'Molo', 'Dumela', 'Thobela', 'Xeweni', 'Ndaa', 'Lotjani', 'Hallo', 'Awe', 'Hola', 'Bonjour', 'Ciao', 'Jambo', 'Sannu', '你好', 'こんにちは', 'नमस्ते', 'Здравствуйте', 'السلام عليكم', '👋'];
     const helloLanguageNames = ['in English', 'in Zulu', 'in Xhosa', 'in Sesotho', 'in Sepedi', 'in Xitsonga', 'in Tshivenda', 'in Siswati', 'in German', 'in Slang', 'in Spanish', 'in French', 'in Italian', 'in Swahili', 'in Hausa', 'in Chinese', 'in Japanese', 'in Hindi', 'in Russian', 'in Arabic', 'Emoji'];
     const [currentHelloIndex, setCurrentHelloIndex] = useState(0);
 
-    // Scroll animation effect for contact text
-    useEffect(() => {
-        const handleScroll = () => {
-            const windowHeight = window.innerHeight;
-
-            // ANIMATION PARAMETERS - Same values as ResumeSection
-            const animationStart = windowHeight * 0.98; // When animation STARTS
-            const animationEnd = windowHeight * 0.8; // When animation ENDS
-            const animationRange = animationStart - animationEnd;
-            const translateDistance = 15; // Movement distance (in pixels)
-            const blurAmount = 10; // Maximum blur (in pixels)
-            const blurEnd = windowHeight * 0.9; // When blur ENDS
-
-            if (!contactTextRef.current) return;
-
-            // Use text element position to calculate progress for both text and links (so they animate together)
-            const rect = contactTextRef.current.getBoundingClientRect();
-            const elementTop = rect.top;
-
-            // Calculate opacity/translateY progress (shared for both text and links)
-            let progress = 0;
-            if (elementTop <= animationStart && elementTop >= animationEnd) {
-                progress = Math.max(0, Math.min(1, (animationStart - elementTop) / animationRange));
-            } else if (elementTop < animationEnd) {
-                progress = 1; // Animation complete
-            }
-
-            // Ease out function for smoother animation
-            const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-            // Calculate blur progress separately (shared for both text and links)
-            const blurRange = animationStart - blurEnd;
-            let blurProgress = 0;
-            if (elementTop <= animationStart && elementTop >= blurEnd) {
-                blurProgress = Math.max(0, Math.min(1, (animationStart - elementTop) / blurRange));
-            } else if (elementTop < blurEnd) {
-                blurProgress = 1; // Blur animation complete
-            }
-
-            // Ease out function for blur
-            const easedBlurProgress = 1 - Math.pow(1 - blurProgress, 3);
-
-            // Blur decreases as blur progress increases (inverse relationship)
-            const currentBlur = blurAmount * (1 - easedBlurProgress);
-
-            // Apply same animation values to both text and links (they animate together)
-            const sharedAnimation = {
-                opacity: easedProgress,
-                translateY: translateDistance * (1 - easedProgress),
-                blur: currentBlur
-            };
-
-            setContactTextAnimation(sharedAnimation);
-            setContactLinksAnimation(sharedAnimation);
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Check on mount
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    // Both text and links animate together based on the text's scroll position
+    const [contactTextAnimation] = useScrollAnimation([contactTextRef], {
+        animationStartOffset: 0.98,
+        animationEndOffset: 0.8,
+        blurAmount: 10,
+        blurEndOffset: 0.9,
+    });
+    const contactLinksAnimation = contactTextAnimation;
 
     // Rotate "hello" languages every 3 seconds
     useEffect(() => {
