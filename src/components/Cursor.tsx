@@ -56,6 +56,7 @@ export default function Cursor() {
 
 
         const handleClick = (e: MouseEvent) => {
+            if (!e.isTrusted) return; // Ignore programmatic clicks to avoid ghost pulses at (0,0)
             const clickEffect = document.createElement('div');
             clickEffect.className = 'cursor-click';
 

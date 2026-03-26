@@ -12,71 +12,17 @@ import ScrollIndicator from '@/components/ScrollIndicator';
 import Notification from '@/components/Notification';
 import { useTheme } from '@/hooks/useTheme';
 
-// Lazy load sections below the fold to reduce initial bundle size
-// Using ssr: false for client components to avoid Turbopack issues
-const AboutSection = dynamic(() => import('@/components/AboutSection'), {
-  ssr: false,
-});
-
-const ResumeSection = dynamic(() => import('@/components/ResumeSection'), {
-  ssr: false,
-});
-
-const ProjectsSection = dynamic(() => import('@/components/ProjectsSection'), {
-  ssr: false,
-});
-
-const ContactSection = dynamic(() => import('@/components/ContactSection'), {
-  ssr: false,
-});
+import AboutSection from '@/components/AboutSection';
+import ResumeSection from '@/components/ResumeSection';
+import ProjectsSection from '@/components/ProjectsSection';
+import ContactSection from '@/components/ContactSection';
 
 // Lazy load InfoPanel - only loads when needed
 const InfoPanel = dynamic(() => import('@/components/InfoPanel'), {
   ssr: false,
 });
 
-// Intersection Observer wrapper for true lazy loading
-function LazySection({ children, className, id }: { children: React.ReactNode; className?: string, id?: string }) {
-  const [shouldLoad, setShouldLoad] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Force load if ANY hash is present in the URL to ensure correct page layout/height
-    const checkHash = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        setShouldLoad(true);
-      }
-    };
-
-    checkHash();
-    window.addEventListener('hashchange', checkHash);
-
-    if (!ref.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setShouldLoad(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '200px' } // Start loading 200px before it's visible
-    );
-
-    observer.observe(ref.current);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('hashchange', checkHash);
-    };
-  }, []); // Only run once on mount
-
-  return (
-    <div ref={ref} id={id} className={className} style={{ minHeight: shouldLoad ? 'auto' : '100px' }}>
-      {shouldLoad && children}
-    </div>
-  );
-}
 
 export default function Home() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -207,19 +153,11 @@ export default function Home() {
         <ScrollIndicator />
       </section>
 
-      {/* Portfolio Sections - Load only when scrolled into view */}
-      <LazySection id="about">
-        <AboutSection />
-      </LazySection>
-      <LazySection id="resume">
-        <ResumeSection />
-      </LazySection>
-      <LazySection id="projects">
-        <ProjectsSection />
-      </LazySection>
-      <LazySection id="contact">
-        <ContactSection />
-      </LazySection>
+      {/* Portfolio Sections */}
+      <AboutSection />
+      <ResumeSection />
+      <ProjectsSection />
+      <ContactSection />
 
       {isInfoOpen && (
         <InfoPanel

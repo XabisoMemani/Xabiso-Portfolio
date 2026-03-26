@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { triggerCVDownload } from '@/utils/cv-tracker';
 
 export default function ContactSection() {
     const contactTextRef = useRef<HTMLParagraphElement>(null);
@@ -175,9 +177,18 @@ export default function ContactSection() {
                             <p className="contact-text" style={{ marginTop: '2rem', fontSize: '1rem' }}>
                                 &quot;Being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus.&quot; — Philippians 1:6
                             </p>
-                            <a href="/cv-download" download="XabisoMemaniCV.pdf" className="download-cv-link download-cv-link-orange" style={{ marginTop: '1.5rem' }}>
+                            <Link 
+                                href="/cv-download" 
+                                scroll={false} 
+                                className="download-cv-link download-cv-link-orange" 
+                                style={{ marginTop: '1.5rem' }}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    triggerCVDownload();
+                                }}
+                            >
                                 Download CV
-                            </a>
+                            </Link>
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Image
                                     src="/images/xabi2.webp"

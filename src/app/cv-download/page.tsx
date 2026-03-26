@@ -7,16 +7,25 @@ export default function CVDownloadPage() {
     const router = useRouter();
 
     useEffect(() => {
-        // Redirect to the actual PDF file
-        window.location.href = '/documents/XabisoMemaniCV.pdf';
+        // Detect if this is being hit in a stealthy way (via iframe)
+        const isStealth = window.location.search.includes('stealth=true');
         
-        // Return to the previous page after a short delay
-        // This keeps the user on the portfolio while the download starts
-        const timer = setTimeout(() => {
-            router.back();
-        }, 1000);
+        if (!isStealth) {
+            // Only trigger a real download and back if navigated to directly from a link
+            const link = document.createElement('a');
+            link.href = '/documents/XabisoMemaniCV.pdf';
+            link.download = 'XabisoMemaniCV.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Return to the previous page after a short delay
+            const timer = setTimeout(() => {
+                router.back();
+            }, 1000);
 
-        return () => clearTimeout(timer);
+            return () => clearTimeout(timer);
+        }
     }, [router]);
 
     return (

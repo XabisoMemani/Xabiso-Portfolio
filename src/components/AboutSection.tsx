@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { triggerCVDownload } from '@/utils/cv-tracker';
 
 const textPart1 = "Software Engineer based in Johannesburg, ";
 const textPart2 = "South Africa, passionate about ";
@@ -148,9 +150,17 @@ export default function AboutSection() {
                                 </p>
                                 <p className="about-section-line">Hire the boy</p>
                             </div>
-                            <a href="/cv-download" download="XabisoMemaniCV.pdf" className="download-cv-link">
+                            <Link 
+                                href="/cv-download" 
+                                scroll={false} 
+                                className="download-cv-link"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    triggerCVDownload();
+                                }}
+                            >
                                 Download CV
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { triggerCVDownload } from '@/utils/cv-tracker';
 
 export default function ResumeSection() {
     const educationRef = useRef<HTMLDivElement>(null);
@@ -345,9 +347,17 @@ export default function ResumeSection() {
                                 </div>
                             </div>
                             <div style={{ marginTop: '2rem', textAlign: 'right' }}>
-                                <a href="/cv-download" download="XabisoMemaniCV.pdf" className="download-cv-link download-cv-link-orange">
+                                <Link 
+                                    href="/cv-download" 
+                                    scroll={false} 
+                                    className="download-cv-link download-cv-link-orange"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        triggerCVDownload();
+                                    }}
+                                >
                                     Download CV
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
