@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
 
-type ProjectCategory = 'all' | 'school' | 'personal' | 'design';
+type ProjectCategory = 'all' | 'client' | 'personal' | 'design';
 
 type Project = {
     id: number;
@@ -17,13 +17,16 @@ type Project = {
     demoUrl?: string;
     youtubeUrl?: string;
     instagramUrl?: string;
+    tiktokUrl?: string;
+    chromeUrl?: string;
     year?: string;
+    clientOrder?: number;
 };
 const projects: Project[] = [
     {
         id: 8,
         title: 'JobTrackr',
-        description: 'Smart job application dashboard with Gmail auto-sync and secure login. JobTrackr is a full-stack web application designed to help job seekers organize and track their job applications with clarity and confidence. Built with Next.js, MongoDB, and secure authentication flows (Google OAuth and OTP), it features automatic Gmail syncing, manual entry fallback, and a clean, responsive dashboard.',
+        description: 'A smart job application tracker that syncs directly with your Gmail to keep all your applications in one place. Built with Next.js and MongoDB, it automatically pulls your latest emails and organizes them in a clean, responsive dashboard so you can apply with clarity and confidence.',
         tech: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'OAuth', 'Nodemailer', 'UI/UX', 'JWT', 'TailwindCSS'],
         category: 'personal' as ProjectCategory,
         screenshot: '/images/jobtrackr.webp',
@@ -36,33 +39,35 @@ const projects: Project[] = [
         title: 'Skinn Galleria',
         description: (
             <>
-                E-commerce website for Skinn, an African-inspired clothing brand founded by <u>Yethu Mabizela</u>. As Creative Director, I designed and developed the brand identity and web presence. Features a modern e-commerce experience with product showcases, magazine integration, and seamless shopping functionality.
+                An e-commerce website for Skinn, an African-inspired clothing brand. As Creative Director, I designed and developed the brand's complete online identity. The platform features an integrated magazine and a seamless, modern shopping experience.
             </>
         ),
         tech: ['E-commerce', 'Brand Design', 'UI/UX', 'Webflow'],
-        category: 'personal' as ProjectCategory,
+        category: 'client' as ProjectCategory,
         screenshot: '/images/skinnbeta.webp',
         githubUrl: '',
         demoUrl: 'https://skinnnation.webflow.io/',
         youtubeUrl: '',
         instagramUrl: 'https://www.instagram.com/skinnnation/',
         year: '2020',
+        clientOrder: 20,
     },
     {
         id: 9,
         title: 'IntelliSave Chrome Extension',
         description:
-            'Intelligent Chrome extension that automatically organises downloaded files into the correct folders based on file type and source, helping to declutter your Downloads folder. IntelliSave runs quietly in the background so you always know exactly where your files are. I started this project in 2024 to solve my own problem of a messy Downloads folder, and decided to share it with others who might benefit from it too!',
+            'An intelligent Chrome extension I built to automatically sort your downloaded files into organized folders. I started this in 2024 to solve my own messy Downloads folder problem, and decided to publish it for others to enjoy! It runs quietly in the background, keeping your files perfectly categorized by type and source. Download it on Chrome Web Store and clear your messy downloads folder!',
         tech: ['Chrome Extension', 'JavaScript', 'Manifest V3', 'Automation'],
         category: 'personal' as ProjectCategory,
         screenshot: '/images/intellisave.webp',
-        githubUrl: 'https://github.com/XabisoMemani/IntelliSave',
+        demoUrl: 'https://xabisomemani.github.io/IntelliSave/index.html',
+        chromeUrl: 'https://chromewebstore.google.com/detail/intellisave/knemlapnohmfinjfondkjhdnoahfafko',
         year: '2024',
     },
     {
         id: 2,
         title: 'Find My Uni',
-        description: 'Full-stack web application that helps South African students discover university programs based on their subject marks and APS scores. Features course matching, automatic APS calculation, user authentication, and responsive design with custom animations. Do check out the GitHub repo to see the code and how to run FindMyUni locally!',
+        description: 'A full-stack web application designed to help South African students find the perfect university program. Simply input your marks to automatically calculate your APS score and discover matching courses. Features user authentication and a smooth, animated UI!',
         tech: ['HTML5', 'CSS3', 'JavaScript', 'WCF', '.NET Framework', 'C#', 'SQL Server'],
         category: 'personal' as ProjectCategory,
         screenshot: '/images/findmyuni.webp',
@@ -74,7 +79,7 @@ const projects: Project[] = [
     {
         id: 6,
         title: 'Xabiso Memani Portfolio',
-        description: 'Custom portfolio website designed and built from scratch to showcase my personality and work. Features a unique custom cursor system, theme switching, and a fully responsive design. Everything was designed by me with no templates—every element crafted to reflect my creative vision and technical skills.',
+        description: 'My personal portfolio, designed and built entirely from scratch! I wanted a space that truly reflected my personality, all hand-crafted elements with no templates, complete with custom cursors, smooth animations, and a seamless theme switcher.',
         tech: ['Next.js', 'React', 'TypeScript', 'CSS3', 'Custom Design'],
         category: 'personal' as ProjectCategory,
         screenshot: '/images/xabisoportfolio.webp',
@@ -87,38 +92,41 @@ const projects: Project[] = [
     {
         id: 1,
         title: 'ZenBox Web Frontend',
-        description: 'Full-stack project management/client onboarding web application built with ASP.NET Web Forms. Features role-based access control, quotation generation, automated emails, and PDF reporting for SAS Environmental.',
+        description: 'A powerful project management and client onboarding dashboard tailored for SAS Environmental. As part of a full-stack ecosystem, it handles complex role-based access control, automates quotation emails, and generates comprehensive PDF reports.',
         tech: ['ASP.NET', 'Web Forms', 'HTML', 'C#'],
-        category: 'school' as ProjectCategory,
+        category: 'client' as ProjectCategory,
         screenshot: '/images/zenbox-web.webp',
         githubUrl: 'https://github.com/IFMTYP2025/team15',
         demoUrl: '',
         youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
         year: '2025',
+        clientOrder: 30,
     },
     {
         id: 3,
         title: 'ZenBox API',
-        description: 'RESTful backend API built with ASP.NET Core (.NET 8) featuring Entity Framework Core, Azure SQL database, and JWT authentication. Handles business logic, data access, and secure authentication for the ZenBox ecosystem.',
+        description: 'The robust backend engine driving the entire ZenBox ecosystem. Built with .NET 8 and Entity Framework Core, this RESTful API securely handles all business logic, data interactions, and JWT authentication.',
         tech: ['ASP.NET Core', 'C#', '.NET 8', 'Entity Framework', 'Azure SQL'],
-        category: 'school' as ProjectCategory,
+        category: 'client' as ProjectCategory,
         screenshot: '/images/zenbox-api.webp',
         githubUrl: 'https://github.com/IFMTYP2025/team15-api',
         demoUrl: '',
         youtubeUrl: 'https://youtu.be/L-LNjbStd80?si=GYvhwquhrLbMvps0',
         year: '2025',
+        clientOrder: 40,
     },
     {
         id: 4,
         title: 'ZenBox Mobile App',
-        description: 'React Native mobile application built with Expo for employee task management. Features role-based access, real-time task tracking, and seamless integration with the ZenBox API. Supports both iOS and Android platforms.',
+        description: 'The mobile companion for ZenBox, built with React Native. Designed specifically for employees on the go, it provides real-time task tracking and full role-based access natively on both iOS and Android.',
         tech: ['React Native', 'Expo', 'TypeScript', 'Tailwind CSS'],
-        category: 'school' as ProjectCategory,
+        category: 'client' as ProjectCategory,
         screenshot: '/images/zenbox-mobile.webp',
         githubUrl: 'https://github.com/IFMTYP2025/team15-mobile',
         demoUrl: '',
         youtubeUrl: 'https://youtu.be/L-LNjbStd80?t=568',
         year: '2025',
+        clientOrder: 50,
     },
     {
         id: 10,
@@ -126,17 +134,29 @@ const projects: Project[] = [
         description:
             'Designed and built a website for Bear Group, a South African company that provides strategic oversight and shared resources across its subsidiaries in construction, earthworks & logistics, security protection, consulting, etc. Built as a clean, responsive site with clear service pages, a gallery, and direct contact details.',
         tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Radix UI', 'GSAP', 'Lenis'],
-        category: 'personal' as ProjectCategory,
+        category: 'client' as ProjectCategory,
         screenshot: '/images/beargroup.webp',
         demoUrl: 'https://beargroup.vercel.app/',
         year: '2026',
+        clientOrder: 10,
+    },
+    {
+        id: 11,
+        title: 'Dimax Software',
+        description: 'Collaborated with Hitek Solutions (the developers behind Spane4All.co.za) to revamp the Dimax Software website. I designed the final wireframes and led the new homepage styling to give the brand a modern feel. To bring the site to life, I took their static logo and animated it into a dynamic motion graphic using LottieFiles, Canva AI, etc.',
+        tech: ['UI/UX Design', 'Wireframing', 'Bootstrap', 'Motion Graphics', 'HTML', 'CSS', 'JavaScript',],
+        category: 'client' as ProjectCategory,
+        screenshot: '/images/dimax.webp',
+        demoUrl: 'https://dimax-software.netlify.app/',
+        year: '2026',
+        clientOrder: 5,
     },
     {
         id: 7,
         title: 'Fleur De Maison',
         description: (
             <>
-                Logo design for Fleur De Maison, a boutique floral brand. Inspired by the romance of Parisian gardens, the brand creates bespoke bouquets that transform every moment into something extraordinary. Check them out on instagram!
+                Logo design for Fleur De Maison, a boutique floral brand. Inspired by the romance of Parisian gardens, the brand creates bespoke bouquets that transform every moment into something extraordinary. Check them out on tiktok and instagram!
             </>
         ),
         tech: ['Logo Design', 'Graphic Design', 'Adobe Illustrator'],
@@ -144,6 +164,7 @@ const projects: Project[] = [
         screenshot: '/images/fleurdemaison.webp',
         githubUrl: '',
         demoUrl: '',
+        tiktokUrl: 'https://www.tiktok.com/@fleur.de.maison',
         youtubeUrl: '',
         instagramUrl: 'https://www.instagram.com/fleur.de.maison/',
         year: '2025',
@@ -152,8 +173,8 @@ const projects: Project[] = [
 
 const filters: { label: string; value: ProjectCategory }[] = [
     { label: 'All Projects', value: 'all' },
-    { label: 'School Projects', value: 'school' },
     { label: 'Personal Projects', value: 'personal' },
+    { label: 'Client Projects', value: 'client' },
     { label: 'Graphic Design', value: 'design' },
 ];
 
@@ -170,7 +191,14 @@ export default function ProjectsSection() {
             // Use `showInAll` flag to hide specific items (like duplicates) from the All view.
             return projects.filter(project => project.showInAll !== false);
         }
-        return projects.filter(project => project.category === activeFilter);
+
+        const filtered = projects.filter(project => project.category === activeFilter);
+
+        if (activeFilter === 'client') {
+            return filtered.sort((a, b) => (a.clientOrder || 99) - (b.clientOrder || 99));
+        }
+
+        return filtered;
     }, [activeFilter]);
 
     const baseVisibleCount = isMobile ? 4 : 6;
@@ -466,6 +494,17 @@ export default function ProjectsSection() {
                                                 <ArrowIcon />
                                             </a>
                                         )}
+                                        {project.tiktokUrl && (
+                                            <a
+                                                href={project.tiktokUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="project-link-btn project-link-btn-tiktok"
+                                            >
+                                                <span style={{ textAlign: 'center', flex: 1 }}>TikTok</span>
+                                                <ArrowIcon />
+                                            </a>
+                                        )}
                                         {project.instagramUrl && (
                                             <a
                                                 href={project.instagramUrl}
@@ -474,6 +513,17 @@ export default function ProjectsSection() {
                                                 className="project-link-btn project-link-btn-instagram"
                                             >
                                                 <span style={{ textAlign: 'center', flex: 1 }}>Instagram</span>
+                                                <ArrowIcon />
+                                            </a>
+                                        )}
+                                        {project.chromeUrl && (
+                                            <a
+                                                href={project.chromeUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="project-link-btn project-link-btn-demo"
+                                            >
+                                                <span style={{ textAlign: 'center', flex: 1 }}>Chrome Store</span>
                                                 <ArrowIcon />
                                             </a>
                                         )}

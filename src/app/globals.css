@@ -2740,13 +2740,14 @@ html.theme-christmas .download-cv-link:hover {
   font-weight: 500;
   border-radius: 8px;
   background: transparent;
+  color: #2a2a2a;
+  border: 1px solid #2a2a2a;
   text-decoration: none;
   cursor: none;
   transition:
     background-color 0.3s ease,
     color 0.3s ease,
     box-shadow 0.3s ease;
-  border: 1px solid;
   position: relative;
 }
 
@@ -2760,68 +2761,10 @@ html.theme-christmas .download-cv-link:hover {
   opacity: 0.9;
 }
 
-/* GitHub Button - Monotone Grey */
-.project-link-btn-github {
-  color: #2a2a2a !important;
-  border-color: #2a2a2a !important;
-}
-
-.project-link-btn-github:hover {
-  background: #2a2a2a !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(42, 42, 42, 0.4) !important;
-}
-
-.project-link-btn-github:hover .project-link-icon {
-  color: var(--nokia-screen) !important;
-}
-
-/* YouTube Button - Monotone Grey */
-.project-link-btn-youtube {
-  color: #2a2a2a !important;
-  border-color: #2a2a2a !important;
-}
-
-.project-link-btn-youtube:hover {
-  background: #2a2a2a !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(42, 42, 42, 0.4) !important;
-}
-
-.project-link-btn-youtube:hover .project-link-icon {
-  color: var(--nokia-screen) !important;
-}
-
-/* Demo Button - Monotone Grey */
-.project-link-btn-demo {
-  color: #2a2a2a !important;
-  border-color: #2a2a2a !important;
-}
-
-.project-link-btn-demo:hover {
-  background: #2a2a2a !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(42, 42, 42, 0.4) !important;
-}
-
-.project-link-btn-demo:hover .project-link-icon {
-  color: var(--nokia-screen) !important;
-}
-
-/* Instagram Button - Monotone Grey */
-.project-link-btn-instagram {
-  color: #2a2a2a !important;
-  border-color: #2a2a2a !important;
-}
-
-.project-link-btn-instagram:hover {
-  background: #2a2a2a !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(42, 42, 42, 0.4) !important;
-}
-
-.project-link-btn-instagram:hover .project-link-icon {
-  color: var(--nokia-screen) !important;
+.project-link-btn:hover {
+  background: #2a2a2a;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(42, 42, 42, 0.4);
 }
 
 .project-link-icon {
