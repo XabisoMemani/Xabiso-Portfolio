@@ -164,7 +164,7 @@ const projects: Project[] = [
         screenshot: '/images/fleurdemaison.webp',
         githubUrl: '',
         demoUrl: '',
-        tiktokUrl: 'https://www.tiktok.com/@fleur.de.maison',
+        tiktokUrl: 'https://www.tiktok.com/@fleur_de_maison',
         youtubeUrl: '',
         instagramUrl: 'https://www.instagram.com/fleur.de.maison/',
         year: '2025',
