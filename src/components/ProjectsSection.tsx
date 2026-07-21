@@ -25,15 +25,13 @@ type Project = {
 const projects: Project[] = [
     {
         id: 12,
-        title: 'Fleur De Maison',
+        title: 'Fleur de Maison',
         description:
-            'A premium full-stack e-commerce platform built for a luxury floral boutique based in Johannesburg. I designed and developed the complete online shopping experience from scratch, focusing on high-end aesthetics, elegant micro-animations, and a seamless checkout flow. Beyond the beautiful storefront, I engineered a secure, role-based admin dashboard powered by Supabase to handle inventory management, real-time order tracking, and automated custom PDF invoicing.',
-        tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'GSAP', 'PayFast API', 'jsPDF', 'E-commerce'],
+            'A premium full‑stack e‑commerce platform built for a luxury floral boutique. I designed and developed the online shopping experience with high‑end aesthetics, elegant micro‑animations, and a seamless checkout flow, plus a secure Supabase‑powered admin dashboard for inventory, orders, and automated PDF invoicing.',
+        tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PayFast API', 'E-commerce', 'fleurdemaison.co'],
         category: 'client' as ProjectCategory,
         screenshot: '/images/fleurdemaison.webp',
         demoUrl: 'https://fleurdemaison.co',
-        instagramUrl: 'https://www.instagram.com/fleurdemaison.co/',
-        tiktokUrl: 'https://www.tiktok.com/@fleur_de_maison',
         year: 'NEW! (2026)',
         clientOrder: 1,
     },
