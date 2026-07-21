@@ -24,6 +24,20 @@ type Project = {
 };
 const projects: Project[] = [
     {
+        id: 12,
+        title: 'Fleur De Maison',
+        description:
+            'A premium full-stack e-commerce platform built for a luxury floral boutique based in Johannesburg. I designed and developed the complete online shopping experience from scratch, focusing on high-end aesthetics, elegant micro-animations, and a seamless checkout flow. Beyond the beautiful storefront, I engineered a secure, role-based admin dashboard powered by Supabase to handle inventory management, real-time order tracking, and automated custom PDF invoicing.',
+        tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'GSAP', 'PayFast API', 'jsPDF', 'E-commerce'],
+        category: 'client' as ProjectCategory,
+        screenshot: '/images/fleurdemaison.webp',
+        demoUrl: 'https://fleurdemaison.co',
+        instagramUrl: 'https://www.instagram.com/fleurdemaison.co/',
+        tiktokUrl: 'https://www.tiktok.com/@fleur_de_maison',
+        year: 'NEW! (2026)',
+        clientOrder: 1,
+    },
+    {
         id: 8,
         title: 'JobTrackr',
         description: 'A smart job application tracker that syncs directly with your Gmail to keep all your applications in one place. Built with Next.js and MongoDB, it automatically pulls your latest emails and organizes them in a clean, responsive dashboard so you can apply with clarity and confidence.',
@@ -32,7 +46,7 @@ const projects: Project[] = [
         screenshot: '/images/jobtrackr.webp',
         githubUrl: 'https://github.com/XabisoMemani/JobTrackr-Showcase',
         demoUrl: 'https://jobtrackr-xabiso.vercel.app/',
-        year: 'NEW! (2026)',
+        year: '2026',
     },
     {
         id: 5,
@@ -153,7 +167,7 @@ const projects: Project[] = [
     },
     {
         id: 7,
-        title: 'Fleur De Maison',
+        title: 'Fleur De Maison Logo',
         description: (
             <>
                 Logo design for Fleur De Maison, a boutique floral brand. Inspired by the romance of Parisian gardens, the brand creates bespoke bouquets that transform every moment into something extraordinary. Check them out on tiktok and instagram!
@@ -161,12 +175,12 @@ const projects: Project[] = [
         ),
         tech: ['Logo Design', 'Graphic Design', 'Adobe Illustrator'],
         category: 'design' as ProjectCategory,
-        screenshot: '/images/fleurdemaison.webp',
+        screenshot: '/images/fleurdemaison-logo.webp',
         githubUrl: '',
         demoUrl: '',
         tiktokUrl: 'https://www.tiktok.com/@fleur_de_maison',
         youtubeUrl: '',
-        instagramUrl: 'https://www.instagram.com/fleur.de.maison/',
+        instagramUrl: 'https://www.instagram.com/fleurdemaison.co/',
         year: '2025',
     },
 ];
