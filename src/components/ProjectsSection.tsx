@@ -24,18 +24,6 @@ type Project = {
 };
 const projects: Project[] = [
     {
-        id: 12,
-        title: 'Fleur de Maison',
-        description:
-            'A premium full‑stack e‑commerce platform built for a luxury floral boutique. I designed and developed the online shopping experience with high‑end aesthetics, elegant micro‑animations, and a seamless checkout flow, plus a secure Supabase‑powered admin dashboard for inventory, orders, and automated PDF invoicing.',
-        tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PayFast API', 'E-commerce', 'fleurdemaison.co'],
-        category: 'client' as ProjectCategory,
-        screenshot: '/images/fleurdemaison.webp',
-        demoUrl: 'https://fleurdemaison.co',
-        year: 'NEW! (2026)',
-        clientOrder: 1,
-    },
-    {
         id: 8,
         title: 'JobTrackr',
         description: 'A smart job application tracker that syncs directly with your Gmail to keep all your applications in one place. Built with Next.js and MongoDB, it automatically pulls your latest emails and organizes them in a clean, responsive dashboard so you can apply with clarity and confidence.',
@@ -45,7 +33,19 @@ const projects: Project[] = [
         githubUrl: 'https://github.com/XabisoMemani/JobTrackr-Showcase',
         demoUrl: 'https://jobtrackr-xabiso.vercel.app/',
         year: '2026',
+    }, {
+        id: 12,
+        title: 'Fleur De Maison Web',
+        description:
+            'A premium full‑stack e‑commerce platform built for a luxury floral boutique. I designed and developed the online shopping experience with high‑end aesthetics, elegant micro‑animations, and a seamless checkout flow, plus a secure Supabase‑powered admin dashboard for inventory, orders, and automated PDF invoicing.',
+        tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PayFast API', 'E-commerce', 'fleurdemaison.co'],
+        category: 'client' as ProjectCategory,
+        screenshot: '/images/fleurdemaison.webp',
+        demoUrl: 'https://fleurdemaison.co',
+        year: 'NEW! (2026)',
+        clientOrder: 1,
     },
+
     {
         id: 5,
         title: 'Skinn Galleria',
