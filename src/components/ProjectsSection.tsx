@@ -164,6 +164,19 @@ const projects: Project[] = [
         clientOrder: 5,
     },
     {
+        id: 13,
+        title: 'Love Is In The Hair',
+        description:
+            'A clean, mobile-first website I designed and built for Love Is In The Hair, a hair stylist based in Moletsane. The site showcases services and pricing, a gallery of past work as well as client reviews — all wrapped in a smooth, modern layout with WhatsApp-based booking so clients can get in touch instantly.',
+        tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Radix UI', 'GSAP', 'Lenis'],
+        category: 'client' as ProjectCategory,
+        screenshot: '/images/loveisinthehair.webp',
+        demoUrl: 'https://loveisinthehair.vercel.app/',
+        githubUrl: 'https://github.com/XabisoMemani/LoveIsInTheHair',
+        year: '2026',
+        clientOrder: 15,
+    },
+    {
         id: 7,
         title: 'Fleur De Maison Logo',
         description: (
