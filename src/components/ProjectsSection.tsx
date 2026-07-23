@@ -387,8 +387,6 @@ export default function ProjectsSection() {
 
                 <div className={`projects-grid ${visibleProjects.length === 1 ? 'projects-grid-single' : ''}`}>
                     {visibleProjects.map((project) => {
-                        //can i remove this line?
-                        const isDesignCategory = project.category === 'design';
                         const aspectRatioClass = 'project-image-video';
 
                         // Arrow icon SVG
@@ -448,17 +446,17 @@ export default function ProjectsSection() {
                                 {/* Content */}
                                 <div className="project-card-content">
                                     <div className="project-card-text">
-                                        <h3 className="project-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <h3 className="project-title">
                                             <span>{project.title}</span>
-                                            <span style={{ fontFamily: 'var(--font-inter), sans-serif', fontSize: '0.7rem', fontWeight: '500', padding: '0.25rem 0.5rem', border: '1px solid #e5e5e5', borderRadius: '999px', color: '#1a1a1a', background: 'transparent' }}>{project.year || 'NEW!'}</span>
+                                            <span className="project-year-badge">{project.year || 'NEW!'}</span>
                                         </h3>
-                                        <p className="project-description" style={{ textAlign: 'justify', marginTop: '1em' }}>
+                                        <p className="project-description">
                                             {project.description}
                                         </p>
                                     </div>
 
                                     {/* Technologies */}
-                                    <div className="project-tech" style={{ marginTop: '1rem' }}>
+                                    <div className="project-tech">
                                         {project.tech.map((tech, index) => (
                                             <span key={index} className="tech-tag">
                                                 {tech}

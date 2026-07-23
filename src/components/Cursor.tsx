@@ -1,18 +1,33 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 export default function Cursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
     const dotRef = useRef<HTMLDivElement>(null);
-    const [isHovering, setIsHovering] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
 
-    // track mouse position using refs for better performance
+    // Use refs for all hot-path state to avoid re-renders and effect re-runs
     const mousePosition = useRef({ x: 0, y: 0 });
+    const isVisibleRef = useRef(false);
+    const isHoveringRef = useRef(false);
+    const mountedRef = useRef(true);
+
+    // Sync visibility to DOM without React re-render
+    const syncVisibility = useCallback(() => {
+        if (cursorRef.current) {
+            cursorRef.current.style.opacity = isVisibleRef.current ? '1' : '0';
+        }
+        if (dotRef.current) {
+            const showDot = isHoveringRef.current && isVisibleRef.current;
+            dotRef.current.style.opacity = showDot ? '1' : '0';
+            dotRef.current.style.display = showDot ? 'block' : 'none';
+        }
+    }, []);
 
     useEffect(() => {
-        // force hide the default system cursor
+        mountedRef.current = true;
+
+        // Force hide the default system cursor on devices with a fine pointer
         const hideSystemCursor = () => {
             if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
                 document.documentElement.style.cursor = 'none';
@@ -22,39 +37,54 @@ export default function Cursor() {
 
         hideSystemCursor();
 
+        // --- Mouse movement ---
         const onMouseMove = (e: MouseEvent) => {
             mousePosition.current = { x: e.clientX, y: e.clientY };
 
-            if (!isVisible) setIsVisible(true);
+            if (!isVisibleRef.current) {
+                isVisibleRef.current = true;
+                syncVisibility();
+            }
 
-            // check if an extension messed with the cursor
-            if (document.body.style.cursor !== 'none' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            // Re-hide system cursor if a browser extension reset it
+            if (
+                document.body.style.cursor !== 'none' &&
+                window.matchMedia('(hover: hover) and (pointer: fine)').matches
+            ) {
                 hideSystemCursor();
             }
         };
 
-        const onMouseLeave = () => setIsVisible(false);
+        // --- Viewport enter / leave ---
+        const onMouseLeave = () => {
+            isVisibleRef.current = false;
+            syncVisibility();
+        };
+
         const onMouseEnter = () => {
-            setIsVisible(true);
+            isVisibleRef.current = true;
+            syncVisibility();
             hideSystemCursor();
         };
 
+        // --- Animation loop (runs once, never torn down until unmount) ---
         const updateCursorPosition = () => {
+            if (!mountedRef.current) return;
+
+            const { x, y } = mousePosition.current;
             if (cursorRef.current) {
-                const { x, y } = mousePosition.current;
-                // hardware accelerated movement
                 cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
             }
             if (dotRef.current) {
-                const { x, y } = mousePosition.current;
                 dotRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
             }
+
             requestAnimationFrame(updateCursorPosition);
         };
 
         const animationId = requestAnimationFrame(updateCursorPosition);
 
-
+        // --- Click ripple ---
         const handleClick = (e: MouseEvent) => {
             if (!e.isTrusted) return; // Ignore programmatic clicks to avoid ghost pulses at (0,0)
             const clickEffect = document.createElement('div');
@@ -71,18 +101,20 @@ export default function Cursor() {
             setTimeout(() => {
                 const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
                 if (!isInteractiveElement(el)) {
-                    setIsHovering(false);
+                    isHoveringRef.current = false;
+                    syncVisibility();
                 }
             }, 0);
         };
 
-        // check if I am hovering over something clickable
+        // --- Interactive element detection ---
         const isInteractiveElement = (element: HTMLElement | null): boolean => {
             if (!element) return false;
 
             const interactiveSelectors = [
                 'a',
                 'button',
+                '[role="button"]',
                 '.info-btn',
                 '.close-btn',
                 '.resume-interactive',
@@ -91,17 +123,22 @@ export default function Cursor() {
                 '.certification-link',
                 '.download-cv-link',
                 '.project-link-btn',
-                '.contact-link'
+                '.project-filter-btn',
+                '.contact-link',
+                '.alert-close',
+                '.university-orange'
             ].join(', ');
 
             return element.matches(interactiveSelectors) ||
                 !!element.closest(interactiveSelectors);
         };
 
+        // --- Hover state ---
         const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             if (isInteractiveElement(target)) {
-                setIsHovering(true);
+                isHoveringRef.current = true;
+                syncVisibility();
             }
         };
 
@@ -110,15 +147,32 @@ export default function Cursor() {
             const relatedTarget = e.relatedTarget as HTMLElement;
 
             if (isInteractiveElement(target) && !isInteractiveElement(relatedTarget)) {
-                setIsHovering(false);
+                isHoveringRef.current = false;
+                syncVisibility();
             }
         };
 
-        // hide cursor again when window gets focus
+        // --- Tab / window focus recovery ---
         const handleFocus = () => {
             hideSystemCursor();
         };
 
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                // Tab is back in view — re-hide system cursor and mark custom cursor visible
+                hideSystemCursor();
+                isVisibleRef.current = true;
+                syncVisibility();
+            }
+        };
+
+        // --- Info panel close ---
+        const handleInfoClose = () => {
+            isHoveringRef.current = false;
+            syncVisibility();
+        };
+
+        // --- Register all listeners ---
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('click', handleClick);
         document.addEventListener('mouseover', handleMouseOver);
@@ -126,12 +180,11 @@ export default function Cursor() {
         document.addEventListener('mouseleave', onMouseLeave);
         document.addEventListener('mouseenter', onMouseEnter);
         window.addEventListener('focus', handleFocus);
-
-        // clear hover state when info panel closes
-        const handleInfoClose = () => setIsHovering(false);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
         window.addEventListener('app:info-close', handleInfoClose as EventListener);
 
         return () => {
+            mountedRef.current = false;
             cancelAnimationFrame(animationId);
             document.removeEventListener('mousemove', onMouseMove);
             document.removeEventListener('click', handleClick);
@@ -140,9 +193,10 @@ export default function Cursor() {
             document.removeEventListener('mouseleave', onMouseLeave);
             document.removeEventListener('mouseenter', onMouseEnter);
             window.removeEventListener('focus', handleFocus);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
             window.removeEventListener('app:info-close', handleInfoClose as EventListener);
         };
-    }, [isVisible]);
+    }, [syncVisibility]);
 
     return (
         <>
@@ -151,11 +205,9 @@ export default function Cursor() {
                 ref={cursorRef}
                 className="cursor"
                 style={{
-                    // Initial position off-screen or 0,0
                     left: 0,
                     top: 0,
-                    opacity: isVisible ? 1 : 0,
-                    // I remove the transition in CSS, and handle position entirely via transform here
+                    opacity: 0,
                 }}
             >
                 <div className="cursor-default"></div>
@@ -171,8 +223,8 @@ export default function Cursor() {
                     zIndex: 10001,
                     left: 0,
                     top: 0,
-                    opacity: (isHovering && isVisible) ? 1 : 0,
-                    display: (isHovering && isVisible) ? 'block' : 'none'
+                    opacity: 0,
+                    display: 'none'
                 }}
             >
                 <div className="cursor-dot"></div>

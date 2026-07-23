@@ -101,6 +101,7 @@ export default function Home() {
         onClick={() => setIsInfoOpen(true)}
         role="button"
         tabIndex={0}
+        aria-label="Open info panel"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             setIsInfoOpen(true);
