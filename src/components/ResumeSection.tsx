@@ -246,7 +246,7 @@ export default function ResumeSection() {
                                 <Link 
                                     href="/cv-download" 
                                     scroll={false} 
-                                    className="download-cv-link download-cv-link-orange"
+                                    className="download-cv-link"
                                     onClick={(e) => {
                                         e.preventDefault();
                                         triggerCVDownload();

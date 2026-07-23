@@ -1722,7 +1722,7 @@ body.navbar-active .landing-section::after {
 
 /* Download CV Link - Base styles (theme-aware) */
 .download-cv-link {
-  background: rgba(255, 242, 225, 0.65);
+  background: color-mix(in srgb, var(--nokia-screen) 12%, white);
   border: 1px solid var(--nokia-screen);
   border-radius: 8px;
   padding: 0.75rem 1.5rem;
@@ -1749,15 +1749,15 @@ body.navbar-active .landing-section::after {
 html.theme-orange .download-cv-link {
   background: rgba(255, 242, 225, 0.65);
   box-shadow:
-    0 0 15px rgba(255, 152, 0, 0.2),
-    0 0 30px rgba(255, 152, 0, 0.1);
+    0 0 15px color-mix(in srgb, var(--nokia-screen) 20%, transparent),
+    0 0 30px color-mix(in srgb, var(--nokia-screen) 10%, transparent);
 }
 
 html.theme-orange .download-cv-link:hover {
   background: rgba(255, 242, 225, 0.8);
   box-shadow:
-    0 0 20px rgba(255, 152, 0, 0.4),
-    0 0 40px rgba(255, 152, 0, 0.2),
+    0 0 20px color-mix(in srgb, var(--nokia-screen) 40%, transparent),
+    0 0 40px color-mix(in srgb, var(--nokia-screen) 20%, transparent),
     0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
@@ -1819,24 +1819,7 @@ html.theme-christmas .download-cv-link:hover {
   transform: scale(1.03);
 }
 
-/* Orange variant (always orange, regardless of theme - for resume section) */
-.download-cv-link-orange {
-  border-color: #ff9800 !important;
-  color: #ff9800 !important;
-  background: rgba(255, 242, 225, 0.65) !important;
-  box-shadow:
-    0 0 15px rgba(255, 152, 0, 0.2),
-    0 0 30px rgba(255, 152, 0, 0.1) !important;
-}
 
-.download-cv-link-orange:hover {
-  background: rgba(255, 242, 225, 0.8) !important;
-  color: #ff9800 !important;
-  box-shadow:
-    0 0 20px rgba(255, 152, 0, 0.4),
-    0 0 40px rgba(255, 152, 0, 0.2),
-    0 10px 40px rgba(0, 0, 0, 0.1) !important;
-}
 
 /* Services Paragraph */
 .services-paragraph {
@@ -1995,7 +1978,7 @@ html.theme-christmas .download-cv-link:hover {
   padding-bottom: 0;
   border-bottom: none;
   text-decoration: underline;
-  text-decoration-color: #ff9800;
+  text-decoration-color: var(--nokia-screen);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.5rem;
   letter-spacing: -0.02em;
@@ -2041,7 +2024,7 @@ html.theme-christmas .download-cv-link:hover {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  border: 2px solid #ff9800;
+  border: 2px solid var(--nokia-screen);
   background-color: #ffffff;
 }
 
@@ -2194,17 +2177,17 @@ html.theme-christmas .download-cv-link:hover {
   font-family: var(--font-inter), sans-serif;
   font-size: 0.85rem;
   line-height: 1.6;
-  color: #ff9800;
+  color: var(--nokia-screen);
   padding: 0.75rem 1rem;
-  background: rgba(255, 237, 204, 0.95);
-  border-left: 3px solid #ff9800;
+  background: color-mix(in srgb, var(--nokia-screen) 12%, white);
+  border-left: 3px solid var(--nokia-screen);
   border-radius: 4px;
   position: relative;
   z-index: 1;
 }
 
 .experience-achievement strong {
-  color: #ff9800;
+  color: var(--nokia-screen);
   font-weight: 600;
 }
 
@@ -2222,24 +2205,24 @@ html.theme-christmas .download-cv-link:hover {
   font-family: var(--font-inter), sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #ff9800;
-  background: rgba(255, 237, 204, 0.95);
+  color: var(--nokia-screen);
+  background: color-mix(in srgb, var(--nokia-screen) 12%, white);
   padding: 0.5rem 0.85rem;
   border-radius: 6px;
-  border: 1px solid rgba(255, 152, 0, 0.3);
+  border: 1px solid color-mix(in srgb, var(--nokia-screen) 30%, transparent);
   margin-top: 0.75rem;
   margin-bottom: 0.5rem;
   position: relative;
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.15);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--nokia-screen) 15%, transparent);
   line-height: 1.4;
   transition: box-shadow 0.3s ease;
 }
 
 .achievement-badge:hover {
   box-shadow:
-    0 0 5px rgba(255, 152, 0, 0.4),
-    0 0 15px rgba(255, 152, 0, 0.2);
+    0 0 5px color-mix(in srgb, var(--nokia-screen) 40%, transparent),
+    0 0 15px color-mix(in srgb, var(--nokia-screen) 20%, transparent);
 }
 
 .achievement-badge:first-child {
@@ -2344,7 +2327,7 @@ html.theme-christmas .download-cv-link:hover {
 .certification-link {
   display: inline-flex;
   align-items: center;
-  color: #ff9800;
+  color: var(--nokia-screen);
   text-decoration: none;
   transition:
     color 0.3s ease,
@@ -2506,7 +2489,7 @@ html.theme-christmas .download-cv-link:hover {
 
 .skill-bar-fill {
   height: 100%;
-  background: #ff9800;
+  background: var(--nokia-screen);
   border-radius: 4px;
   transition: width 0.6s ease;
   position: relative;
@@ -2547,18 +2530,18 @@ html.theme-christmas .download-cv-link:hover {
 }
 
 .project-filter-btn.active {
-  color: #ff9800;
+  color: var(--nokia-screen);
   font-weight: 600;
   text-shadow:
-    0 0 10px rgba(255, 152, 0, 0.5),
-    0 0 20px rgba(255, 152, 0, 0.3);
+    0 0 10px color-mix(in srgb, var(--nokia-screen) 50%, transparent),
+    0 0 20px color-mix(in srgb, var(--nokia-screen) 30%, transparent);
 }
 
 .project-filter-btn.active:hover {
-  color: #ff9800;
+  color: var(--nokia-screen);
   text-shadow:
-    0 0 15px rgba(255, 152, 0, 0.7),
-    0 0 30px rgba(255, 152, 0, 0.4);
+    0 0 15px color-mix(in srgb, var(--nokia-screen) 70%, transparent),
+    0 0 30px color-mix(in srgb, var(--nokia-screen) 40%, transparent);
 }
 
 .project-filter-separator {
@@ -2903,13 +2886,13 @@ html.theme-christmas .download-cv-link:hover {
 }
 
 .contact-details a {
-  color: #ff9800;
+  color: var(--nokia-screen);
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .contact-details a:hover {
-  color: #f57c00;
+  color: var(--nokia-screen-dark);
   text-decoration: underline;
 }
 
@@ -2994,8 +2977,8 @@ html.theme-christmas .download-cv-link:hover {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #ff9800;
-  box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+  border-color: var(--nokia-screen);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nokia-screen) 10%, transparent);
 }
 
 .form-group textarea {
@@ -3008,7 +2991,7 @@ html.theme-christmas .download-cv-link:hover {
   font-size: 1rem;
   font-weight: 500;
   padding: 0.875rem 2rem;
-  background: #ff9800;
+  background: var(--nokia-screen);
   border: none;
   border-radius: 4px;
   color: #ffffff;
@@ -3018,9 +3001,9 @@ html.theme-christmas .download-cv-link:hover {
 }
 
 .submit-btn:hover {
-  background: #f57c00;
+  background: var(--nokia-screen-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--nokia-screen) 30%, transparent);
 }
 
 /* Responsive updates */
