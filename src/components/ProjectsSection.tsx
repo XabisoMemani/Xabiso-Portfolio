@@ -37,7 +37,7 @@ const projects: Project[] = [
         id: 12,
         title: 'FleurDeMaison.co',
         description:
-            'A premium full‑stack e‑commerce platform built for a luxury floral boutique. I designed and developed the online shopping experience with high‑end aesthetics, elegant micro‑animations, and a seamless checkout flow, plus a secure Supabase‑powered admin dashboard for inventory, orders, and automated PDF invoicing.',
+            'A premium full‑stack e‑commerce platform built for a luxury floral boutique. I designed (from scratch) and developed the online shopping experience with high‑end aesthetics, elegant micro‑animations, and a seamless checkout flow, plus a secure Supabase‑powered admin dashboard for inventory, orders, and automated PDF invoicing.',
         tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PayFast API', 'E-commerce', 'fleurdemaison.co'],
         category: 'client' as ProjectCategory,
         screenshot: '/images/fleurdemaison.webp',
@@ -59,7 +59,6 @@ const projects: Project[] = [
         screenshot: '/images/skinnbeta.webp',
         githubUrl: '',
         demoUrl: 'https://skinnnation.webflow.io/',
-        youtubeUrl: '',
         instagramUrl: 'https://www.instagram.com/skinnnation/',
         year: '2020',
         clientOrder: 20,
@@ -68,11 +67,12 @@ const projects: Project[] = [
         id: 9,
         title: 'IntelliSave Chrome Extension',
         description:
-            'An intelligent Chrome extension I built to automatically sort your downloaded files into organized folders. I started this in 2024 to solve my own messy Downloads folder problem, and decided to publish it for others to enjoy! It runs quietly in the background, keeping your files perfectly categorized by type and source. Download it on Chrome Web Store and clear your messy downloads folder!',
+            'An intelligent Chrome extension I built to automatically sort your downloaded files into organized folders based on the file type and source website. I started this in 2024 to solve my own messy Downloads folder problem, and decided to publish it for others to enjoy! Download it on Chrome Web Store and clear your messy downloads folder!',
         tech: ['Chrome Extension', 'JavaScript', 'Manifest V3', 'Automation'],
         category: 'personal' as ProjectCategory,
         screenshot: '/images/intellisave.webp',
         demoUrl: 'https://xabisomemani.github.io/IntelliSave/index.html',
+        youtubeUrl: 'https://youtu.be/p9v7tRmU8tY?si=Vx4E7k46BaYCO-eB',
         chromeUrl: 'https://chromewebstore.google.com/detail/intellisave/knemlapnohmfinjfondkjhdnoahfafko',
         year: '2024',
     },
@@ -547,7 +547,7 @@ export default function ProjectsSection() {
                                                 rel="noopener noreferrer"
                                                 className="project-link-btn project-link-btn-demo"
                                             >
-                                                <span style={{ textAlign: 'center', flex: 1 }}>Chrome Store</span>
+                                                <span style={{ textAlign: 'center', flex: 1 }}>Chrome</span>
                                                 <ArrowIcon />
                                             </a>
                                         )}
