@@ -35,7 +35,7 @@ const projects: Project[] = [
         year: '2026',
     }, {
         id: 12,
-        title: 'Fleur De Maison Web',
+        title: 'FleurDeMaison.co',
         description:
             'A premium full‑stack e‑commerce platform built for a luxury floral boutique. I designed and developed the online shopping experience with high‑end aesthetics, elegant micro‑animations, and a seamless checkout flow, plus a secure Supabase‑powered admin dashboard for inventory, orders, and automated PDF invoicing.',
         tech: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PayFast API', 'E-commerce', 'fleurdemaison.co'],
