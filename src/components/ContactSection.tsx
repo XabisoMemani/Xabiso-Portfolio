@@ -50,6 +50,7 @@ export default function ContactSection() {
                             >
                                 Feel free to reach out if you&apos;d like to work together or just want to say{' '}
                                 <span
+                                    className="cursor-help"
                                     title={`Hello ${helloLanguageNames[currentHelloIndex]}`}
                                     style={{
                                         cursor: 'help',

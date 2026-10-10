@@ -10,10 +10,20 @@ export default function Cursor() {
     const mousePosition = useRef({ x: 0, y: 0 });
     const isVisibleRef = useRef(false);
     const isHoveringRef = useRef(false);
+    const isHelpRef = useRef(false);
     const mountedRef = useRef(true);
 
     // Sync visibility to DOM without React re-render
     const syncVisibility = useCallback(() => {
+        if (isHelpRef.current) {
+            if (cursorRef.current) cursorRef.current.style.opacity = '0';
+            if (dotRef.current) {
+                dotRef.current.style.opacity = '0';
+                dotRef.current.style.display = 'none';
+            }
+            return;
+        }
+
         if (cursorRef.current) {
             cursorRef.current.style.opacity = isVisibleRef.current ? '1' : '0';
         }
@@ -37,17 +47,31 @@ export default function Cursor() {
 
         hideSystemCursor();
 
+        const isHelpElement = (element: HTMLElement | null): boolean => {
+            if (!element) return false;
+            return !!(element.matches?.('.cursor-help, [style*="cursor: help"], [style*="cursor:help"]') ||
+                element.closest?.('.cursor-help, [style*="cursor: help"], [style*="cursor:help"]'));
+        };
+
         // --- Mouse movement ---
         const onMouseMove = (e: MouseEvent) => {
             mousePosition.current = { x: e.clientX, y: e.clientY };
+
+            const target = e.target as HTMLElement | null;
+            const onHelp = isHelpElement(target);
+            if (onHelp !== isHelpRef.current) {
+                isHelpRef.current = onHelp;
+                syncVisibility();
+            }
 
             if (!isVisibleRef.current) {
                 isVisibleRef.current = true;
                 syncVisibility();
             }
 
-            // Re-hide system cursor if a browser extension reset it
+            // Re-hide system cursor if a browser extension reset it (unless on help element)
             if (
+                !isHelpRef.current &&
                 document.body.style.cursor !== 'none' &&
                 window.matchMedia('(hover: hover) and (pointer: fine)').matches
             ) {
@@ -136,6 +160,11 @@ export default function Cursor() {
         // --- Hover state ---
         const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
+            if (isHelpElement(target)) {
+                isHelpRef.current = true;
+                syncVisibility();
+                return;
+            }
             if (isInteractiveElement(target)) {
                 isHoveringRef.current = true;
                 syncVisibility();
@@ -145,6 +174,11 @@ export default function Cursor() {
         const handleMouseOut = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             const relatedTarget = e.relatedTarget as HTMLElement;
+
+            if (isHelpElement(target) && !isHelpElement(relatedTarget)) {
+                isHelpRef.current = false;
+                syncVisibility();
+            }
 
             if (isInteractiveElement(target) && !isInteractiveElement(relatedTarget)) {
                 isHoveringRef.current = false;

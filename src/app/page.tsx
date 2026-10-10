@@ -119,13 +119,13 @@ export default function Home() {
           <div className="stagger-parent">
             <div className="stagger-item" style={{ '--delay': '0ms' } as React.CSSProperties}>
               <div className="stagger-inner">
-                <div className="profile-container">
+                <div className="profile-container" style={{ width: 'clamp(210px, 20vw, 240px)', height: 'clamp(210px, 20vw, 240px)' }}>
                   <Image
                     key={`profile-${theme}`}
                     src={theme === 'christmas' ? '/images/profile-picture-chrismas.jpg' : '/images/profile-picture.webp'}
                     alt="Xabiso Memani"
-                    width={200}
-                    height={200}
+                    width={240}
+                    height={240}
                     className="profile-pic"
                     priority
                     unoptimized
