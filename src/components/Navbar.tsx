@@ -50,9 +50,10 @@ export default function Navbar() {
                         <button onClick={() => scrollToSection('about')} className="nav-link">
                             ABOUT
                         </button>
-                        <button onClick={() => scrollToSection('resume')} className="nav-link">
+                        {/* Hidden per request: Resume nav link */}
+                        {/* <button onClick={() => scrollToSection('resume')} className="nav-link">
                             RESUME
-                        </button>
+                        </button> */}
                         <button onClick={() => scrollToSection('projects')} className="nav-link">
                             PROJECTS
                         </button>

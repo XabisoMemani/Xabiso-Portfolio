@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Link from 'next/link';
 import { triggerCVDownload } from '@/utils/cv-tracker';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -10,7 +10,7 @@ export default function ResumeSection() {
     const experienceRef = useRef<HTMLDivElement>(null);
     const certificationsRef = useRef<HTMLDivElement>(null);
     const skillsRef = useRef<HTMLDivElement>(null);
-    const [educationAnimation, experienceAnimation, certificationsAnimation, skillsAnimation] = useScrollAnimation([
+    const [educationAnimation, , certificationsAnimation, skillsAnimation] = useScrollAnimation([
         educationRef, experienceRef, certificationsRef, skillsRef
     ]);
 
@@ -64,6 +64,8 @@ export default function ResumeSection() {
                                 </div>
                             </div>
                         </div>
+                        {/* Hidden per request: Experience section */}
+                        {/*
                         <div
                             ref={experienceRef}
                             className="resume-section-group"
@@ -76,7 +78,6 @@ export default function ResumeSection() {
                         >
                             <h3 className="resume-group-title">EXPERIENCE</h3>
                             <div className="experience-list">
-                                {/* Mbungela Consulting Experience */}
                                 <div className="experience-entry">
                                     <div className="experience-employer-row">
                                         <div className="experience-employer">
@@ -94,7 +95,6 @@ export default function ResumeSection() {
                                     </div>
                                 </div>
 
-                                {/* Tokoos Studio Experience */}
                                 <div className="experience-entry">
                                     <div className="experience-employer-row">
                                         <div className="experience-employer">
@@ -110,6 +110,7 @@ export default function ResumeSection() {
                                 </div>
                             </div>
                         </div>
+                        */}
                     </div>
                     <div className="resume-right">
                         <div

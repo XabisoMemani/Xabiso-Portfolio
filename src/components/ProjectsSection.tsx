@@ -51,7 +51,7 @@ const projects: Project[] = [
         title: 'Skinn Galleria',
         description: (
             <>
-                An e-commerce website for Skinn, an African-inspired clothing brand. As Creative Director, I designed and developed the brand's complete online identity. The platform features an integrated magazine and a seamless, modern shopping experience.
+                An e-commerce website for Skinn, an African-inspired clothing brand. As Creative Director, I designed and developed the brand&apos;s complete online identity. The platform features an integrated magazine and a seamless, modern shopping experience.
             </>
         ),
         tech: ['E-commerce', 'Brand Design', 'UI/UX', 'Webflow'],
@@ -208,7 +208,7 @@ export default function ProjectsSection() {
     const projectCardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
     const [cardAnimations, setCardAnimations] = useState<Map<number, { opacity: number; translateY: number; blur: number }>>(new Map());
     const [isMobile, setIsMobile] = useState(false);
-    const [visibleCount, setVisibleCount] = useState(6);
+    const [visibleCount, setVisibleCount] = useState(9);
 
     const filteredProjects = useMemo(() => {
         if (activeFilter === 'all') {
@@ -226,7 +226,7 @@ export default function ProjectsSection() {
         return filtered;
     }, [activeFilter]);
 
-    const baseVisibleCount = isMobile ? 4 : 6;
+    const baseVisibleCount = isMobile ? 4 : 9;
     const visibleProjects = useMemo(() => filteredProjects.slice(0, visibleCount), [filteredProjects, visibleCount]);
 
     // Detect mobile vs desktop

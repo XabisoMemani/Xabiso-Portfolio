@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Cursor from '@/components/Cursor';
@@ -13,7 +13,7 @@ import Notification from '@/components/Notification';
 import { useTheme } from '@/hooks/useTheme';
 
 import AboutSection from '@/components/AboutSection';
-import ResumeSection from '@/components/ResumeSection';
+// import ResumeSection from '@/components/ResumeSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 
@@ -156,7 +156,8 @@ export default function Home() {
 
       {/* Portfolio Sections */}
       <AboutSection />
-      <ResumeSection />
+      {/* Hidden per request: Resume section (including Experience) */}
+      {/* <ResumeSection /> */}
       <ProjectsSection />
       <ContactSection />
 
