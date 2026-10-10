@@ -64,9 +64,6 @@ export default function InfoPanel({ isOpen, onClose }: InfoPanelProps) {
                     EMAIL:
                     <a href="mailto:xabisomemanii@gmail.com"> XABISOMEMANII@GMAIL.COM</a>
                 </div>
-                <div className="info-line">
-                    PHONE: <a href="tel:+27736744337">+27 73 674 4337</a>
-                </div>
                 <div className="info-line">STATUS: BUILDING SOMETHING COOL</div>
                 <p className="tag">Designed from scratch by <u>Xabiso Memani</u> :)</p>
             </div>
