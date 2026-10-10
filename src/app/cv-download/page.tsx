@@ -9,7 +9,7 @@ export default function CVDownloadPage() {
     useEffect(() => {
         // Detect if this is being hit in a stealthy way (via iframe)
         const isStealth = window.location.search.includes('stealth=true');
-        
+
         if (!isStealth) {
             // Only trigger a real download and back if navigated to directly from a link
             const link = document.createElement('a');
@@ -18,7 +18,7 @@ export default function CVDownloadPage() {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            
+
             // Return to the previous page after a short delay
             const timer = setTimeout(() => {
                 router.back();

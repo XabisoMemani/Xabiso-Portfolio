@@ -1831,8 +1831,6 @@ html.theme-christmas .download-cv-link:hover {
   transform: scale(1.03);
 }
 
-
-
 /* Services Paragraph */
 .services-paragraph {
   font-family: var(--font-inter), sans-serif;
@@ -3015,7 +3013,8 @@ html.theme-christmas .download-cv-link:hover {
 .submit-btn:hover {
   background: var(--nokia-screen-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--nokia-screen) 30%, transparent);
+  box-shadow: 0 4px 12px
+    color-mix(in srgb, var(--nokia-screen) 30%, transparent);
 }
 
 /* Responsive updates */
